@@ -42,3 +42,83 @@ Este repositorio contiene un proyecto estructurado para trabajar con un backend 
 ├── .gitignore                # Configuración para ignorar archivos en Git
 ├── README.md                 # Instrucciones generales del proyecto
 └
+
+```
+Requisitos previos
+Backend
+
+    Java 17+
+    Maven 3.6+
+    IDE compatible con Java (IntelliJ, Eclipse, VSCode)
+
+Frontend
+
+    Node.js 16+
+    npm o yarn
+
+Instalación
+1. Clona el repositorio
+
+git clone https://github.com/tu-usuario/proyecto-spring-react.git
+cd proyecto-spring-react
+
+2. Configuración del backend
+
+cd backend
+mvn clean install
+
+3. Configuración del frontend
+
+cd frontend
+npm install
+
+Ejecución
+Levantar el backend
+
+    Ve a la carpeta del backend:
+
+cd backend
+
+Ejecuta el servidor Spring Boot:
+
+    mvn spring-boot:run
+
+    El backend estará disponible en: http://localhost:8080
+
+Levantar el frontend
+
+    Ve a la carpeta del frontend:
+
+cd frontend
+
+Ejecuta la aplicación de React:
+
+    npm start
+
+    El frontend estará disponible en: http://localhost:3000
+
+    Nota: El frontend está configurado para usar un proxy hacia el backend en desarrollo. Puedes modificarlo en el archivo package.json:
+
+"proxy": "http://localhost:8080"
+
+Documentación
+
+Toda la documentación relacionada con el proyecto se encuentra en la carpeta /docs. Esto incluye:
+
+    Especificación de la API (OpenAPI/Swagger).
+    Guías de estilo para backend y frontend.
+    Información de configuración y despliegue.
+
+Flujo de Trabajo
+Ramas de Git
+
+    main: Rama principal para producción.
+    develop: Rama para desarrollo conjunto.
+    feature/backend-xxx: Funcionalidades específicas del backend.
+    feature/frontend-xxx: Funcionalidades específicas del frontend.
+
+Buenas prácticas
+
+    Crea una rama nueva para cada funcionalidad o bugfix.
+    Realiza pruebas antes de hacer un pull request.
+    Asegúrate de que el código pase los pipelines de CI/CD.
