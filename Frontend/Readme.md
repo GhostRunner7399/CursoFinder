@@ -28,8 +28,8 @@ Este es nuestro espacio para desarrollar la interfaz del proyecto. Aquí tienen 
 ### **Motivación**
 Recuerda: estamos creando la primera experiencia del usuario. Una interfaz bien hecha no solo funciona, sino que deja una impresión duradera. 🖼️✨  
 
-Si necesitas algo, solo dilo. ¡A darle con todo, equipo! 💪
+Si necesitas algo, solo ponelo al whatsapp. ¡A darle con todo, equipo! 💪
 
 --- 
 
-Este mensaje es más práctico, directo y ajustado a un flujo sencillo en la rama principal (`master`). 😊
+
