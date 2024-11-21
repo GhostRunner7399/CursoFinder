@@ -25,6 +25,7 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 El backend sigue la estructura estándar de un proyecto Spring Boot:
 
 ```
+```markdown
 Backend/
 ├── src/
 │   ├── main/
