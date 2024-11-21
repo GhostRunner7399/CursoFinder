@@ -17,4 +17,10 @@ public class Usuario {
     private Integer cif;
 
     private String contraseña;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private boolean adminrole;
 }

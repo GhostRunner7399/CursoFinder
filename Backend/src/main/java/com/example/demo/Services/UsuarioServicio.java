@@ -23,8 +23,11 @@ public class UsuarioServicio {
         return usuarioRepository.findByCif(cif);
     }
 
+
     //Autenticar usuario
     public boolean autenticarUsuario(Integer cif, String contraseña) {
-        return usuarioRepository.findByCifAndContraseña(cif, contraseña).isPresent();
+        return usuarioRepository.findByCifAndContraseña( cif, contraseña).isPresent();
     }
+
+
 }
