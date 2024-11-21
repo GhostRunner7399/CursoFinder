@@ -2,10 +2,11 @@
 
 Este repositorio contiene un proyecto estructurado para trabajar con un backend desarrollado en **Java Spring Boot** y un frontend desarrollado en **React**. Está diseñado para facilitar la colaboración entre equipos trabajando en el backend y el frontend simultáneamente.
 
-
+---
 
 ## **Estructura del Repositorio**
 
+```plaintext
 /raiz-del-proyecto
 │
 ├── /backend                  # Carpeta para el backend (Spring Boot)
@@ -40,4 +41,4 @@ Este repositorio contiene un proyecto estructurado para trabajar con un backend 
 │
 ├── .gitignore                # Configuración para ignorar archivos en Git
 ├── README.md                 # Instrucciones generales del proyecto
-___
+└
