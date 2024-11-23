@@ -1,8 +1,21 @@
+import React, { useState } from 'react';
 import logo from './images/icon2.svg';
 import logoUAM from './images/logoUAM.svg';
+import Courses from './courses.js';
 import './App.css';
 
+/*PAGINA INICIAL, USER LOG IN */
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  if (isLoggedIn) {
+    return <Courses />;
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -17,7 +30,7 @@ function App() {
     <input type="password" placeholder="contraseña" className="input-rectangle"/>
         </div>
         {/*boton iniciar sesion*/ }
-        <button className="button-iniciarSesion">iniciar sesión</button>
+        <button className="button-iniciarSesion" onClick={handleLogin} >iniciar sesión</button>
         <p>
         Copyright © Universidad Americana. Reservados todos los derechos.
         </p>
