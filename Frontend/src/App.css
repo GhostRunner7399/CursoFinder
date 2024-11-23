@@ -1,0 +1,70 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  position: relative; /* ensure logo is correctly layered */
+  z-index: 2; /* higher z-index so it stays on top */
+}
+
+.App-header {
+  background-color: #76c2af;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: relative; 
+}
+
+.App-circle {
+  position: absolute top;
+  width: 80vmin; /* size of the circle */
+  height: 80vmin; /* size of the circle */
+  background-color: white;
+  border-radius: 50%;
+  top: calc(50vmin - 40vmin); /* Adjust based on the size of the logo */
+  z-index: 1; /* ensures it is under the logo but above the background */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.input-rectangle {
+  width: 400px;
+  height: 40px;
+  margin: 10px; /* Spacing*/
+  padding: 10px;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  background-color: #bcbefa; /* Light grey background */
+  color: #333;
+  font-size: 16px;
+}
+
+.input-rectangle::placeholder {
+  color: #666; /* texto dentro del rectangle */
+}
+
+.button-iniciar{
+  color: 
+}
+
+.App-logoUAM{
+  height: 10vmin;
+  pointer-events: none;
+  position: top left; /* ensure logo is correctly layered */
+  z-index: 2; /* higher z-index so it stays on top */
+}
+
+.App-link {
+  color: #61dafb;
+}
