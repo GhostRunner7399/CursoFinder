@@ -1,0 +1,31 @@
+body
+{
+  background-color: #76c2af !important;
+  text-align: center;
+}
+
+.courses-logoUAM {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 1%;
+    margin-left: 8%;
+    height: 5vmin;
+    z-index: 3; /*capa*/
+  }
+
+/*
+.lineas {
+
+
+}
+
+.container {
+
+
+}
+
+.input-rectangle {
+
+
+}*/
