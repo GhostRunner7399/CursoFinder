@@ -21,6 +21,7 @@ public class CursoController {
         Cursos cursoGuardado = cursoServicio.guardarCurso(curso);
         return ResponseEntity.ok(cursoGuardado);
     }
+    //farmeo
 
     // Obtener todos los cursos
     @GetMapping("/all")
