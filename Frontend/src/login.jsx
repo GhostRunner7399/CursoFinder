@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import logo from './images/icon2.svg';
 import logoUAM from './images/logoUAM.svg';
-import Courses from './courses.js';
-import './App.css';
+import Courses from './courses.jsx';
+import './login.css';
 
 /*PAGINA INICIAL, USER LOG IN */
 
@@ -19,7 +19,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="App-circle"></div> {}
         {/*logo uam*/}
         <img src={logoUAM} className="App-logoUAM" alt="logoUAM"/>
         {/*business person icon*/}
