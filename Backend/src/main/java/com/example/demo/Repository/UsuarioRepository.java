@@ -12,4 +12,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     //Autenticar usuario
     Optional<Usuario> findByCifAndContraseña(Integer cif, String contraseña);
+
 }

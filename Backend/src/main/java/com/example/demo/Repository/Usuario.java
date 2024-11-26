@@ -18,6 +18,7 @@ public class Usuario {
 
     private String contraseña;
 
+    //comentario
     @Column(nullable = false)
     private String email;
 
