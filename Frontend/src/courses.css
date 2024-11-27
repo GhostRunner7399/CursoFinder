@@ -1,31 +1,83 @@
-body
-{
-  background-color: #76c2af !important;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #e0f7fa; 
+}
+
+.courses-container {
+  padding: 20px;
   text-align: center;
 }
 
-.courses-logoUAM {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-top: 1%;
-    margin-left: 8%;
-    height: 5vmin;
-    z-index: 3; /*capa*/
-  }
-
-/*
-.lineas {
-
-
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
 }
 
-.container {
-
-
+.logo {
+  width: 50px; 
+  margin-right: 20px; 
 }
 
-.input-rectangle {
+h1 {
+  font-size: 2rem;
+  color: #00796b;
+}
 
+.course-form {
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #00796b;
+  border-radius: 8px;
+  background-color: white; 
+  max-width: 400px;
+  text-align: left; 
+}
 
-}*/
+.course-form h2 {
+  text-align: center; 
+}
+
+.course-form label {
+  display: block; 
+  margin-bottom: 10px; 
+}
+
+.courses-list {
+  text-align: left; 
+  max-width: 400px;
+  margin: 20px auto; 
+}
+
+.course-card {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #00796b;
+  border-radius: 5px;
+  background-color: #b2dfdb; 
+}
+
+.add-button {
+  background-color: #00796b; 
+  color: white;
+  border: none;
+  border-radius: 50%; 
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  position: fixed; 
+  bottom: 20px; 
+  right: 20px; 
+}
+
+.submit-button {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%; 
+}
