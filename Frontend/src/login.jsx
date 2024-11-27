@@ -23,6 +23,7 @@ function App() {
         <img src={logoUAM} className="App-logoUAM" alt="logoUAM"/>
         {/*business person icon*/}
         <img src={logo} className="App-iconPerson" alt="iconPerson" />
+        <div className="App-circle" alt="circle"></div>
         {/*creacion de botones username password*/} 
         <div className="container">
     <input type="text" placeholder="usuario" className="input-rectangle"/>
