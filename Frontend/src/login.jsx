@@ -1,42 +1,68 @@
 import React, { useState } from 'react';
 import logo from './images/icon2.svg';
 import logoUAM from './images/logoUAM.svg';
-import Courses from './courses.jsx';
 import './login.css';
 
-/*PAGINA INICIAL, USER LOG IN */
+/* PAGINA INICIAL, USER LOG IN */
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Login = ({ onLogin }) => {
+  const [credentials, setCredentials] = useState({ username: "", password: "" });
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  // Maneja los cambios en los campos del formulario
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
   };
 
-  if (isLoggedIn) {
-    return <Courses />;
-  }
+  // Maneja el envío del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí puedes agregar la lógica de validación de credenciales
+    onLogin(credentials);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        {/*logo uam*/}
+        {/* Logo UAM */}
         <img src={logoUAM} className="App-logoUAM" alt="logoUAM"/>
-        {/*business person icon*/}
+        
+        {/* Ícono de persona de negocios */}
         <img src={logo} className="App-iconPerson" alt="iconPerson" />
+        
         <div className="App-circle" alt="circle"></div>
-        {/*creacion de botones username password*/} 
-        <div className="container">
-    <input type="text" placeholder="usuario" className="input-rectangle"/>
-    <input type="password" placeholder="contraseña" className="input-rectangle"/>
-        </div>
-        {/*boton iniciar sesion*/ }
-        <button className="button-iniciarSesion" onClick={handleLogin} >iniciar sesión</button>
+        
+        {/* Formulario de inicio de sesión */}
+        <form className="container" onSubmit={handleSubmit}>
+          <input 
+            type="text" 
+            name="username" 
+            placeholder="Usuario" 
+            className="input-rectangle" 
+            onChange={handleChange} 
+            value={credentials.username}
+            required 
+          />
+          <input 
+            type="password" 
+            name="password" 
+            placeholder="Contraseña" 
+            className="input-rectangle" 
+            onChange={handleChange} 
+            value={credentials.password}
+            required 
+          />
+          
+          {/* Botón de iniciar sesión */}
+          <button className="button-iniciarSesion" type="submit">Iniciar Sesión</button>
+        </form>
+        
         <p>
-        Copyright © Universidad Americana. Reservados todos los derechos.
+          Copyright © Universidad Americana. Reservados todos los derechos.
         </p>
       </header>
     </div>
   );
-}
+};
 
-export default App;
+export default Login;
