@@ -1,8 +1,12 @@
-package com.example.demo.Repository;
+package com.example.demo.Repository.Cursos;
 
 
+import com.example.demo.Repository.Matricula.Matricula;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -40,7 +44,22 @@ public class Cursos {
     private String certificacion;
 
     @Column(nullable = false)
-    private String capacidadydisponibilidad;
+    private String capacidad;
+
+    @Column
+    private String disponibilidad;
+
+    @Column(nullable = false)
+    private boolean Active;
+
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    //LOCO NO BORREN ESTO O JODEMOS TODO AJAJJAJAJ
+    //Esto evita que el codigo sea redundante, por ende si lo quitan
+    //El codigo va a recursar entre si infinitamente creando un .json infinito njds
+    @JsonIgnore
+    private List<Matricula> matriculas;
 
 }
 

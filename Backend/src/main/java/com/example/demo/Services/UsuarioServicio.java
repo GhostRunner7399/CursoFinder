@@ -1,10 +1,8 @@
 package com.example.demo.Services;
 
-import com.example.demo.Repository.Cursos;
-import com.example.demo.Repository.Usuario;
-import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.Repository.Usuario.Usuario;
+import com.example.demo.Repository.Usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +33,8 @@ public class UsuarioServicio {
     public List<Usuario> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll();
     }
+
+    //Unirse a un curso
 
 
 }

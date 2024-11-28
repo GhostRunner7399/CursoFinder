@@ -1,7 +1,6 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Repository.Cursos;
-import com.example.demo.Repository.Usuario;
+import com.example.demo.Repository.Usuario.Usuario;
 import com.example.demo.Services.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +37,7 @@ public class UsuarioController {
         return usuarioServicio.buscarPorCif(cif);
     }
 
+    // Todos los usuarios
     @GetMapping("/all")
     public ResponseEntity<List<Usuario>> obtenerTodosLosUsuarios(){
         List<Usuario> usuarios = usuarioServicio.obtenerTodosLosUsuarios();
