@@ -63,5 +63,15 @@ public class MatriculaController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @DeleteMapping("/usuario/{cif}/curso/{codigocurso}")
+    public ResponseEntity<String> borrarMatricula(@PathVariable Integer cif, @PathVariable String codigocurso) {
+        try {
+            matriculaServicio.borrarmatricula(cif, codigocurso);
+            return ResponseEntity.ok("Matrícula eliminada con éxito.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
 

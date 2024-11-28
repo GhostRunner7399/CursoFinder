@@ -65,5 +65,20 @@ public class MatriculaServicio {
                 .toList();
 
     }
+    public void borrarmatricula(Integer cif, String codigocurso) {
+        // Verificar si el usuario y el curso existen
+        Usuario usuario = usuarioRepository.findByCif(cif)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
+        Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
+                .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
+
+        // Buscar la matrícula correspondiente
+        Matricula matricula = matriculaRepository.findByUsuarioAndCurso(usuario, curso)
+                .orElseThrow(() -> new IllegalArgumentException("La matrícula no existe."));
+
+        // Eliminar la matrícula
+        matriculaRepository.delete(matricula);
+    }
+
 
 }
