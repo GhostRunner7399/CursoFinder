@@ -38,9 +38,11 @@ public class CursoController {
     }
 
     // Eliminar un curso por ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarCurso(@PathVariable Long id) {
-        cursoServicio.eliminarCurso(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{codigocurso}")
+    public ResponseEntity<String> eliminarCurso(@PathVariable String codigocurso) {
+        cursoServicio.eliminarCurso(codigocurso);
+        return ResponseEntity.ok("Curso con código " + codigocurso + " eliminado correctamente.");
+
     }
+
 }

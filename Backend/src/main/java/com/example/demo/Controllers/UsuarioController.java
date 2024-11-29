@@ -18,7 +18,7 @@ public class UsuarioController {
     private UsuarioServicio usuarioServicio;
 
     // Registrar usuario
-    @PostMapping("/register")
+    @PostMapping("/action/register")
     public Usuario registrarUsuario(@RequestBody Usuario usuario) {
         return usuarioServicio.registrarUsuario(usuario);
     }
@@ -32,7 +32,7 @@ public class UsuarioController {
 
 
     // Buscar usuario por CIF
-    @GetMapping("/{cif}")
+    @GetMapping("/info/{cif}")
     public Optional<Usuario> buscarUsuario(@PathVariable Integer cif) {
         return usuarioServicio.buscarPorCif(cif);
     }

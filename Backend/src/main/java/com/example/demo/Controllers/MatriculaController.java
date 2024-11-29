@@ -30,7 +30,7 @@ public class MatriculaController {
     private MatriculaRepository matriculaRepository;
 
     //Matricularse en un curso
-    @PostMapping("/Enroll")
+    @PostMapping("/enroll")
     public ResponseEntity<String> matricularUsuario(@RequestBody MatriculaRequest request) {
         try {
             matriculaServicio.matricularUsuario(request.getCif(), request.getCodigocurso());
@@ -41,7 +41,7 @@ public class MatriculaController {
     }
 
     //Participantes de un curso
-    @GetMapping("/participantes/{codigocurso}")
+    @GetMapping("/participants/{codigocurso}")
     public ResponseEntity<List<Usuario>> obtenerParticipantes(@PathVariable String codigocurso) {
         try {
             List<Usuario> participantes = matriculaServicio.obtenerParticipantes(codigocurso);

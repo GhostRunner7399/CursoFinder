@@ -43,16 +43,19 @@ public class CursoServicio {
         return cursosRepository.findById(id);
     }
 
-    /**
-     * Eliminar un curso por su ID.
-     *
-     * @param id Identificador del curso a eliminar.
-     */
-    public void eliminarCurso(Long id) {
-        if (cursosRepository.existsById(id)) {
-            cursosRepository.deleteById(id);
+
+    public void eliminarCurso(String codigocurso) {
+        // Busca el curso por el código proporcionado
+        Optional<Cursos> cursoOptional = cursosRepository.findByCodigocurso(codigocurso);
+
+        if (cursoOptional.isPresent()) {
+            // Si el curso existe, se elimina
+            cursosRepository.delete(cursoOptional.get());
+            System.out.println("Curso con código " + codigocurso + " eliminado correctamente.");
         } else {
-            throw new IllegalArgumentException("El curso con el ID especificado no existe.");
+            // Maneja el caso en que el curso no existe
+            throw new RuntimeException("El curso con código " + codigocurso + " no fue encontrado.");
         }
     }
+
 }
