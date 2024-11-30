@@ -14,6 +14,10 @@ function Courses({ courses }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleCourseClick = (courseId) => {
+    navigate(`/curso/${courseId}`);
+  };
+
   return (
     <div className="courses-page">
       {/* Líneas blancas verticales */}
@@ -61,7 +65,11 @@ function Courses({ courses }) {
             <h2 className="no-courses-message">No hay cursos disponibles</h2>
           ) : (
             courses.map((course) => (
-              <div key={course.id} className="course-card">
+              <div
+                key={course.id}
+                className="course-card"
+                onClick={() => handleCourseClick(course.id)}
+              >
                 <h3 className="course-name">{course.name}</h3>
                 <p className="course-description">{course.description}</p>
               </div>

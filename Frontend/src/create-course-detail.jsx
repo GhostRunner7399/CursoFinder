@@ -20,18 +20,15 @@ const CreateCourseDetail = ({ onAddCourse }) => {
 
   const navigate = useNavigate();
 
-  // Maneja los cambios en los campos del formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCourseData({ ...courseData, [name]: value });
   };
 
-  // Maneja el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes realizar validaciones adicionales si es necesario
 
-    // Añadir el nuevo curso a la lista
     if (onAddCourse) {
       onAddCourse(courseData);
     }
@@ -51,26 +48,28 @@ const CreateCourseDetail = ({ onAddCourse }) => {
       <div className="form-container">
         <h2>Crear Nuevo Curso</h2>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label className="label">
             Nombre del curso:
             <input
               type="text"
               name="name"
               value={courseData.name}
               onChange={handleInputChange}
+              className="input"
               required
             />
           </label>
-          <label>
+          <label className="label">
             Descripción:
             <textarea
               name="description"
               value={courseData.description}
               onChange={handleInputChange}
               required
+              className="textarea"
             />
           </label>
-          <label>
+          <label className="label">
             Duración:
             <input
               type="text"
@@ -79,7 +78,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Profesor:
             <input
               type="text"
@@ -88,7 +87,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Lugar:
             <input
               type="text"
@@ -97,7 +96,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Horario:
             <input
               type="text"
@@ -106,7 +105,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Requisitos previos:
             <input
               type="text"
@@ -115,7 +114,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Nivel del curso:
             <input
               type="text"
@@ -124,7 +123,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Certificación ofrecida:
             <input
               type="text"
@@ -133,7 +132,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Capacidad:
             <input
               type="number"
@@ -142,7 +141,7 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label className="label">
             Costo:
             <input
               type="number"
@@ -151,7 +150,6 @@ const CreateCourseDetail = ({ onAddCourse }) => {
               onChange={handleInputChange}
             />
           </label>
-          
           {/* Botón para crear el curso */}
           <button type="submit">Crear Curso</button>
         </form>

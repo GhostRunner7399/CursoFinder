@@ -1,8 +1,8 @@
-.App {
+.login {
   text-align: center;
 }
 
-.App-iconPerson {
+.login-iconPerson {
   height: 40vmin;
   pointer-events: none;
   position: absolute;
@@ -11,7 +11,7 @@
 }
 
 /*no estoy segura que pinta esto pero no lo toques pq mueve el background*/
-.App-header {
+.login-header {
   background-color: #76c2af;
   min-height: 100vh;
   display: flex;
@@ -24,7 +24,7 @@
   position: relative;
 }
 
-.App-circle {
+.login-circle {
   position: absolute;
   width: 130vmin;
   height: 85vmin;
@@ -36,7 +36,7 @@
   z-index: 1;
 }
 
-.container {
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +44,7 @@
   margin-top: 48vmin;  /* Ajustado para que el contenedor aparezca debajo del icono de la persona */
 }
 
-.input-rectangle {
+.login-input-rectangle {
   width: 400px;
   height: 40px;
   margin: 10px; /*spacing*/
@@ -57,11 +57,11 @@
   font-size: 16px;
 }
 
-.input-rectangle::placeholder {
+.login-input-rectangle::placeholder {
   color: #666; /* texto dentro del rectangle */
 }
 
-.button-iniciarSesion {
+.login-button-iniciarSesion {
   width: 200px;  
   height: 50px;       
   margin: 10px;       
@@ -75,11 +75,11 @@
   transition: background-color 0.3s ease; /*click interaction*/
 }
 
-.button-iniciarSesion:hover {
+.login-button-iniciarSesion:hover {
   background-color: #9596bd; /*change de color al tener el cursor encima*/
 }
 
-.App-logoUAM {
+.login-logoUAM {
   position: absolute;
   top: 0;
   left: 0;

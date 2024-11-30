@@ -3,20 +3,18 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./login.jsx";
 import Courses from "./admin-courses.jsx";
 import CreateCourseDetail from "./create-course-detail.jsx";
+import Details from "./show-course-detail.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [courses, setCourses] = useState([]);
 
-  // Función para manejar el inicio de sesión
   const handleLogin = (credentials) => {
-    // Aquí puedes agregar la lógica de autenticación real (por ejemplo, llamar a una API)
-    // Por ahora, simularemos una autenticación exitosa
+    //agregar la lógica de autenticación real (llamar api)
     console.log("Credenciales recibidas:", credentials);
     setIsAuthenticated(true);
   };
 
-  // Función para agregar un nuevo curso
   const addCourse = (course) => {
     const courseToAdd = {
       id: courses.length > 0 ? courses[courses.length - 1].id + 1 : 1,
@@ -58,6 +56,18 @@ function App() {
           element={
             isAuthenticated ? (
               <CreateCourseDetail onAddCourse={addCourse} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+
+        {/* Ruta de Detalles del Curso */}
+        <Route
+          path="/curso/:id"
+          element={
+            isAuthenticated ? (
+              <Details courses={courses} />
             ) : (
               <Navigate to="/" />
             )

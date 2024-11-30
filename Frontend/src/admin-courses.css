@@ -81,7 +81,6 @@ body {
   margin-top: 5vmin;
   margin-left: 15vmin;
   cursor: pointer;
-  position: top;
   bottom: 20px;
   right: 20px;
 }
@@ -98,7 +97,6 @@ body {
   font-size: 1.3rem;
   margin-top: 250px;
   color: #00796b;
-  position: top; 
   transform: translate(35%, -500%); 
 }
 
