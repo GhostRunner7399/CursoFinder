@@ -24,17 +24,17 @@ body {
 .logo-admin-courses {
   position: absolute;
   left: 0;
-  margin-top: 3%;
+  margin-top: 4%;
   margin-left: 6%;
-  height: 5vmin;
+  height: 7vmin;
   z-index: 3;
 }
 
 .courses-header {
-  width: 85%;
+  width: 73%;
   height: 70px;
   margin-left: 5%;
-  margin-top: 1%;
+  margin-top: 1.5%;
   padding: 0;
   text-align: left;
   background-color: #00796b;
@@ -138,38 +138,17 @@ body {
   box-sizing: border-box; 
 }
 
-.white-rectangle {
-  width: 95.7%;
-  height: 32px;
-  top: 0;
-  margin-left: 4.6%;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #fff;
-  z-index: 1; 
-}
-
 .white-lineL {
   position: absolute;
   top: 0;
   margin-left: 2%;
   left: 5vmin; 
   width: 4px;
-  height: 100%; 
+  height: 100vh; 
   background-color: rgb(255, 255, 255);
   z-index: 1;
 }
 
-.white-lineR {
-  position:absolute;
-  top: 0;
-  margin-right: 2%;
-  right: 12vmin; 
-  width: 4px;
-  height: 100%; 
-  background-color: rgb(255, 255, 255);
-  z-index: 1;
-}
 
 .sidebar {
   height: 100vh;
@@ -224,13 +203,35 @@ body {
   z-index: 5;
 }
 
-.white-lineH {
+.admin-white-lineH {
   position:absolute;
-  margin-top: 7%;
+  margin-top: 8%;
   margin-left: -1%;
   left: 12vmin; 
   width: 100%;
   height: 4px; 
   background-color: rgb(255, 255, 255);
   z-index: 1;
+}
+
+.admin-right-side-rectangle {
+  position: absolute;
+  width: 20%;
+  height: 100vh;
+  background-color: #aed6db;
+  right: 0%;
+  margin-top: 4%;
+  z-index: 1;
+}
+
+.user-box-container {
+  position: absolute;
+  right: 1%;  /* Ajusta esto según sea necesario para alinear correctamente */
+  margin-top: 5%;  /* Ajusta según la altura deseada */
+  width: 18%;  
+  height: auto; 
+  display: flex;
+  align-items: center; /* Center the UserBox vertically */
+  justify-content: center; /* Center the UserBox horizontally */
+  z-index: 3; 
 }

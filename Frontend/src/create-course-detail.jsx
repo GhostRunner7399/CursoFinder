@@ -7,14 +7,18 @@ const CreateCourseDetail = ({ onAddCourse }) => {
   const [courseData, setCourseData] = useState({
     name: "",
     description: "",
-    duration: "",
+    weeks: "",
+    courseHours: "",
+    daysOfWeek: "",
     professor: "",
     location: "",
     schedule: "",
     prerequisites: "",
     level: "",
     certification: "",
+    certifyingBody: "",
     capacity: "",
+    availableSpots: "",
     cost: "",
   });
 
@@ -27,130 +31,169 @@ const CreateCourseDetail = ({ onAddCourse }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes realizar validaciones adicionales si es necesario
-
+    // Validation and adding course logic here
     if (onAddCourse) {
       onAddCourse(courseData);
     }
-
-    // Redirigir a la página de cursos
+    // Navigate back to course list
     navigate("/courses");
   };
 
   return (
     <div className="create-course-page">
-      {/* Encabezado */}
       <div className="header-create-course-detail">
         <img src={logo} alt="LogoUAMFD" className="logo-create-course-detail" />
       </div>
-
-      {/* Contenedor del formulario */}
       <div className="form-container">
         <h2>Crear Nuevo Curso</h2>
         <form onSubmit={handleSubmit}>
-          <label className="label">
-            Nombre del curso:
-            <input
-              type="text"
-              name="name"
-              value={courseData.name}
-              onChange={handleInputChange}
-              className="input"
-              required
-            />
-          </label>
-          <label className="label">
-            Descripción:
-            <textarea
-              name="description"
-              value={courseData.description}
-              onChange={handleInputChange}
-              required
-              className="textarea"
-            />
-          </label>
-          <label className="label">
-            Duración:
-            <input
-              type="text"
-              name="duration"
-              value={courseData.duration}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Profesor:
-            <input
-              type="text"
-              name="professor"
-              value={courseData.professor}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Lugar:
-            <input
-              type="text"
-              name="location"
-              value={courseData.location}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Horario:
-            <input
-              type="text"
-              name="schedule"
-              value={courseData.schedule}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Requisitos previos:
-            <input
-              type="text"
-              name="prerequisites"
-              value={courseData.prerequisites}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Nivel del curso:
-            <input
-              type="text"
-              name="level"
-              value={courseData.level}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Certificación ofrecida:
-            <input
-              type="text"
-              name="certification"
-              value={courseData.certification}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Capacidad:
-            <input
-              type="number"
-              name="capacity"
-              value={courseData.capacity}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="label">
-            Costo:
-            <input
-              type="number"
-              name="cost"
-              value={courseData.cost}
-              onChange={handleInputChange}
-            />
-          </label>
-          {/* Botón para crear el curso */}
+          <fieldset>
+            <legend>Descripción Completa del Curso</legend>
+            <label>
+              Nombre del curso:
+              <input
+                type="text"
+                name="name"
+                value={courseData.name}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label>
+              Descripción:
+              <textarea
+                name="description"
+                value={courseData.description}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label>
+              Semanas del curso:
+              <input
+                type="number"
+                name="weeks"
+                value={courseData.weeks}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Total de horas del curso:
+              <input
+                type="number"
+                name="courseHours"
+                value={courseData.courseHours}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Días de la semana:
+              <input
+                type="text"
+                name="daysOfWeek"
+                value={courseData.daysOfWeek}
+                onChange={handleInputChange}
+              />
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Información Operacional</legend>
+            <label>
+              Profesor:
+              <input
+                type="text"
+                name="professor"
+                value={courseData.professor}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Lugar:
+              <input
+                type="text"
+                name="location"
+                value={courseData.location}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Horario:
+              <input
+                type="text"
+                name="schedule"
+                value={courseData.schedule}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Requisitos previos:
+              <input
+                type="text"
+                name="prerequisites"
+                value={courseData.prerequisites}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Nivel del curso:
+              <select
+                name="level"
+                value={courseData.level}
+                onChange={handleInputChange}>
+                <option value="beginner">Principiante</option>
+                <option value="intermediate">Intermedio</option>
+                <option value="advanced">Avanzado</option>
+              </select>
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Certificación y Capacidad</legend>
+            <label>
+              Certificación ofrecida:
+              <input
+                type="text"
+                name="certification"
+                value={courseData.certification}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Entidad Certificadora:
+              <input
+                type="text"
+                name="certifyingBody"
+                value={courseData.certifyingBody}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Capacidad máxima:
+              <input
+                type="number"
+                name="capacity"
+                value={courseData.capacity}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Cupos disponibles:
+              <input
+                type="number"
+                name="availableSpots"
+                value={courseData.availableSpots}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Costo:
+              <input
+                type="number"
+                name="cost"
+                value={courseData.cost}
+                onChange={handleInputChange}
+              />
+            </label>
+          </fieldset>
           <button type="submit">Crear Curso</button>
         </form>
       </div>

@@ -58,26 +58,35 @@ function Details({courses}) {
           <div className="course-header">
             <h1>{course.name}</h1>
           </div>
+  
+          {/* Detalles del curso */}
+          <div className="course-display">
+          <div className="course-detail-heading">Descripción completa del curso</div>
+          <div className="course-detail-item"><strong>Descripción:</strong> {course.description}</div>
+          <div className="course-detail-item"><strong>Duración en semanas:</strong> {course.weeks}</div>
+          <div className="course-detail-item"><strong>Total horas del curso:</strong> {course.courseHours}</div>
+          <div className="course-detail-heading">Logística y Operación</div>
+          <div className="course-detail-item"><strong>Profesor:</strong> {course.professor}</div>
+          <div className="course-detail-item"><strong>Lugar:</strong> {course.location}</div>
+          <div className="course-detail-item"><strong>El curso se impartirá los días:</strong> {course.daysOfWeek}</div>
+          <div className="course-detail-item"><strong>Horario:</strong> {course.schedule}</div>
+          <div className="course-detail-heading">Requisitos</div>
+          <div className="course-detail-item"><strong>Requisitos Previos:</strong> {course.prerequisites}</div>
+          <div className="course-detail-item"><strong>Nivel:</strong> {course.level}</div>
+          <div className="course-detail-heading">Certificación</div>
+          <div className="course-detail-item"><strong>Cuerpo Certificador:</strong> {course.certifyingBody}</div>
+          <div className="course-detail-item"><strong>Certificación:</strong> {course.certification}</div>
+          <div className="course-detail-heading">Capacidad y Financiamiento</div>
+          <div className="course-detail-item"><strong>Capacidad:</strong> {course.capacity}</div>
+          <div className="course-detail-item"><strong>Cupos Disponibles:</strong> {course.availableSpots}</div>
+          <div className="course-detail-item"><strong>Costo:</strong> ${course.cost}</div>
+          </div>
           <button
             className="button-inscribirse" 
             onClick={() => alert(`Usted se ha inscrito en el curso: ${course.name}`)}
           >
             Inscribirse
           </button>
-  
-          {/* Detalles del curso */}
-          <div className="course-display">
-          <p><strong>Descripción:</strong> {course.description}</p>
-          <p><strong>Duración:</strong> {course.duration}</p>
-          <p><strong>Profesor:</strong> {course.professor}</p>
-          <p><strong>Lugar:</strong> {course.location}</p>
-          <p><strong>Horario:</strong> {course.schedule}</p>
-          <p><strong>Requisitos Previos:</strong> {course.prerequisites}</p>
-          <p><strong>Nivel:</strong> {course.level}</p>
-          <p><strong>Certificación Ofrecida:</strong> {course.certification}</p>
-          <p><strong>Capacidad:</strong> {course.capacity}</p>
-          <p><strong>Costo:</strong> ${course.cost}</p>
-          </div>
         </div>
       </div>
     );

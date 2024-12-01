@@ -4,12 +4,14 @@ import "./admin-courses.css";
 import logo from "./images/logoUAMFD.svg";
 import settingsIcon from './images/settings.svg';
 import menuIcon from './images/menu.svg';
+import UserBox from "./components/user-box";
 
-function Courses({ courses }) {
+
+//AGREGAR BOTONES PARA EDITAR O ELIMINAR UN CURSO
+function Courses({ courses, user }) {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-  // Función para alternar la barra lateral
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -20,22 +22,23 @@ function Courses({ courses }) {
 
   return (
     <div className="courses-page">
+      <div className="user-box-container">
+        <UserBox user={user} />
+      </div>
       {/* Líneas blancas verticales */}
       <div className="white-lineL"></div>
-      <div className="white-lineR"></div>
-
+      <div className="admin-right-side-rectangle"></div>
       {/* Barra lateral */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-content">
           <img src={settingsIcon} alt="Configuración" className="settings-icon" />
-          {/* Puedes agregar más elementos a la barra lateral aquí */}
+          {/*agregar más elementos a la barra*/}
         </div>
       </div>
 
-      {/* Encabezado */}
       <div className="header-admin-courses">
-        <div className="white-lineH"></div>
-        {/* Ícono del menú para abrir la barra lateral */}
+        <div className="admin-white-lineH"></div>
+        {/* Ícono del menú para abrir la sidebar */}
         <img
           src={menuIcon}
           alt="Menú"

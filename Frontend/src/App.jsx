@@ -7,12 +7,20 @@ import Details from "./show-course-detail.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const [courses, setCourses] = useState([]);
 
   const handleLogin = (credentials) => {
-    //agregar la lógica de autenticación real (llamar api)
+    // Here you would typically validate the credentials against an API
     console.log("Credenciales recibidas:", credentials);
-    setIsAuthenticated(true);
+    if (credentials.username && credentials.password) { // Simulate successful login
+      setIsAuthenticated(true);
+      // Simulate fetching user data based on the credentials
+      setUser({
+        name: "Halley Isela Castro Calero", // Simulated name
+        email: `${credentials.username}@pelu.edu.ni` // Simulated email construction
+      });
+    }
   };
 
   const addCourse = (course) => {
@@ -39,15 +47,13 @@ function App() {
         />
 
         {/* Ruta de Cursos Disponibles */}
+        {/*pass info de los credentials al component to retrieve the data connected a las credentials */}
         <Route
           path="/courses"
           element={
-            isAuthenticated ? (
-              <Courses courses={courses} />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
+            isAuthenticated ? 
+            <Courses courses={courses} user={user} /> 
+            : <Navigate to="/" />}
         />
 
         {/* Ruta de Creación de Cursos */}
