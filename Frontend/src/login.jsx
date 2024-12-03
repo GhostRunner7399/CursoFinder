@@ -22,23 +22,23 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="login">
+      <header className="login-header">
         {/* Logo UAM */}
-        <img src={logoUAM} className="App-logoUAM" alt="logoUAM"/>
+        <img src={logoUAM} className="login-logoUAM" alt="logoUAM"/>
         
         {/* Ícono de persona de negocios */}
-        <img src={logo} className="App-iconPerson" alt="iconPerson" />
+        <img src={logo} className="login-iconPerson" alt="iconPerson" />
         
-        <div className="App-circle" alt="circle"></div>
+        <div className="login-circle" alt="circle"></div>
         
         {/* Formulario de inicio de sesión */}
-        <form className="container" onSubmit={handleSubmit}>
+        <form className="login-container" onSubmit={handleSubmit}>
           <input 
             type="text" 
             name="username" 
             placeholder="Usuario" 
-            className="input-rectangle" 
+            className="login-input-rectangle" 
             onChange={handleChange} 
             value={credentials.username}
             required 
@@ -47,14 +47,14 @@ const Login = ({ onLogin }) => {
             type="password" 
             name="password" 
             placeholder="Contraseña" 
-            className="input-rectangle" 
+            className="login-input-rectangle" 
             onChange={handleChange} 
             value={credentials.password}
             required 
           />
           
           {/* Botón de iniciar sesión */}
-          <button className="button-iniciarSesion" type="submit">Iniciar Sesión</button>
+          <button className="login-button-iniciarSesion" type="submit">Iniciar Sesión</button>
         </form>
         
         <p>

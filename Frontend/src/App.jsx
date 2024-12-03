@@ -3,20 +3,26 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./login.jsx";
 import Courses from "./admin-courses.jsx";
 import CreateCourseDetail from "./create-course-detail.jsx";
+import Details from "./show-course-detail.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const [courses, setCourses] = useState([]);
 
-  // Función para manejar el inicio de sesión
   const handleLogin = (credentials) => {
-    // Aquí puedes agregar la lógica de autenticación real (por ejemplo, llamar a una API)
-    // Por ahora, simularemos una autenticación exitosa
+    // Here you would typically validate the credentials against an API
     console.log("Credenciales recibidas:", credentials);
-    setIsAuthenticated(true);
+    if (credentials.username && credentials.password) { // Simulate successful login
+      setIsAuthenticated(true);
+      // Simulate fetching user data based on the credentials
+      setUser({
+        name: "Halley Isela Castro Calero", // Simulated name
+        email: `${credentials.username}@pelu.edu.ni` // Simulated email construction
+      });
+    }
   };
 
-  // Función para agregar un nuevo curso
   const addCourse = (course) => {
     const courseToAdd = {
       id: courses.length > 0 ? courses[courses.length - 1].id + 1 : 1,
@@ -41,15 +47,13 @@ function App() {
         />
 
         {/* Ruta de Cursos Disponibles */}
+        {/*pass info de los credentials al component to retrieve the data connected a las credentials */}
         <Route
           path="/courses"
           element={
-            isAuthenticated ? (
-              <Courses courses={courses} />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
+            isAuthenticated ? 
+            <Courses courses={courses} user={user} /> 
+            : <Navigate to="/" />}
         />
 
         {/* Ruta de Creación de Cursos */}
@@ -58,6 +62,18 @@ function App() {
           element={
             isAuthenticated ? (
               <CreateCourseDetail onAddCourse={addCourse} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+
+        {/* Ruta de Detalles del Curso */}
+        <Route
+          path="/curso/:id"
+          element={
+            isAuthenticated ? (
+              <Details courses={courses} />
             ) : (
               <Navigate to="/" />
             )
