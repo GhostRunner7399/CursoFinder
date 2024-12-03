@@ -51,13 +51,21 @@ body {
   }
   
   .course-display {
-    margin: 20px auto;
-    padding: 10px;
+    margin: 20px 0 90px 5%; /* Margen superior, derecho, inferior, izquierdo */
+    width: 83%; /* Ajusta según necesites para que coincida con la línea blanca */
+    padding: 20px;
     border: 1px solid #00796b;
     border-radius: 8px;
     background-color: white;
-    max-width: 400px;
     text-align: left;
+    /* Añadimos position relative para posicionar el botón inscribirse */
+    position: relative;
+  }
+
+  .course-detail-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0; /* Eliminar margen superior del ul */
   }
   
   .course-name {
@@ -81,22 +89,23 @@ body {
   
   .course-detail-heading {
     font-size: 1.2rem;
+    font-weight: bold;
     color: #00796b;
     margin-bottom: 10px;
   }
   
   .course-detail-item {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
-  .button-inscribirse {
-    background-color: #bcbefa;
+/*  .button-inscribirse {
+    background-color: #00796b;
     color: white;
     width: 200px;  
     height: 50px;
     position:absolute;
     right: 10%;
-    bottom: 2%;   
+    bottom: 2%;
     padding: 10px 20px;
     border-radius: 20px;
     font-family: 'Poppins', sans-serif;
@@ -109,7 +118,7 @@ body {
   
   .button-inscribirse:hover {
     background-color: #60cdd1;
-  }
+  }*/
   
   .white-lineL {
     position: absolute;
@@ -117,7 +126,7 @@ body {
     margin-left: 2%;
     left: 5vmin; 
     width: 4px;
-    height: 100vh; 
+    height: 100%; 
     background-color: rgb(255, 255, 255);
     z-index: 1;
   }
@@ -191,26 +200,37 @@ body {
     margin-top: 7%;
     margin-left: -1%;
     left: 12vmin; 
-    width: 100vh;
+    width: 100%;
     height: 4px; 
     background-color: rgb(255, 255, 255);
     z-index: 1;
   }
 
-  /*
-  .description-container {
-
-
+  .edit-button {
+    background-color: #00796b;
+    margin: 2%;
+    margin-left: 5%;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
   }
 
-  .logistic-container {
-
-
+  .edit-button {
+    background-color: #00796b;
   }
-
-  .requisites-container, .certificacion-container, .capacity-container {
-
-
+  
+  .edit-button img {
+    width: 24px; 
+    height: 24px;
+    vertical-align: middle;
+    filter: invert(100%);
   }
-
-*/

@@ -5,9 +5,9 @@ import logo from "./images/logoUAMFD.svg";
 import settingsIcon from './images/settings.svg';
 import menuIcon from './images/menu.svg';
 import UserBox from "./components/user-box";
+import trashCan from './images/trash-can.svg';
 
 
-//AGREGAR BOTONES PARA EDITAR O ELIMINAR UN CURSO
 function Courses({ courses, user }) {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
@@ -20,15 +20,22 @@ function Courses({ courses, user }) {
     navigate(`/curso/${courseId}`);
   };
 
+  //If your courses are fetched from a server, you also need to send a request to delete the course from the backend
+  //remember to handle the course deletion when pressing the del button
+  const handleDelete = (courseId) => {
+    if (window.confirm("Esta seguro que quiere eliminar este curso?")) {
+      setCourses(courses.filter((course) => course.Id !== Id));
+    }
+  };
+
   return (
     <div className="courses-page">
       <div className="user-box-container">
         <UserBox user={user} />
       </div>
-      {/* Líneas blancas verticales */}
-      <div className="white-lineL"></div>
+      {/* Líneas blancas verticales edteticas*/}
+      <div className="admin-white-lineL"></div>
       <div className="admin-right-side-rectangle"></div>
-      {/* Barra lateral */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-content">
           <img src={settingsIcon} alt="Configuración" className="settings-icon" />
@@ -38,7 +45,6 @@ function Courses({ courses, user }) {
 
       <div className="header-admin-courses">
         <div className="admin-white-lineH"></div>
-        {/* Ícono del menú para abrir la sidebar */}
         <img
           src={menuIcon}
           alt="Menú"
@@ -48,20 +54,24 @@ function Courses({ courses, user }) {
         <img src={logo} alt="LogoUAMFD" className="logo-admin-courses" />
       </div>
 
-      {/* Contenido principal */}
+      {/* display de cursos*/}
       <div className="courses-container">
         <div className="courses-header">
           <h1>Cursos Disponibles</h1>
         </div>
 
-        {/* Botón para agregar un nuevo curso */}
+        <div className="buttons-container">
+        {/*para agregar un nuevo curso */}
         <button
           className="add-button"
           onClick={() => navigate("/crear-curso")}
         >
           +
         </button>
-
+        <button className="delete-button" onClick={() => handleDelete(course.id)}>
+          <img src={trashCan} alt="Delete" />
+        </button>
+        </div>
         {/* Lista de cursos */}
         <div className="courses-list">
           {courses.length === 0 ? (
