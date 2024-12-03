@@ -1,7 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Repository.Cursos.Cursos;
-import com.example.demo.Services.CursoServicio;
+import com.example.demo.Services.Cursos.CursoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -6,7 +6,7 @@ import com.example.demo.Repository.Matricula.MatriculaRepository;
 import com.example.demo.Repository.Matricula.MatriculaRequest;
 import com.example.demo.Repository.Usuario.Usuario;
 import com.example.demo.Repository.Usuario.UsuarioRepository;
-import com.example.demo.Services.MatriculaServicio;
+import com.example.demo.Services.Matricula.MatriculaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

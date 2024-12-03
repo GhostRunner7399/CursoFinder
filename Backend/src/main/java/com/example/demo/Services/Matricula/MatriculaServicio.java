@@ -1,4 +1,4 @@
-package com.example.demo.Services;
+package com.example.demo.Services.Matricula;
 
 import com.example.demo.Repository.Cursos.Cursos;
 import com.example.demo.Repository.Cursos.CursosRepository;
