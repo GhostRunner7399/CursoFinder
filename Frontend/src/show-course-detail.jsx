@@ -1,13 +1,14 @@
+// show-course-detail.jsx
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./show-course-detail.css";
 import logo from "./images/logoUAMFD.svg";
-import settingsIcon from './images/settings.svg';
 import menuIcon from './images/menu.svg';
 import editButton from './images/edit.svg';
 import trashCan from './images/trash-can.svg';
+import Sidebar from './components/sidebar';
 
-function Details({ courses }) {
+function Details({ courses, setCourses }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const courseId = parseInt(id, 10);
@@ -19,7 +20,7 @@ function Details({ courses }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // Si no se encuentra el curso or smth like that
+  // Si no se encuentra el curso
   if (!course) {
     return (
       <div className="course-page">
@@ -28,24 +29,28 @@ function Details({ courses }) {
       </div>
     );
   }
+
+  const handleDelete = (courseId) => {
+    if (window.confirm("¿Está seguro que quiere eliminar este curso?")) {
+      setCourses(courses.filter((c) => c.id !== courseId));
+      navigate("/courses");
+    }
+  };
+
+  const handleEdit = (courseId) => {
+    navigate(`/editar-curso/${courseId}`); // Suponiendo que tienes una ruta para editar
+  };
+
   return (
     <div className="course-page">
-      {/* Líneas blancas verticales */}
       <div className="white-lineL"></div>
       <div className="white-lineR"></div>
 
-      {/* Barra lateral */}
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-content">
-          <img src={settingsIcon} alt="Configuración" className="settings-icon" />
-          {/* Puedes agregar más elementos a la barra lateral aquí */}
-        </div>
-      </div>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      {/* header que retrae el nombre del curso seleccionado*/}
+      {/* Header */}
       <div className="header-course-detail">
         <div className="white-lineH"></div>
-        {/* Ícono del menú para abrir la barra lateral */}
         <img
           src={menuIcon}
           alt="Menú"
@@ -61,9 +66,15 @@ function Details({ courses }) {
           <h1>{course.name}</h1>
         </div>
 
-        <button className="edit-button" onClick={() => {/* Add action for editing */}}>
-          <img src={editButton} alt="Edit" />
-        </button>
+        {/* Botones de editar y eliminar */}
+        <div className="buttons-container">
+          <button className="edit-button" onClick={() => handleEdit(course.id)}>
+            <img src={editButton} alt="Editar" />
+          </button>
+          <button className="delete-button" onClick={() => handleDelete(course.id)}>
+            <img src={trashCan} alt="Eliminar" />
+          </button>
+        </div>
 
         {/* Detalles del curso */}
         <div className="course-display">

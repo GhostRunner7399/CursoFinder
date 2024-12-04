@@ -11,14 +11,14 @@ function App() {
   const [courses, setCourses] = useState([]);
 
   const handleLogin = (credentials) => {
-    // Here you would typically validate the credentials against an API
+    // validate the credentials against an API
     console.log("Credenciales recibidas:", credentials);
-    if (credentials.username && credentials.password) { // Simulate successful login
+    if (credentials.username && credentials.password) { 
       setIsAuthenticated(true);
       // Simulate fetching user data based on the credentials
       setUser({
-        name: "Halley Isela Castro Calero", // Simulated name
-        email: `${credentials.username}@pelu.edu.ni` // Simulated email construction
+        name: "Halley Isela Castro Calero", // Simulated
+        email: `${credentials.username}@pelu.edu.ni` 
       });
     }
   };
@@ -34,7 +34,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Ruta de Inicio de Sesión */}
+        {/* Inicio de Sesión */}
         <Route
           path="/"
           element={
@@ -52,7 +52,7 @@ function App() {
           path="/courses"
           element={
             isAuthenticated ? 
-            <Courses courses={courses} user={user} /> 
+            <Courses courses={courses} user={user} setCourses={setCourses} />
             : <Navigate to="/" />}
         />
 

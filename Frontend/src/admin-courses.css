@@ -67,7 +67,7 @@ body {
   padding-left: 20px;
 }
 
-.add-button, .delete-button {
+.add-button {
   background-color: #00796b;
   margin: 2%;
   margin-left: 4%;
@@ -87,6 +87,19 @@ body {
 
 .delete-button {
   background-color: #d12525;
+  margin: 2%;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
 }
 
 .delete-button img {
@@ -113,23 +126,30 @@ body {
 }
 
 .course-card {
-  margin: 8px 0;
-  padding: 2px;
-  border: 1px solid #00796b; 
+  margin: 8px ;
+  padding: 7px;  /* Aumentado para mejor padding */
+  border: 1px solid #00796b;
   border-radius: 5px;
-  background-color: #e0f7fa; 
+  background-color: #e0f7fa;
+  overflow: hidden; 
+  width: 60vw;
+  max-width: 90vw; 
+  min-width: 50%;
 }
 
 .course-name {
+  margin-top: 1.5%;
   background-color: #00796b;
-  color: #fff; 
-  border: 1px solid #fff; 
-  border-radius: 5px; 
-  padding: 10px; 
-  margin-bottom: 5px; 
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
   font-weight: bold;
-  cursor: pointer; 
+  cursor: pointer;
+  word-wrap: break-word;
 }
+
 
 .course-form label {
   display: block; 
@@ -150,59 +170,22 @@ body {
   box-sizing: border-box; 
 }
 
-.admin-white-lineL {
-  position: absolute;
+.course-description {
+  font-size: 1rem;
+  color: #333;
+  padding: 0 10px;  
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+}
+
+.admin-left-side-rectangle {
+  position: fixed;   
   top: 0;
-  margin-left: 2%;
-  left: 5vmin; 
-  width: 4px;
+  left: 0vmin;  
+  width: 70px;  
   height: 100vh; 
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(252, 251, 251);
   z-index: 1;
-}
-
-
-.sidebar {
-  height: 100vh;
-  width: 0;
-  position: fixed;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  background-color: #158578;
-  border-radius: 8px;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidebar.open {
-  width: 60px;
-}
-
-.sidebar .close-btn {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  font-size: 36px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-.sidebar-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.settings-icon {
-  width: 30px;
-  height: 30px;
-  margin: 20px 0;
-  cursor: pointer;
-  /*filter: invert(100%);  hace que el icon sea blanco si es negro viceversa */
 }
 
 .menu-icon {
@@ -222,14 +205,14 @@ body {
   left: 12vmin; 
   width: 100%;
   height: 4px; 
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(252, 251, 251);
   z-index: 1;
 }
 
 .admin-right-side-rectangle {
   position: absolute;
   width: 20%;
-  height: 100vh;
+  height: 100%;
   background-color: #aed6db;
   right: 0%;
   margin-top: 4%;
@@ -246,10 +229,4 @@ body {
   align-items: center;
   justify-content: center; 
   z-index: 3; 
-}
-
-.delete-minibox {
-
-
-
 }
