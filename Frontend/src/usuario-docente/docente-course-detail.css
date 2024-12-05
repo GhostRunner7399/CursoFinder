@@ -4,56 +4,88 @@ body {
   background-color: #e0f7fa;
 }
 
-.course-page-doc {
+.course-page-docente {
   position: relative;
   padding: 20px;
+  top: 20px;
 }
 
-.course-container-doc {
+.course-container-docente {
   max-width: 800px;
   margin-left: 80px;  
 }
 
-.header-course-detail-doc {
+.header-course-detail-docente {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 30px;
 }
 
-.logo-container {
+.logo-container-docente {
   display: flex;
   align-items: center;
-  margin-left: 70px; 
-  margin-right: 30px; 
-}
-
-.logo-course-detail-doc {
-  height: 33px;
+  margin-left: 40px; 
+  margin-right: 15px;
   margin-top: -10px;  
 }
 
-
-.course-header-doc {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00796b;
-  margin-bottom: 20px;
+.logo-course-detail-docente {
+  position: absolute;
+  left: 0;
+  margin-top: 1%;
+  margin-left: 6%;
+  height: 5vmin;
+  z-index: 3;
 }
 
-.course-display-doc {
-  margin: 20px 0;
+.course-header-docente {
+  background-color: transparent;
+  border: none; 
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00796b; 
+  margin-bottom: 20px;
+}
+.course-cost-docente {
+  position: absolute; /* Posición absoluta para situarlo en la esquina superior derecha */
+  top: 20px; /* Ajusta la distancia desde la parte superior */
+  right: 20px; /* Ajusta la distancia desde la derecha */
+  font-size: 1.2rem; /* Tamaño de fuente */
+  color: #00796b; /* Color del texto */
+  font-weight: bold; /* Negrita */
+
+}
+.course-details-container {
+  display: flex; /* Usar flexbox para el diseño de columnas */
+  justify-content: space-between; /* Espacio entre las columnas */
+  margin-top: 20px; /* Espacio superior */
+  margin-left: 80px; 
+}
+
+.course-details-left,
+.course-details-right {
+  width: 48%; 
+}
+
+.info-detail {
+  margin-left: 20px; 
+  margin-bottom: 10px;
+}
+.course-display-docente {
+  margin: 70px 0; 
+  margin-left: 80px; 
   padding: 20px;
   border: none;
   background-color: transparent;
   box-shadow: none;
 }
 
-.course-detail-section-doc {
-  margin-bottom: 20px;
+.course-detail-section-docente {
+  margin-bottom: 30px;
 }
 
-.course-detail-heading-doc {
+.course-detail-heading-docente {
   font-size: 1.4rem;
   font-weight: bold;
   color: #00796b;
@@ -62,26 +94,90 @@ body {
   padding-bottom: 5px;
 }
 
-.course-detail-item-doc {
+.course-detail-item-docente {
   margin-bottom: 10px;
   font-size: 1.1rem;
   line-height: 1.5;
   margin-left: 20px;
 }
-
-.course-name-doc {
-  font-weight: bold;
-  color: white;
-  margin-left: 20px;
+.description-text {
+  margin-bottom:20px; 
+  margin-top: 80px;
+  margin-left: 80px;
 }
 
-.enroll-container-doc {
+.course-name-docente {
+  color: black; 
+  background: none; 
+  border: none; 
+  padding: 0; 
+  font-size: 4rem; 
+  font-weight: bold; 
+  display: inline;
+  position: relative;  
+  top: 65px;
+  margin-top: 120px;  
+  left: 100px;  
+}
+
+
+.certification-box-docente {
+  margin-top: 20px; 
+  background-color: black; 
+  padding: 10px; 
+  border-radius: 5px; 
+  color: white; 
+  width: 60%; 
+  max-width: 350px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  display: flex; 
+  align-items: center; 
+}
+
+
+.certifying-body-text {
+  font-size: 0.9rem; 
+  margin-top: 5px; 
+  font-weight: normal; 
+  color: white; 
+  text-align: right; 
+}
+
+.certification-content {
+  margin-left: 10px; 
+  flex-grow: 1; 
+}
+
+.certification-icon-docente {
+  width: 50px; 
+  height: 40px; 
+}
+
+.icon-container {
+  background-color: white; 
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-right: 8px; 
+}
+.certification-text-docente {
+  font-size: 1rem; 
+  font-weight: bold; 
+  margin-left: auto; 
+  text-align: right; 
+  flex-grow: 1; 
+  color: white; 
+}
+.enroll-container-docente {
   position: fixed;
   right: 20px;
   bottom: 20px;
 }
 
-.enroll-btn-doc {
+.enroll-btn-docente {
   background-color: #00796b;
   color: white;
   width: 220px;
@@ -98,7 +194,7 @@ body {
   background-color: #60cdd1;
 }
 
-.subscription-message-doc {
+.subscription-message-docente {
   position: fixed;
   bottom: 20px;
   left: 50%;
@@ -112,22 +208,22 @@ body {
   z-index: 5;
 }
 
-.white-lineL-doc,
-.white-lineR-doc,
-.white-lineH-doc {
+.white-lineL-docente,
+.white-lineR-docente,
+.white-lineH-docente {
   position: absolute;
   background-color: rgb(252, 251, 251);
   z-index: 1;
 }
 
-
-.white-lineH-doc {
+.white-lineH-docente {
   top: 6%;
   left: 0;
   width: 100%;
   height: 4px;
 }
-.white-lineL {
+
+.white-lineL-docente {
   position: absolute;
   top: 0;
   left: 9.5vmin; 
@@ -137,8 +233,8 @@ body {
   z-index: 1;
 }
 
-.white-lineR {
-  position:absolute;
+.white-lineR-docente {
+  position: absolute;
   top: 0;
   margin-right: 2%;
   right: 12vmin; 
@@ -146,4 +242,13 @@ body {
   height: 100%; 
   background-color: rgb(252, 251, 251);
   z-index: 1;
+}
+
+.menu-icon-docente {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px; 
+  left: 10px; 
+  cursor: pointer;
 }
