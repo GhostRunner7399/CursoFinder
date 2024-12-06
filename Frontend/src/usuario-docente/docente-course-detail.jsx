@@ -44,7 +44,7 @@ function Detailsdocente({ courses }) {
         <img src={menuIcon} alt="Menú" className="menu-icon-docente" onClick={toggleSidebar} />
         <div className="logo-container-docente">
           <img src={logo} alt="Logo UAMFD" className="logo-course-detail-docente" />
-          <div className="white-lineL-docente"></div>
+          <div className="white-left-rectangle-docente"></div>
         </div>
         {/* Costo en la esquina superior derecha */}
         <div className="course-cost-docente">

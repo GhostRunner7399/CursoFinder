@@ -42,7 +42,7 @@ function Details({ courses, setCourses }) {
 
   return (
     <div className="course-page">
-      <div className="white-lineL"></div>
+      <div className="course-detail-left-side-rectangle"></div>
       <div className="white-lineR"></div>
 
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

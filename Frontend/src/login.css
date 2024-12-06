@@ -36,6 +36,12 @@
   z-index: 1;
 }
 
+.login-error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;

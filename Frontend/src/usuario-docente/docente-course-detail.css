@@ -223,12 +223,12 @@ body {
   height: 4px;
 }
 
-.white-lineL-docente {
-  position: absolute;
+.white-left-rectangle-docente {
+  position: fixed;
   top: 0;
-  left: 9.5vmin; 
-  width: 4px;
-  height: 100%; 
+  left: 0vmin;
+  width: 70px;
+  height: 100vh;
   background-color: rgb(252, 251, 251);
   z-index: 1;
 }

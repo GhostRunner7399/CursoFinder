@@ -6,7 +6,8 @@ import './login.css';
 /* PAGINA INICIAL, USER LOG IN */
 
 const Login = ({ onLogin }) => {
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const [credentials, setCredentials] = useState({ cif: "", contraseña: "" });
+  const [error, setError] = useState("");
 
   // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
@@ -15,46 +16,55 @@ const Login = ({ onLogin }) => {
   };
 
   // Maneja el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica de validación de credenciales
-    onLogin(credentials);
+    try {
+      const success = await onLogin(credentials);
+      if (!success) {
+        setError("Credenciales inválidas. Inténtalo de nuevo.");
+      }
+    } catch (err) {
+      setError("Error al iniciar sesión. Inténtalo más tarde.");
+      console.error(err);
+    }
   };
 
   return (
     <div className="login">
       <header className="login-header">
-        {/* Logo UAM */}
+    
         <img src={logoUAM} className="login-logoUAM" alt="logoUAM"/>
-        
-        {/* Ícono de persona de negocios */}
+
         <img src={logo} className="login-iconPerson" alt="iconPerson" />
-        
+
         <div className="login-circle" alt="circle"></div>
-        
+
         {/* Formulario de inicio de sesión */}
         <form className="login-container" onSubmit={handleSubmit}>
           <input 
             type="text" 
-            name="username" 
-            placeholder="Usuario" 
+            name="cif" 
+            placeholder="CIF" 
             className="login-input-rectangle" 
             onChange={handleChange} 
-            value={credentials.username}
+            value={credentials.cif}
             required 
           />
           <input 
             type="password" 
-            name="password" 
+            name="contraseña" 
             placeholder="Contraseña" 
             className="login-input-rectangle" 
             onChange={handleChange} 
-            value={credentials.password}
+            value={credentials.contraseña}
             required 
           />
           
           {/* Botón de iniciar sesión */}
           <button className="login-button-iniciarSesion" type="submit">Iniciar Sesión</button>
+
+          {/* Mostrar error */}
+          {error && <p className="login-error">{error}</p>}
         </form>
         
         <p>

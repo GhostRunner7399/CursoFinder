@@ -14,6 +14,7 @@ function CursosDocente({ user, courses, setCourses }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  //connect to database, check courses table, retraer info con axios
   useEffect(() => {
     if (!courses || courses.length === 0) {
       const cursoPrueba = {
