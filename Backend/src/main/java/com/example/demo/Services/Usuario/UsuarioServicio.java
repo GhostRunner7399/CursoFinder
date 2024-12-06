@@ -20,13 +20,13 @@ public class UsuarioServicio {
     }
 
     //Buscar usuario
-    public Optional<Usuario> buscarPorCif(Integer cif) {
+    public Optional<Usuario> buscarPorCif(String cif) {
         return usuarioRepository.findByCif(cif);
     }
 
 
     //Autenticar usuario
-    public boolean autenticarUsuario(Integer cif, String contraseña) {
+    public boolean autenticarUsuario(String cif, String contraseña) {
         return usuarioRepository.findByCifAndContraseña( cif, contraseña).isPresent();
     }
 

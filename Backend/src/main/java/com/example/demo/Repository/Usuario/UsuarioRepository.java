@@ -8,9 +8,9 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     //Buscar usuario por CIF
-    Optional<Usuario> findByCif(Integer cif);
+    Optional<Usuario> findByCif(String cif);
 
     //Autenticar usuario
-    Optional<Usuario> findByCifAndContraseña(Integer cif, String contraseña);
+    Optional<Usuario> findByCifAndContraseña(String cif, String contraseña);
 
 }

@@ -51,7 +51,7 @@ public class MatriculaController {
         }
     }
     @GetMapping("/{cif}/courses")
-    public ResponseEntity<List<Cursos>> obtenerCursosUsuario(@PathVariable Integer cif) {
+    public ResponseEntity<List<Cursos>> obtenerCursosUsuario(@PathVariable String cif) {
         try {
             Usuario usuario = usuarioRepository.findByCif(cif)
                     .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
@@ -65,7 +65,7 @@ public class MatriculaController {
     }
 
     @DeleteMapping("/usuario/{cif}/curso/{codigocurso}")
-    public ResponseEntity<String> borrarMatricula(@PathVariable Integer cif, @PathVariable String codigocurso) {
+    public ResponseEntity<String> borrarMatricula(@PathVariable String cif, @PathVariable String codigocurso) {
         try {
             matriculaServicio.borrarmatricula(cif, codigocurso);
             return ResponseEntity.ok("Matrícula eliminada con éxito.");

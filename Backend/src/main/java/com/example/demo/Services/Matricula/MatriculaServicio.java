@@ -24,7 +24,7 @@ public class MatriculaServicio {
     @Autowired
     CursosRepository cursosRepository;
 
-    public Matricula matricularUsuario(Integer cif, String codigocurso) {
+    public Matricula matricularUsuario(String cif, String codigocurso) {
         // Verificar si el usuario y el curso existen
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
@@ -43,7 +43,7 @@ public class MatriculaServicio {
             return matriculaRepository.save(matricula);
 
     }
-    public List<Cursos> obtenerCursosUsuario(Integer cif){
+    public List<Cursos> obtenerCursosUsuario(String cif){
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
 
@@ -65,7 +65,7 @@ public class MatriculaServicio {
                 .toList();
 
     }
-    public void borrarmatricula(Integer cif, String codigocurso) {
+    public void borrarmatricula(String cif, String codigocurso) {
         // Verificar si el usuario y el curso existen
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));

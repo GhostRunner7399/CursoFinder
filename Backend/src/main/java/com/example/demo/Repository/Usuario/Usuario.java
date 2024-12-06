@@ -18,7 +18,7 @@ public class Usuario {
     private String nombre;
 
     @Column(unique = true, nullable = false)
-    private Integer cif;
+    private String cif;
 
     @Column(nullable = false)
     private String contraseña;
