@@ -1,4 +1,3 @@
-// show-course-detail.jsx
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./show-course-detail.css";
