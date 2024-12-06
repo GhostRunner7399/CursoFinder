@@ -29,9 +29,5 @@
   height: 30px;
   margin: 20px 0;
   cursor: pointer;
-  border: 2px solid transparent; /* Asegurando que no haya borde por defecto */
-}
-
-.statisticIcon {
-  border: 2px solid red; /* Añadimos un borde temporal */
+  border: 2px solid transparent; 
 }

@@ -48,18 +48,18 @@ body {
   margin-bottom: 20px;
 }
 .course-cost-docente {
-  position: absolute; /* Posición absoluta para situarlo en la esquina superior derecha */
-  top: 20px; /* Ajusta la distancia desde la parte superior */
-  right: 20px; /* Ajusta la distancia desde la derecha */
-  font-size: 1.2rem; /* Tamaño de fuente */
-  color: #00796b; /* Color del texto */
-  font-weight: bold; /* Negrita */
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  font-size: 1.2rem;
+  color: #00796b; 
+  font-weight: bold; 
 
 }
 .course-details-container {
-  display: flex; /* Usar flexbox para el diseño de columnas */
-  justify-content: space-between; /* Espacio entre las columnas */
-  margin-top: 20px; /* Espacio superior */
+  display: flex; 
+  justify-content: space-between;
+  margin-top: 20px;
   margin-left: 80px; 
 }
 
@@ -156,7 +156,7 @@ body {
 
 .icon-container {
   background-color: white; 
-  border-radius: 5px; /* Bordes redondeados */
+  border-radius: 5px; 
   padding: 10px; 
   display: flex; 
   align-items: center; 
