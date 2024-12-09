@@ -59,21 +59,29 @@ body {
 .course-details-container {
   display: flex; 
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-left: 80px; 
+  padding: 20px;
+  margin: 30px auto; 
+  border: 3.5px solid #00796b; 
+  border-radius: 10px;  
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .course-details-left,
 .course-details-right {
   width: 48%; 
+  margin-top: 30px;
+
 }
 
 .info-detail {
-  margin-left: 20px; 
+  margin-left: 30px; 
   margin-bottom: 10px;
 }
 .course-display-docente {
-  margin: 70px 0; 
+  margin: 80px 0; 
   margin-left: 80px; 
   padding: 20px;
   border: none;
@@ -101,40 +109,51 @@ body {
   margin-left: 20px;
 }
 .description-text {
-  margin-bottom:20px; 
-  margin-top: 80px;
+  margin-bottom:60px; 
+  margin-top: 60px;
   margin-left: 80px;
 }
 
+.course-name-box-docente {
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 40px 0;
+  text-align: center;
+  max-width: 600px;
+  margin-left: -40px;
+  margin-right: auto;
+  
+}
+
 .course-name-docente {
-  color: black; 
-  background: none; 
-  border: none; 
+  color: #00796b;
+  font-size: 70rem;
+  font-weight: bold;
+  margin: 0;
+  word-wrap: break-word;
   padding: 0; 
-  font-size: 4rem; 
-  font-weight: bold; 
   display: inline;
   position: relative;  
-  top: 65px;
-  margin-top: 120px;  
-  left: 100px;  
+  top: 15px;
+  margin-top: 50px;  
+  left: -5px;
 }
 
 
 .certification-box-docente {
-  margin-top: 20px; 
+  position: absolute; /*esquina*/
+  top: 80px;
+  right: 90px;
   background-color: black; 
   padding: 10px; 
   border-radius: 5px; 
   color: white; 
   width: 60%; 
   max-width: 350px; 
-  margin-left: auto; 
-  margin-right: auto; 
   display: flex; 
   align-items: center; 
 }
-
 
 .certifying-body-text {
   font-size: 0.9rem; 
@@ -208,7 +227,6 @@ body {
   z-index: 5;
 }
 
-.white-lineL-docente,
 .white-lineR-docente,
 .white-lineH-docente {
   position: absolute;
@@ -223,12 +241,12 @@ body {
   height: 4px;
 }
 
-.white-left-rectangle-docente {
-  position: fixed;
+.docente-course-detail-L-side-rectangle {
+  position: fixed;   
   top: 0;
-  left: 0vmin;
-  width: 70px;
-  height: 100vh;
+  left: 0vmin;  
+  width: 60px;  
+  height: 100vh; 
   background-color: rgb(252, 251, 251);
   z-index: 1;
 }
@@ -244,11 +262,3 @@ body {
   z-index: 1;
 }
 
-.menu-icon-docente {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 10px; 
-  left: 10px; 
-  cursor: pointer;
-}

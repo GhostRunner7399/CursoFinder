@@ -1,17 +1,15 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./docente-course-detail.css";
+import "./docente-course-detail.css"; // Ensure this is the correct path to your CSS file
 import logo from "../images/logoUAMFD.svg";
 import menuIcon from "../images/menu.svg";
-import certificationIcon from "../images/certificationIcon.svg"; 
+import certificationIcon from "../images/certificationIcon.svg";
 import Sidebar from "../components/sidebar";
 
 function Detailsdocente({ courses }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const courseId = parseInt(id, 10);
-
-  // Buscar curso
   const course = courses.find((c) => c.id === courseId);
 
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
@@ -22,7 +20,6 @@ function Detailsdocente({ courses }) {
   };
 
   if (!course) {
-    console.log("Curso no encontrado. Cursos disponibles:", courses);
     return (
       <div className="course-page-docente">
         <p>Curso no encontrado.</p>
@@ -34,28 +31,24 @@ function Detailsdocente({ courses }) {
   return (
     <div className="course-page-docente">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      
-      <div className="white-lineH-docente"></div>
 
-      {message && <div className="subscription-message-docente">{message}</div>}
-
-      {/* Header */}
       <div className="header-course-detail-docente">
-        <img src={menuIcon} alt="Menú" className="menu-icon-docente" onClick={toggleSidebar} />
+        <img src={menuIcon} alt="Menú" className="menu-icon" onClick={toggleSidebar} />
+        <div className="white-lineH-docente"></div>
+        <div className="docente-course-detail-L-side-rectangle"></div>
         <div className="logo-container-docente">
-          <img src={logo} alt="Logo UAMFD" className="logo-course-detail-docente" />
-          <div className="white-left-rectangle-docente"></div>
+          <img src={logo} alt="LogoUAMFD" className="logo-course-detail-docente" />
         </div>
-        {/* Costo en la esquina superior derecha */}
         <div className="course-cost-docente">
           <strong>Costo:</strong> ${course.cost}
         </div>
       </div>
 
-      {/* Detalles del curso */}
       <div className="course-container-docente">
-        <h1 className="course-name-docente">{course.name}</h1>
-        <p className="description-text">{course.description}</p> {/* Descripción del curso */}
+        <div className="course-name-box-docente">
+        <h1 className="course-header-docente">{course.name}</h1>
+        </div>
+        <p className="description-text">{course.description}</p>
 
         <div className="course-details-container">
           <div className="course-details-left">
@@ -91,19 +84,17 @@ function Detailsdocente({ courses }) {
             <p className="info-detail">• {course.availableSpots}</p>
           </div>
         </div>
-
-        {/* Sección de Certificación */}
+        
         <div className="certification-box-docente">
-  <div className="icon-container">
-    <img src={certificationIcon} alt="Certificación" className="certification-icon-docente" />
-  </div>
-  <div className="certification-content">
-    <p className="certification-text-docente">{course.certification}</p>
-    <p className="certifying-body-text">Cuerpo Certificador: {course.certifyingBody}</p>
-  </div>
-</div>
+          <div className="icon-container">
+            <img src={certificationIcon} alt="Certification" className="certification-icon-docente" />
+          </div>
+          <div className="certification-content">
+            <p className="certification-text-docente">{course.certification}</p>
+            <p className="certifying-body-text">Cuerpo Certificador: {course.certifyingBody}</p>
+          </div>
+        </div>
 
-        {/* Botón de inscripción */}
         <div className="enroll-container-docente">
           <button
             onClick={() => {
