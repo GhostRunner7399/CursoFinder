@@ -15,7 +15,7 @@ public class CursoController {
     @Autowired
     private CursoServicio cursoServicio;
 
-    // Crear curso
+    // Crear o actualizar curso
     @PostMapping("/create")
     public ResponseEntity<Cursos> crearCurso(@RequestBody Cursos curso) {
         Cursos cursoGuardado = cursoServicio.guardarCurso(curso);
@@ -38,7 +38,7 @@ public class CursoController {
     }
 
     // Eliminar un curso por ID
-    @DeleteMapping("/delete/{codigocurso}")
+    @DeleteMapping("/{codigocurso}")
     public ResponseEntity<String> eliminarCurso(@PathVariable String codigocurso) {
         cursoServicio.eliminarCurso(codigocurso);
         return ResponseEntity.ok("Curso con código " + codigocurso + " eliminado correctamente.");
