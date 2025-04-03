@@ -1,11 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./admin-courses.css";
-import logo from "./images/logoUAMFD.svg";
-import menuIcon from './images/menu.svg';
-import UserBox from "./components/user-box";
-import trashCan from './images/trash-can.svg';
-import Sidebar from "./components/sidebar";
+import logo from "../images/logoUAMFD.svg";
+import menuIcon from '../images/menu.svg';
+import UserBox from "../components/user-box";
+import trashCan from '../images/trash-can.svg';
+import Sidebar from "../components/sidebar";
+import { deleteCourse } from "../services/Courses-Op.jsx";
 
 function Courses({ courses, user, setCourses }) {
   const navigate = useNavigate();
@@ -19,9 +20,14 @@ function Courses({ courses, user, setCourses }) {
     navigate(`/curso/${courseId}`);
   };
 
-  const handleDelete = (courseId) => {
+  const handleDelete = async (codigocurso) => {
     if (window.confirm("¿Está seguro que quiere eliminar este curso?")) {
-      setCourses(courses.filter((course) => course.id !== courseId));
+      try {
+        await deleteCourse(codigocurso);
+        setCourses(courses.filter((course) => course.codigocurso !== codigocurso));
+      } catch (error) {
+        console.error("Error al eliminar el curso:", error);
+      }
     }
   };
 
@@ -52,7 +58,6 @@ function Courses({ courses, user, setCourses }) {
         </div>
 
         <div className="buttons-container">
-          {/* agregar un nuevo curso */}
           <button
             className="add-button"
             onClick={() => navigate("/crear-curso")}
@@ -69,12 +74,13 @@ function Courses({ courses, user, setCourses }) {
               <div key={course.id} className="course-card">
                 <h3
                   className="course-name"
+                  // Aquí utilizamos el `id` del curso
                   onClick={() => handleCourseClick(course.id)}
                 >
-                  {course.name}
+                  {course.nombre}
                 </h3>
-                <p className="course-description">{course.description}</p>
-                <button className="delete-button" onClick={() => handleDelete(course.id)}>
+                <p className="course-description">{course.descripcion}</p>
+                <button className="delete-button" onClick={() => handleDelete(course.codigocurso)}>
                   <img src={trashCan} alt="Eliminar" />
                 </button>
               </div>
