@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from './images/iconLoginUAMFD.svg';
 import logoUAM from './images/logoUAM.svg';
 import errorImage from './images/errorLogin.svg';
+import logIcon from './images/logIcon.svg';
 import './login.css';
 
 /* PAGINA INICIAL, USER LOG IN */
@@ -22,10 +23,15 @@ const Login = ({ onLogin }) => {
     try {
       const success = await onLogin(credentials);
       if (!success) {
-        setError("Credenciales inválidas. Inténtalo de nuevo.");
+        {/*credenciales invalidas, intentar de nuevo*/}
+        setError("Credenciales invalidas.")
+        setCredentials({ cif: "", contraseña: "" });
+      } else {
+        setError("");
       }
     } catch (err) {
       setError("Error al iniciar sesión. Inténtalo más tarde.");
+      setCredentials({ cif: "", contraseña: "" });
       console.error(err);
     }
   };
@@ -35,55 +41,55 @@ const Login = ({ onLogin }) => {
       <header className="login-header">
         <img src={logoUAM} className="login-logoUAM" alt="logoUAM"/>
       </header>
+      
+    {/*si no hay error se muestra el image principal de las personas */}
+    {!error && (
+      <div className="login-image-container">
+        <img src={logo} className="login-iconPerson" alt="iconPerson" />
+        <div className="login-circle" alt="circle"></div>
+      </div>
+    )}
 
-      {!error && (
-        <>
-          <img src={logo} className="login-iconPerson" alt="iconPerson" />
-          <div className="login-circle" alt="circle"></div>
-        </>
-      )}
-
-        {/* Formulario de inicio de sesión */}
-        <form className="login-container" onSubmit={handleSubmit}>
-          <div className="container-title">UAMFD</div>
-          <input 
-            type="text" 
-            name="cif" 
-            placeholder="CIF" 
-            className="login-input-rectangle" 
-            onChange={handleChange} 
-            value={credentials.cif}
-            required 
-          />
-          <input 
-            type="password" 
-            name="contraseña" 
-            placeholder="Contraseña" 
-            className="login-input-rectangle" 
-            onChange={handleChange} 
-            value={credentials.contraseña}
-            required 
-          />
-          
-          {/* Botón de iniciar sesión */}
-          <button className="login-button-iniciarSesion" type="submit">Iniciar Sesión</button>
-
-          <div className="cpr">Copyright © Universidad Americana. Reservados todos los derechos.</div>
-
-          {/* Mostrar error */}
-          {error && (
-          <>
-            <img 
-              src={errorImage} 
-              className="login-error-image" 
-              alt="Error" 
-            />
-            <p className="login-error">{error}</p>
-          </>
-        )}
-        </form>
-        
-        
+    {/* Formulario de inicio de sesión */}
+    
+    <form className="login-container" onSubmit={handleSubmit}>
+      <img src={logIcon} className="log-icon" alt="log"/>
+      <div className="container-title">Formación Docente</div>
+      <input 
+        type="text" 
+        name="cif" 
+        placeholder={error ? "CIF Incorrecto*" : "CIF"} 
+        className={`login-input-rectangle ${error ? "login-error-input-rectangle" : ""}`}
+        onChange={handleChange} 
+        value={credentials.cif}
+        required 
+      />
+      <input 
+        type="password" 
+        name="contraseña" 
+        placeholder={error ? "Contraseña Incorrecta*" : "Contraseña"} 
+        className={`login-input-rectangle ${error ? "login-error-input-rectangle" : ""}`}
+        onChange={handleChange} 
+        value={credentials.contraseña}
+        required 
+      />
+      {/* botón iniciar sesión */}
+      <button className="login-button-iniciarSesion" type="submit">
+        Iniciar Sesión</button>
+      <div className="cpr">
+        Copyright © Universidad Americana. Reservados todos los derechos.
+      </div>
+    </form>
+     {/* Mostrar error image */}
+     {error && (
+         <div className="login-image-container"> 
+           <img 
+             src={errorImage} 
+             className="login-error-image" 
+             alt="Error" 
+           />
+         </div> 
+      )}          
     </div>
   );
 };
