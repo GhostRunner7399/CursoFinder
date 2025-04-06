@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import logo from './images/icon2.svg';
+import logo from './images/iconLoginUAMFD.svg';
 import logoUAM from './images/logoUAM.svg';
+import errorImage from './images/errorLogin.svg';
 import './login.css';
 
 /* PAGINA INICIAL, USER LOG IN */
@@ -32,15 +33,19 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login">
       <header className="login-header">
-    
         <img src={logoUAM} className="login-logoUAM" alt="logoUAM"/>
+      </header>
 
-        <img src={logo} className="login-iconPerson" alt="iconPerson" />
-
-        <div className="login-circle" alt="circle"></div>
+      {!error && (
+        <>
+          <img src={logo} className="login-iconPerson" alt="iconPerson" />
+          <div className="login-circle" alt="circle"></div>
+        </>
+      )}
 
         {/* Formulario de inicio de sesión */}
         <form className="login-container" onSubmit={handleSubmit}>
+          <div className="container-title">UAMFD</div>
           <input 
             type="text" 
             name="cif" 
@@ -63,14 +68,22 @@ const Login = ({ onLogin }) => {
           {/* Botón de iniciar sesión */}
           <button className="login-button-iniciarSesion" type="submit">Iniciar Sesión</button>
 
+          <div className="cpr">Copyright © Universidad Americana. Reservados todos los derechos.</div>
+
           {/* Mostrar error */}
-          {error && <p className="login-error">{error}</p>}
+          {error && (
+          <>
+            <img 
+              src={errorImage} 
+              className="login-error-image" 
+              alt="Error" 
+            />
+            <p className="login-error">{error}</p>
+          </>
+        )}
         </form>
         
-        <p>
-          Copyright © Universidad Americana. Reservados todos los derechos.
-        </p>
-      </header>
+        
     </div>
   );
 };

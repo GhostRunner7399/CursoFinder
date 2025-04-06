@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./docente-course-detail.css"; // Ensure this is the correct path to your CSS file
-import logo from "../images/logoUAMFD.svg";
-import menuIcon from "../images/menu.svg";
-import certificationIcon from "../images/certificationIcon.svg";
-import Sidebar from "../components/sidebar";
+import logo from "../../images/logoUAMFD.svg";
+import menuIcon from "../../images/menu.svg";
+import certificationIcon from "../../images/certificationIcon.svg";
+import Sidebar from "../../components/sidebar";
 
 function Detailsdocente({ courses }) {
   const navigate = useNavigate();

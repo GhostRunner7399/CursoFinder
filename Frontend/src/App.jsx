@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./login.jsx";
-import AdminCourses from "./usuario-administrador/admin-courses.jsx";
-import DocenteCourses from "./usuario-docente/docente-courses.jsx";
-import CreateCourseDetail from "./usuario-administrador/create-course-detail.jsx";
-import Details from "./usuario-administrador/show-course-detail.jsx"; 
-import Detailsdocente from "./usuario-docente/docente-course-detail.jsx";
+import AdminCourses from "./vistas/usuario-administrador/admin-courses.jsx";
+import DocenteCourses from "./vistas/usuario-docente/docente-courses.jsx";
+import CreateCourseDetail from "./vistas/usuario-administrador/create-course-detail.jsx";
+import Details from "./vistas/usuario-administrador/show-course-detail.jsx"; 
+import Detailsdocente from "./vistas/usuario-docente/docente-course-detail.jsx";
 import { authenticateUser, fetchUserByCif } from "./services/User-Op.jsx";
 import { fetchCourses, createCourse } from "./services/Courses-Op.jsx";
 

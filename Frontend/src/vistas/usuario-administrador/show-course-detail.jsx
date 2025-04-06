@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./show-course-detail.css";
-import logo from "../images/logoUAMFD.svg";
-import menuIcon from '../images/menu.svg';
-import editButton from '../images/edit.svg';
-import trashCan from '../images/trash-can.svg';
-import Sidebar from '../components/sidebar';
+import logo from "../../images/logoUAMFD.svg";
+import menuIcon from '../../images/menu.svg';
+import editButton from '../../images/edit.svg';
+import trashCan from '../../images/trash-can.svg';
+import Sidebar from '../../components/sidebar';
 
 function Details({ courses, setCourses }) {
   const navigate = useNavigate();

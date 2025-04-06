@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./admin-courses.css";
-import logo from "../images/logoUAMFD.svg";
-import menuIcon from '../images/menu.svg';
-import UserBox from "../components/user-box";
-import trashCan from '../images/trash-can.svg';
-import Sidebar from "../components/sidebar";
-import { deleteCourse } from "../services/Courses-Op.jsx";
+import logo from "../../images/logoUAMFD.svg";
+import menuIcon from '../../images/menu.svg';
+import UserBox from "../../components/user-box";
+import trashCan from '../../images/trash-can.svg';
+import Sidebar from "../../components/sidebar";
+import { deleteCourse } from "../../services/Courses-Op.jsx";
 
 function Courses({ courses, user, setCourses }) {
   const navigate = useNavigate();

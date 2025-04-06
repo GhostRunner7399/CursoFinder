@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from '../images/logoUAMFD.svg';
+import logo from '../../images/logoUAMFD.svg';
 import "./create-course-detail.css";
 
 const CreateCourseDetail = ({ onAddCourse }) => {

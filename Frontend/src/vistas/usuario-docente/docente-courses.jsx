@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./docente-courses.css"; 
-import logo from "../images/logoUAMFD.svg";
-import menuIcon from "../images/menu.svg";
-import Sidebar from "../components/sidebar";
-import UserBox from "../components/user-box";
+import logo from "../../images/logoUAMFD.svg";
+import menuIcon from "../../images/menu.svg";
+import Sidebar from "../../components/sidebar";
+import UserBox from "../../components/user-box";
 
 function CursosDocente({ user, courses, setCourses }) {
   const navigate = useNavigate();
