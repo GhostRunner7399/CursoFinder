@@ -1,10 +1,10 @@
 package com.example.demo.Services.Matricula;
 
-import com.example.demo.Repository.Cursos.Cursos;
+import com.example.demo.Repository.Cursos.Class.Cursos;
 import com.example.demo.Repository.Cursos.CursosRepository;
-import com.example.demo.Repository.Matricula.Matricula;
+import com.example.demo.Repository.Matricula.Class.Matricula;
 import com.example.demo.Repository.Matricula.MatriculaRepository;
-import com.example.demo.Repository.Usuario.Usuario;
+import com.example.demo.Repository.Usuario.Class.Usuario;
 import com.example.demo.Repository.Usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
