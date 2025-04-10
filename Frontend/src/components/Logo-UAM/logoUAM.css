@@ -1,0 +1,10 @@
+.login-logoUAM {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 1%;
+    margin-left: 1%;
+    height: 7vmin;
+    z-index: 3; /*posicion over el circulo*/
+  }
+  

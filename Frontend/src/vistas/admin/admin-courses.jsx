@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./admin-courses.css";
-import logo from "../../images/logoUAMFD.svg";
+import logo from "../../images/logoUAMFD.svg"; {/*CHANGE TO DEFAULT HEADER */}
 import menuIcon from '../../images/menu.svg';
-import UserBox from "../../components/user-box";
+import UserBox from "../../components/user-box/user-box.jsx";
 import trashCan from '../../images/trash-can.svg';
-import Sidebar from "../../components/sidebar";
+import Sidebar from "../../components/sidebar/sidebar.jsx";
 import { deleteCourse } from "../../services/Courses-Op.jsx";
 
 function Courses({ courses, user, setCourses }) {

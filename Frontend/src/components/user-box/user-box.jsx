@@ -1,5 +1,5 @@
 import styles from './user-box.module.css';
-import fijado from '../images/fijado.svg';
+import fijado from '../../images/fijado.svg';
 
 function UserBox({ user }) {
   if (!user) return null;

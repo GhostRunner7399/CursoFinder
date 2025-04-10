@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './sidebar.module.css';
-import settingsIcon from '../images/settings.svg';
-import statisticIcon from '../images/statistic_icon.svg';
+import settingsIcon from '../../images/settings.svg';
+import statisticIcon from '../../images/statistic_icon.svg';
 
 function Sidebar({ isOpen, toggleSidebar }) {
   return (

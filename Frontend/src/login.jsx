@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import logo from './images/iconLoginUAMFD.svg';
-import logoUAM from './images/logoUAM.svg';
 import errorImage from './images/errorLogin.svg';
 import logIcon from './images/logIcon.svg';
+import LogoUAM from './components/Logo-UAM/logoUAM';
 import './login.css';
 
 /* PAGINA INICIAL, USER LOG IN */
@@ -39,7 +39,7 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login">
       <header className="login-header">
-        <img src={logoUAM} className="login-logoUAM" alt="logoUAM"/>
+        <LogoUAM />
       </header>
       
     {/*si no hay error se muestra el image principal de las personas */}
