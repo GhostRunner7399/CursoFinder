@@ -1,33 +1,83 @@
 .sidebar {
-  height: 100vh;
-  width: 0;
   position: fixed;
-  z-index: 4;
   top: 0;
   left: 0;
-  background-color: #f1f1f1;
-  border-radius: 8px;
+  height: 100vh;
+  background-color: #242424;
   overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-.open {
-  width: 60px;
-}
-.sidebarContent {
+  z-index: 4;
+  /* Narrow width by default */
+  width: 40px;
+  transition: width 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.settingsIcon {
+
+.open {
+  width: 250px;
+}
+
+.displayIcon {
   width: 30px;
   height: 30px;
-  margin: 20px 0;
+  margin: 1rem 0;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
+
+.sidebarContent {
+  flex: 1;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 1rem;
+}
+
+.displayIconOpened {
+  transform: rotate(180deg);
+}
+
+/* Container for user/role text */
+.identificadorContainer {
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.sidebarTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0 0;
+}
+
+.sidebarRole {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #00bfff; /* or any color to highlight the role */
+}
+
+/* Each nav item: icon + optional label */
+.navItem {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
   cursor: pointer;
 }
-.statisticIcon {
-  width: 30px;
-  height: 30px;
-  margin: 10px 0;
-  cursor: pointer;
+
+/* Icon inside navItem */
+.navItem img {
+  width: 25px;
+  height: 25px;
+  margin-right: 1rem;
+}
+
+/* Only show text when .open is true, but we handle it in the JSX conditionally as well */
+.navItem span {
+  font-size: 0.95rem;
+  font-weight: 400;
 }

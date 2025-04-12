@@ -4,6 +4,8 @@ import "./docente-courses.css";
 import DefaultHeader from "../../components/def-header/default-header.jsx"; 
 import GreaterThan from "./../../images/SimboloMayor.svg";
 import DefCourseImage from "./../../images/def_course_image.svg";
+import Sidebar from "../../components/sidebar/sidebar.jsx";
+import Highlight from "../../components/Highlight/highlight.jsx";
 
 /**
  * Helper function to group courses by faculty.
@@ -55,13 +57,11 @@ function CursosDocente({ user, courses, setCourses }) {
       {/* Header at the top */}
       <DefaultHeader />
 
-      {/* Sidebar placeholder (development) 
-          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      */}
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       <div className="all-courses-container">
         <div className="courses-header-container">
-          <h1>Qué aprender ahora</h1>
+          <h1><Highlight>Qué aprender ahora</Highlight></h1>
         </div>
 
         {/* If courses is empty or not an array */}
@@ -93,7 +93,7 @@ function CursosDocente({ user, courses, setCourses }) {
                   </div>
                 ))}
 
-                {/* “See more” arrow at the end of the row */}
+                {/* see more arrow */}
                 <img
                   src={GreaterThan}
                   className="courses-see-more"

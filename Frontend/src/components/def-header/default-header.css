@@ -13,14 +13,14 @@
     align-items: center;
     justify-content: space-between;
     background-color: #BAEEF2;
-    height: 60px;
+    height: 50px;
     padding: 0 1rem;
     box-sizing: border-box;
   }
   
   /* logo en el top left side of the header */
   .logoUAM {
-    height: 35px;
+    height: 30px;
     width: auto;
     cursor: pointer;
   }

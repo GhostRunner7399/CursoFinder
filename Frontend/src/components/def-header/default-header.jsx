@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logoUAM from '../../images/logoUAM.svg';
-import profileIcon from '../../images/profile_Button.svg';
-import bell from '../../images/Bell.svg';
+import profileIcon from '../../images/def-header/profile_Button.svg';
+import bell from '../../images/def-header/Bell.svg';
 import './default-header.css';
 
 function DefaultHeader() {
