@@ -44,10 +44,10 @@ public class Cursos {
     private String certificacion;
 
     @Column(nullable = false)
-    private Integer capacidad;
+    private String capacidad;
 
     @Column
-    private Integer disponibilidad;
+    private String disponibilidad;
 
     @Column(nullable = false)
     private boolean Active;
@@ -62,6 +62,7 @@ public class Cursos {
     private List<Matricula> matriculas;
 
 }
+
 
 
 

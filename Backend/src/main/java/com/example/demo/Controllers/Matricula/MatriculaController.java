@@ -1,10 +1,10 @@
-package com.example.demo.Controllers;
+package com.example.demo.Controllers.Matricula;
 
-import com.example.demo.Repository.Cursos.Cursos;
-import com.example.demo.Repository.Matricula.Matricula;
+import com.example.demo.Repository.Cursos.Class.Cursos;
+import com.example.demo.Repository.Matricula.Class.Matricula;
 import com.example.demo.Repository.Matricula.MatriculaRepository;
-import com.example.demo.Repository.Matricula.MatriculaRequest;
-import com.example.demo.Repository.Usuario.Usuario;
+import com.example.demo.Repository.Matricula.Class.MatriculaRequest;
+import com.example.demo.Repository.Usuario.Class.Usuario;
 import com.example.demo.Repository.Usuario.UsuarioRepository;
 import com.example.demo.Services.Matricula.MatriculaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +50,8 @@ public class MatriculaController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    //Obterner los cursos de el usuario con el cif
     @GetMapping("/{cif}/courses")
     public ResponseEntity<List<Cursos>> obtenerCursosUsuario(@PathVariable Integer cif) {
         try {
@@ -64,6 +66,7 @@ public class MatriculaController {
         }
     }
 
+    //ELiminar la matricula de un usuario
     @DeleteMapping("/usuario/{cif}/curso/{codigocurso}")
     public ResponseEntity<String> borrarMatricula(@PathVariable Integer cif, @PathVariable String codigocurso) {
         try {

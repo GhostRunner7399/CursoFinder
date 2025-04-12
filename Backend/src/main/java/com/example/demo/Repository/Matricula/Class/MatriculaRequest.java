@@ -1,4 +1,4 @@
-package com.example.demo.Repository.Matricula;
+package com.example.demo.Repository.Matricula.Class;
 
 import lombok.Getter;
 import lombok.Setter;
