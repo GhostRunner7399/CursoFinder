@@ -1,59 +1,113 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+}
+
 .login {
-  text-align: center;
+  background-color: #FFFFFF;
+  z-index: 0;
+  position: relative;
+}
+
+:root{
+  --font-family: 'Poppins', sans-serif;
+}
+
+
+
+.login-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+
+
+.login-image-container {
+  position: absolute;      
+  top: 10vmin;             
+  left: 15vmin;            
+  width: 101.25vmin;       
+  height: 85.885vmin;      
+  z-index: 2;               
 }
 
 .login-iconPerson {
-  height: 40vmin;
+  
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   position: absolute;
-  top: 10vmin;
   z-index: 2; /*higher capa asi se mantiene por encima de los otros componentes */
-}
-
-/*no estoy segura que pinta esto pero no lo toques pq mueve el background*/
-.login-header {
-  background-color: #76c2af;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: calc(4px + 2vmin);
-  color: white;
-  position: relative;
 }
 
 .login-circle {
   position: absolute;
-  width: 130vmin;
-  height: 85vmin;
-  background-color: white;
+  width: 90.189vmin;
+  height: 62.5vmin;
+  background-color: #D9D9D9;
   border-radius: 50%;
-  top: 0; /*only mitad del circulo visible*/
-  left: 50%;
-  transform: translate(-50%, -40%);
+  top: -5%; 
+  left: 10%;
   z-index: 1;
 }
 
+
+
+.login-error-image {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  position: relative; /* Use absolute positioning */
+  z-index: 2;
+}
+
 .login-container {
+  position: relative;
+  width: 58vmin;
+  height: 58vmin;
   display: flex;
   flex-direction: column;
+  margin-left: 140vmin;
+  margin-top: 30vmin;  /* Ajustado para que el contenedor aparezca debajo del icono de la persona */
+  background-color: #D8FCFF;
   align-items: center;
-  padding: 20px;
-  margin-top: 48vmin;  /* Ajustado para que el contenedor aparezca debajo del icono de la persona */
+  justify-content: center;
+  border-radius: 3%;
+  border: 1px solid #c9c8c8;
+}
+
+.log-icon {
+  width: 132px;
+  height: 129px;
+  position: absolute;         /* Posicionamiento absoluto */
+  left: 50%;                  /* Centra horizontalmente */
+  top: -40%;                   /* Ajusta el valor para mover la imagen más arriba o abajo */
+  transform: translateX(-50%);/* Compensa el 50% de 'left' para un centrado exacto */
+  z-index: 1;
+}
+
+.container-title{
+  text-align: center;
+  font-family: var(root);
+  font-size: 16px;
+  font-weight: bold;
+  color: #353535;
+
 }
 
 .login-input-rectangle {
-  width: 400px;
-  height: 40px;
+  width: 70%;
+  height: 8%;
   margin: 10px; /*spacing*/
   padding: 10px;
   border: none;
   border-radius: 20px; /* corners */
-  background-color: #bcbefa; 
   color: #333;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(root);
   font-size: 16px;
 }
 
@@ -62,14 +116,14 @@
 }
 
 .login-button-iniciarSesion {
-  width: 200px;  
+  width: 70%;  
   height: 50px;       
   margin: 10px;       
-  background-color: #bcbefa;
+  background-color: #81B9F9;
   color: #333;   
   border: none;      
   border-radius: 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(root);
   font-size: 16px;      
   cursor: pointer;/*el cursor cambia para mostrar que puede clickearse*/
   transition: background-color 0.3s ease; /*click interaction*/
@@ -79,13 +133,15 @@
   background-color: #9596bd; /*change de color al tener el cursor encima*/
 }
 
-.login-logoUAM {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-top: 2%;
-  margin-left: 2%;
-  height: 7vmin;
-  z-index: 3; /*posicion over el circulo*/
+.cpr{
+  font-family: var(root);
+  font-size: 10px;
+  position: relative;
+  width: 90%;
+  padding-top: 8%;
+  justify-content: center;
 }
 
+.login-error-input-rectangle::placeholder {
+  color: red !important; /* texto dentro del rectangle */
+}
