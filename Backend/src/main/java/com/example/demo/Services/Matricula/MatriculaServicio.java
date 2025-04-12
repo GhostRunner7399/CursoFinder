@@ -1,10 +1,10 @@
 package com.example.demo.Services.Matricula;
 
-import com.example.demo.Repository.Cursos.Class.Cursos;
+import com.example.demo.Repository.Cursos.Cursos;
 import com.example.demo.Repository.Cursos.CursosRepository;
-import com.example.demo.Repository.Matricula.Class.Matricula;
+import com.example.demo.Repository.Matricula.Matricula;
 import com.example.demo.Repository.Matricula.MatriculaRepository;
-import com.example.demo.Repository.Usuario.Class.Usuario;
+import com.example.demo.Repository.Usuario.Usuario;
 import com.example.demo.Repository.Usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class MatriculaServicio {
     @Autowired
     CursosRepository cursosRepository;
 
-    public Matricula matricularUsuario(Integer cif, String codigocurso) {
+    public Matricula matricularUsuario(String cif, String codigocurso) {
         // Verificar si el usuario y el curso existen
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
@@ -43,7 +43,7 @@ public class MatriculaServicio {
             return matriculaRepository.save(matricula);
 
     }
-    public List<Cursos> obtenerCursosUsuario(Integer cif){
+    public List<Cursos> obtenerCursosUsuario(String cif){
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
 
@@ -65,7 +65,7 @@ public class MatriculaServicio {
                 .toList();
 
     }
-    public void borrarmatricula(Integer cif, String codigocurso) {
+    public void borrarmatricula(String cif, String codigocurso) {
         // Verificar si el usuario y el curso existen
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));

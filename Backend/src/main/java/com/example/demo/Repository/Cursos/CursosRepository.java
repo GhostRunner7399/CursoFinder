@@ -1,7 +1,6 @@
 package com.example.demo.Repository.Cursos;
 
 
-import com.example.demo.Repository.Cursos.Class.Cursos;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

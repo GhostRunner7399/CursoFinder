@@ -1,8 +1,7 @@
 package com.example.demo.Repository.Matricula;
 
-import com.example.demo.Repository.Cursos.Class.Cursos;
-import com.example.demo.Repository.Matricula.Class.Matricula;
-import com.example.demo.Repository.Usuario.Class.Usuario;
+import com.example.demo.Repository.Cursos.Cursos;
+import com.example.demo.Repository.Usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
