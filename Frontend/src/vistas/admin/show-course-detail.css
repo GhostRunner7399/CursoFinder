@@ -1,0 +1,216 @@
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background-color: #e0f7fa;
+  }
+  
+  .course-page {
+    position: relative;
+  }
+  
+  .course-container {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .header-course-detail {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .logo-course-detail {
+    position: absolute;
+    left: 0;
+    margin-top: 3%;
+    margin-left: 6%;
+    height: 5vmin;
+    z-index: 3;
+  }
+  
+  .course-header {
+    width: 85%;
+    height: 70px;
+    margin-left: 5%;
+    margin-top: 1%;
+    padding: 0;
+    text-align: left;
+    background-color: #00796b;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem; 
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    position: relative;
+    padding-left: 20px; 
+    z-index: 3;
+  }
+  
+  .course-display {
+    margin: 20px 0 90px 5%; /* Margen superior, derecho, inferior, izquierdo */
+    width: 83%; /* Ajusta según necesites para que coincida con la línea blanca */
+    padding: 20px;
+    border: 1px solid #00796b;
+    border-radius: 8px;
+    background-color: white;
+    text-align: left;
+    /* Añadimos position relative para posicionar el botón inscribirse */
+    position: relative;
+  }
+
+  .course-detail-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+  }
+  
+  .course-name {
+    background-color: #00796b;
+    color: #fff; 
+    border: 1px solid #fff; 
+    border-radius: 5px; 
+    padding: 10px; 
+    margin-bottom: 5px; 
+    font-weight: bold;
+    cursor: pointer; 
+  }
+
+  .course-detail-section {
+    background-color: white;
+    border: 1px solid #00796b;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .course-detail-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00796b;
+    margin-bottom: 10px;
+  }
+  
+  .course-detail-item {
+    margin-bottom: 5px;
+  }
+  
+/*  .button-inscribirse {
+    background-color: #00796b;
+    color: white;
+    width: 200px;  
+    height: 50px;
+    position:absolute;
+    right: 10%;
+    bottom: 2%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;      
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 3;
+  }
+  
+  .button-inscribirse:hover {
+    background-color: #60cdd1;
+  }*/
+  
+  .course-detail-left-side-rectangle {
+    position: fixed;   
+    top: 0;
+    left: 0vmin;  
+    width: 70px;  
+    height: 100vh; 
+    background-color: rgb(252, 251, 251);
+    z-index: 1;
+  }
+  
+  .white-lineR {
+    position:absolute;
+    top: 0;
+    margin-right: 2%;
+    right: 12vmin; 
+    width: 4px;
+    height: 100%; 
+    background-color: rgb(252, 251, 251);
+    z-index: 1;
+  }
+  
+  .menu-icon {
+    position: absolute;
+    top: 15px;
+    left: 14px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 5;
+  }
+  
+  .white-lineH {
+    position:absolute;
+    margin-top: 7%;
+    margin-left: -1%;
+    left: 12vmin; 
+    width: 100vw;
+    height: 4px; 
+    background-color: rgb(252, 251, 251);
+    z-index: 1;
+  }
+
+  .edit-button {
+    background-color: #00796b;
+    margin: 2%;
+    margin-left: 5%;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .edit-button {
+    background-color: #00796b;
+  }
+
+  .delete-button {
+    background-color: #d12525;
+    margin: 2%;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .delete-button img {
+    width: 24px; 
+    height: 24px;
+    vertical-align: middle;
+    filter: invert(100%);
+  }
+  
+  .edit-button img {
+    width: 24px; 
+    height: 24px;
+    vertical-align: middle;
+    filter: invert(100%);
+  }

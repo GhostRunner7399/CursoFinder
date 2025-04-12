@@ -1,0 +1,264 @@
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  background-color: #e0f7fa;
+}
+
+.course-page-docente {
+  position: relative;
+  padding: 20px;
+  top: 20px;
+}
+
+.course-container-docente {
+  max-width: 800px;
+  margin-left: 80px;  
+}
+
+.header-course-detail-docente {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.logo-container-docente {
+  display: flex;
+  align-items: center;
+  margin-left: 40px; 
+  margin-right: 15px;
+  margin-top: -10px;  
+}
+
+.logo-course-detail-docente {
+  position: absolute;
+  left: 0;
+  margin-top: 1%;
+  margin-left: 6%;
+  height: 5vmin;
+  z-index: 3;
+}
+
+.course-header-docente {
+  background-color: transparent;
+  border: none; 
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00796b; 
+  margin-bottom: 20px;
+}
+.course-cost-docente {
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  font-size: 1.2rem;
+  color: #00796b; 
+  font-weight: bold; 
+
+}
+.course-details-container {
+  display: flex; 
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-left: 80px; 
+  padding: 20px;
+  margin: 30px auto; 
+  border: 3.5px solid #00796b; 
+  border-radius: 10px;  
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.course-details-left,
+.course-details-right {
+  width: 48%; 
+  margin-top: 30px;
+
+}
+
+.info-detail {
+  margin-left: 30px; 
+  margin-bottom: 10px;
+}
+.course-display-docente {
+  margin: 80px 0; 
+  margin-left: 80px; 
+  padding: 20px;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.course-detail-section-docente {
+  margin-bottom: 30px;
+}
+
+.course-detail-heading-docente {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #00796b;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #00796b;
+  padding-bottom: 5px;
+}
+
+.course-detail-item-docente {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-left: 20px;
+}
+.description-text {
+  margin-bottom:60px; 
+  margin-top: 60px;
+  margin-left: 80px;
+}
+
+.course-name-box-docente {
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 40px 0;
+  text-align: center;
+  max-width: 600px;
+  margin-left: -40px;
+  margin-right: auto;
+  
+}
+
+.course-name-docente {
+  color: #00796b;
+  font-size: 70rem;
+  font-weight: bold;
+  margin: 0;
+  word-wrap: break-word;
+  padding: 0; 
+  display: inline;
+  position: relative;  
+  top: 15px;
+  margin-top: 50px;  
+  left: -5px;
+}
+
+
+.certification-box-docente {
+  position: absolute; /*esquina*/
+  top: 80px;
+  right: 90px;
+  background-color: black; 
+  padding: 10px; 
+  border-radius: 5px; 
+  color: white; 
+  width: 60%; 
+  max-width: 350px; 
+  display: flex; 
+  align-items: center; 
+}
+
+.certifying-body-text {
+  font-size: 0.9rem; 
+  margin-top: 5px; 
+  font-weight: normal; 
+  color: white; 
+  text-align: right; 
+}
+
+.certification-content {
+  margin-left: 10px; 
+  flex-grow: 1; 
+}
+
+.certification-icon-docente {
+  width: 50px; 
+  height: 40px; 
+}
+
+.icon-container {
+  background-color: white; 
+  border-radius: 5px; 
+  padding: 10px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-right: 8px; 
+}
+.certification-text-docente {
+  font-size: 1rem; 
+  font-weight: bold; 
+  margin-left: auto; 
+  text-align: right; 
+  flex-grow: 1; 
+  color: white; 
+}
+.enroll-container-docente {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.enroll-btn-docente {
+  background-color: #00796b;
+  color: white;
+  width: 220px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.enroll-btn-doc:hover {
+  background-color: #60cdd1;
+}
+
+.subscription-message-docente {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00796b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.white-lineR-docente,
+.white-lineH-docente {
+  position: absolute;
+  background-color: rgb(252, 251, 251);
+  z-index: 1;
+}
+
+.white-lineH-docente {
+  top: 6%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+.docente-course-detail-L-side-rectangle {
+  position: fixed;   
+  top: 0;
+  left: 0vmin;  
+  width: 60px;  
+  height: 100vh; 
+  background-color: rgb(252, 251, 251);
+  z-index: 1;
+}
+
+.white-lineR-docente {
+  position: absolute;
+  top: 0;
+  margin-right: 2%;
+  right: 12vmin; 
+  width: 4px;
+  height: 100%; 
+  background-color: rgb(252, 251, 251);
+  z-index: 1;
+}
+
