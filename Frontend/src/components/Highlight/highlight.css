@@ -1,0 +1,15 @@
+.highlight {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .highlight::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 4px;
+    background-color: #BAEEF2; /* Change this to any color you want */
+  }
+  

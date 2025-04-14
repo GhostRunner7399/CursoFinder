@@ -25,7 +25,7 @@ function Sidebar({ isOpen, toggleSidebar, user }) {
   const navigate = useNavigate();
 
   // Extract the role name from user.id_rol
-  const roleName = user?.id_rol ? getRoleName(user.id_rol) : 'Guest';
+  const roleName = user?.id_rol ? getRoleName(user.id_rol) : 'Docente';
 
   // Handlers for navigation
   const handleDashboardClick = () => {
@@ -67,27 +67,30 @@ function Sidebar({ isOpen, toggleSidebar, user }) {
           )}
         </div>
 
-        {/* Nav items */}
-        <div className={styles.navItem} onClick={handleDashboardClick}>
-          <img src={DashboardIcon} alt="Dashboard" />
-          {isOpen && <span>Dashboard</span>}
-        </div>
+        <div className= {styles.navItems}>{/* Nav items */}
+            <div className={styles.navItem} onClick={handleDashboardClick}>
+              <img src={DashboardIcon} alt="Dashboard" />
+              {isOpen && <span>Dashboard</span>}
+            </div>
 
-        <div className={styles.navItem} onClick={handleStatisticsClick}>
-          <img src={statisticIcon} alt="Estadísticas" />
-          {isOpen && <span>Estadísticas</span>}
-        </div>
+            {roleName === 'Administrador' && (
+              <div className={styles.navItem} onClick={handleStatisticsClick}>
+                <img src={statisticIcon} alt="Estadísticas" />
+                {isOpen && <span>Estadísticas</span>}
+              </div>
+            )}
 
-        <div className={styles.navItem} onClick={handleSettingsClick}>
-          <img src={settingsIcon} alt="Configuración" />
-          {isOpen && <span>Configuración</span>}
-        </div>
+            <div className={styles.navItem} onClick={handleSettingsClick}>
+              <img src={settingsIcon} alt="Configuración" />
+              {isOpen && <span>Configuración</span>}
+            </div>
 
-        <div className={styles.navItem} onClick={handleLogoutClick}>
-          <img src={logOutIcon} alt="Cerrar sesión" />
-          {isOpen && <span>Cerrar sesión</span>}
+            <div className={styles.navItem} onClick={handleLogoutClick}>
+              <img src={logOutIcon} alt="Cerrar sesión" />
+              {isOpen && <span>Cerrar sesión</span>}
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   );
 }

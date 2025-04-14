@@ -59,51 +59,51 @@ function CursosDocente({ user, courses, setCourses }) {
 
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <div className="all-courses-container">
-        <div className="courses-header-container">
-          <h1><Highlight>Qué aprender ahora</Highlight></h1>
-        </div>
+        <div className="all-courses-container">
+          <div className="courses-header-container">
+            <h1><Highlight>Qué aprender ahora</Highlight></h1>
+          </div>
 
-        {/* If courses is empty or not an array */}
-        {(!Array.isArray(courses) || courses.length === 0) ? (
-          <h2 className="no-courses-message">No hay cursos disponibles</h2>
-        ) : (
-          facultyGroups.map((facultyGroup) => (
-            <div key={facultyGroup.faculty} className="faculty-section">
-              <h2 className="faculty-title">{facultyGroup.faculty}</h2>
+          {/* If courses is empty or not an array */}
+          {(!Array.isArray(courses) || courses.length === 0) ? (
+            <h2 className="no-courses-message">No hay cursos disponibles</h2>
+          ) : (
+            facultyGroups.map((facultyGroup) => (
+              <div key={facultyGroup.faculty} className="faculty-section">
+                <h2 className="faculty-title">{facultyGroup.faculty}</h2>
 
-              {/* 
-                Each faculty-courses container displays courses in a row. 
-                If there are too many to fit on screen, user can scroll horizontally.
-              */}
-              <div className="faculty-courses">
-                {facultyGroup.courses.map((course) => (
-                  <div
-                    key={course.id}
-                    className="course-container"
-                    onClick={() => handleCourseClick(course.id)}
-                  >
-                    <img
-                      src={DefCourseImage}
-                      className="course-image"
-                      alt="Imagen de curso"
-                    />
-                    <h3 className="course-title">{course.name}</h3>
-                    <p className="course-docente">{course.instructor}</p>
-                  </div>
-                ))}
+                {/* 
+                  Each faculty-courses container displays courses in a row. 
+                  If there are too many to fit on screen, user can scroll horizontally.
+                */}
+                <div className="faculty-courses">
+                  {facultyGroup.courses.map((course) => (
+                    <div
+                      key={course.id}
+                      className="course-container"
+                      onClick={() => handleCourseClick(course.id)}
+                    >
+                      <img
+                        src={DefCourseImage}
+                        className="course-image"
+                        alt="Imagen de curso"
+                      />
+                      <h3 className="course-title">{course.name}</h3>
+                      <p className="course-docente">{course.instructor}</p>
+                    </div>
+                  ))}
 
-                {/* see more arrow */}
-                <img
-                  src={GreaterThan}
-                  className="courses-see-more"
-                  alt="ver más cursos"
-                />
+                  {/* see more arrow */}
+                  <img
+                    src={GreaterThan}
+                    className="courses-see-more"
+                    alt="ver más cursos"
+                  />
+                </div>
               </div>
-            </div>
-          ))
-        )}
-      </div>
+            ))
+          )}
+        </div>
     </div>
   );
 }

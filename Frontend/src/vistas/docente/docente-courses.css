@@ -8,26 +8,25 @@ html, body {
   --font-family: 'Poppins', sans-serif;
 }
 
-/* Main container for this view */
 .docente-courses {
   background-color: #FFFFFF;
   position: relative;
-  min-height: 100vh; /* So it can expand with content */
+  min-height: 100vh; /* so it can expand with content */
 }
 
-/* Container that holds all the faculties */
 .all-courses-container {
   width: 100%; 
-  padding: 0 10%; /* Some horizontal padding */
+  padding-left: 7%;
+  padding-top: 5%;
 }
 
-/* Section Title (Qué aprender ahora) */
+/* Qué aprender ahora */
 .courses-header-container {
-  margin: 2rem 0; /* Spacing from top */
+  margin-top: 2%; 
 }
 
-/* Faculty section container */
 .faculty-section {
+  padding: 5px;
   margin-bottom: 2rem;
 }
 
@@ -81,9 +80,9 @@ html, body {
   color: #333;
 }
 
-/* Instructor or additional info inside each card */
+/* Instructor / additional info inside each card */
 .course-docente {
-  margin: 0 0.5rem 0.5rem 0.5rem;
+  margin: 0 0.5rem 0.5rem 0.5rem; /*top right bottom left*/
   color: #666;
   font-size: 0.9rem;
 }
