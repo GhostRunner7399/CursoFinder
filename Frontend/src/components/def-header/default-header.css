@@ -18,7 +18,7 @@ body {
   background-color: #BAEEF2;
   padding: 0 1rem;
   box-sizing: border-box;
-  z-index: 3;
+  z-index: 6;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,6 +41,12 @@ body {
   cursor: pointer;
   font-size: 16px;
   color: #303141;
+}
+
+.nav-links p:hover {
+  background-color: #82cecb;
+  transition: background-color #82cecb 0.3s ease;
+  border-radius: 8px;
 }
 
 .icons-container {

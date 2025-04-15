@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./docente-courses.css"; 
 import DefaultHeader from "../../components/def-header/default-header.jsx"; 
-import LessThan from "./../../images/lessThan.svg";
+import GreaterThan from "./../../images/chevronRight.svg";
 import DefCourseImage from "./../../images/def_course_image.svg";
 import Sidebar from "../../components/sidebar/sidebar.jsx";
 import Highlight from "../../components/Highlight/highlight.jsx";
+import heroimg from "./../../images/bienvenida.jpg";
+import Footer from '../../components/Footer/footer.jsx';
 
 /**
  * Helper function to group courses by faculty.
@@ -108,8 +110,22 @@ function CursosDocente({ user, courses, setCourses }) {
       <DefaultHeader />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
 
+      <div className="Bienvenida-container">
+          <img 
+            src={heroimg} 
+            className="hero-img" 
+            alt="Welcome banner"
+          />
+          <div className="bienvenida-text-container">
+            <h1>Bienvenido al espacio de Formación Docente</h1>
+            <p>Descubre cursos diseñados para potenciar tu aprendizaje y crecimiento profesional</p>
+          </div>
+        </div>
+
       <div className="all-courses-container">
-          <h1><Highlight>Qué aprender ahora</Highlight></h1>
+
+
+        <h1><Highlight>Qué aprender ahora</Highlight></h1>
 
         {(!Array.isArray(courses) || courses.length === 0) ? (
           <h2 className="no-courses-message">No hay cursos disponibles</h2>
@@ -148,13 +164,13 @@ function CursosDocente({ user, courses, setCourses }) {
                 </div>
                 {/* Slide arrows */}
                 <img
-                  src={LessThan}
+                  src={GreaterThan}
                   className="slide-arrow-left"
                   alt="Slide left"
                   onClick={() => scrollLeft(facultyGroup.faculty)}
                 />
                 <img
-                  src={LessThan}
+                  src={GreaterThan}
                   className="slide-arrow-right"
                   alt="Slide right"
                   onClick={() => scrollRight(facultyGroup.faculty)}
@@ -164,6 +180,7 @@ function CursosDocente({ user, courses, setCourses }) {
           ))
         )}
       </div>
+      <Footer />
     </div>
   );
 }

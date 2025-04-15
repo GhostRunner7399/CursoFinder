@@ -8,14 +8,59 @@ html, body {
 
 /* ====== MAIN STRUCTURE ====== */
 .docente-courses {
-  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7F7;
   min-height: 100vh;
   width: 100%;
+  padding-top: 50px; /* Compensa el header fijo */
+  padding-left: 45px; /* Compensa el sidebar cerrado */
+  transition: padding-left 0.3s ease; /* Para animar con el sidebar */
 }
 
-.all-courses-container {
+/* ====== HERO SECTION ======  hero refers to la imagen grandota de bienvenida de los websites*/
+.Bienvenida-container {
   width: 100%;
-  padding: 5% 5% 0 7%;
+  position: relative;
+}
+
+.hero-img {
+  width: 100%;
+  height: 350px; /* Adjust height as needed */
+  object-fit: cover;
+  display: block;
+}
+
+.bienvenida-text-container {
+  position: absolute;
+  top: 60%;
+  left: 7%;
+  transform: translateY(-40%);
+  max-width: 600px;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.bienvenida-text-container h1 {
+  font-family: 'Pridi', serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.bienvenida-text-container p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+
+.all-courses-container {
+  flex: 1;
+  width: 100%;
+  padding: 2% 7% 0 5%; /* Removed for testing actual responsive page */
   box-sizing: border-box;
 }
 
@@ -66,16 +111,16 @@ html, body {
 /*container for each course card*/
 .course-container {
   width: 296px;
-  height: 273px; /* Full card height */
+  height: 273px; 
   min-width: 296px;
   flex-shrink: 0;
-  background-color: #f0efef;
+  background-color: #FFFFFF;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  position: relative; /* For absolute positioning of content */
+  position: relative; 
 }
 
 .course-container:hover .course-content {
@@ -138,18 +183,18 @@ html, body {
   z-index: 3;
   opacity: 0.9;
   transition: opacity 0.2s;
-  background: none; /* Remove white background */
-  border-radius: 0; /* Remove circle */
+  background: white;
+  border-radius: 14px; /* Remove circle */
   box-shadow: none; /* Remove shadow */
 }
 
 .slide-arrow-right {
   right: -40px;
-  transform: rotate(180deg); /* Rotate the same icon for left */
 }
 
 .slide-arrow-left {
   left: -40px;
+  transform: rotate(180deg);
 }
 
 .slide-arrow-left:hover,

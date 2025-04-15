@@ -1,10 +1,9 @@
 .sidebar {
   position: fixed;
-  /* Adjust top depending on your header’s height */
-  top: 50px;
   left: 0;
+  top: 50px;
   height: 100vh;
-  background-color: #242424;
+  background-color: #1E3F3E;
   z-index: 5;
 
   /* Default collapsed width */
@@ -15,12 +14,11 @@
   flex-direction: column;
 }
 
-/* Expanded state */
 .open {
   width: 250px;
 }
 
-/* Toggle icon placed in the top-right corner of the sidebar */
+/* Toggle icon placed in the top-left corner of the sidebar */
 .displayIcon {
   position: absolute;
   top: 1rem;
@@ -31,14 +29,14 @@
   transition: transform 0.3s ease;
 }
 
-/* Rotate the toggle icon when open */
+/* Rotate the toggle icon to the left when open */
 .displayIconOpened {
   transform: rotate(180deg);
 }
 
 /* Main content area of the sidebar, starts below the toggle icon */
 .sidebarContent {
-  margin-top: 3rem; /* Leave space for the icon up top */
+  margin-top: 3rem; 
   flex: 1;
   width: 100%;
   font-family: 'Poppins', sans-serif;
@@ -75,7 +73,7 @@
 /* Title & role text */
 .sidebarTitle {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   margin: -1.5rem 0 0 0; /* top, right, bottom, left */
   font-family: 'Pridi';
 }
@@ -84,7 +82,7 @@
   font-size: 1rem;
   margin: 0;
   color: #00bfff;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 /* Items container */
