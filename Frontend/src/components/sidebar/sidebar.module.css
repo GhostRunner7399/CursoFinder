@@ -5,7 +5,7 @@
   left: 0;
   height: 100vh;
   background-color: #242424;
-  z-index: 2;
+  z-index: 5;
 
   /* Default collapsed width */
   width: 45px;

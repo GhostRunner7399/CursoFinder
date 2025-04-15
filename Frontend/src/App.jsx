@@ -15,6 +15,8 @@ function App() {
   const [courses, setCourses] = useState([]);
 
   // Al montar el componente, obtener cursos desde el backend
+  //HERE WHERE YOU FETCH THE COURSES FROM THE DB
+  /*
   useEffect(() => {
     const loadCourses = async () => {
       try {
@@ -26,6 +28,7 @@ function App() {
     };
     loadCourses();
   }, []);
+  */
 
   const handleLogin = async (credentials) => {
     try {
@@ -39,7 +42,7 @@ function App() {
             name: userInfo.nombre,
             email: userInfo.email,
             cif: userInfo.cif,
-            role: userInfo.adminrole ? "administrador" : "docente",
+            role: userInfo.adminrole ? "administrador" : "docente"
           });
           return true;
         } else {
