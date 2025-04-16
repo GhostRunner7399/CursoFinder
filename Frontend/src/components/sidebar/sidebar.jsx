@@ -29,7 +29,7 @@ function Sidebar({ isOpen, toggleSidebar, user }) {
 
   // Handlers for navigation
   const handleDashboardClick = () => {
-    navigate('/dashboard');
+    navigate('/courses');
   };
 
   const handleStatisticsClick = () => {
