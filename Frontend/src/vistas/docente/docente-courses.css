@@ -13,9 +13,8 @@ html, body {
   background-color: #F7F7F7;
   min-height: 100vh;
   width: 100%;
-  padding-top: 50px; /* Compensa el header fijo */
-  padding-left: 45px; /* Compensa el sidebar cerrado */
-  transition: padding-left 0.3s ease; /* Para animar con el sidebar */
+  padding-top: 50px;
+  padding-left: 45px; 
 }
 
 /* ====== HERO SECTION ======  hero refers to la imagen grandota de bienvenida de los websites*/

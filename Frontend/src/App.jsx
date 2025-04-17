@@ -100,64 +100,66 @@ function App() {
   }, [isAuthenticated, user]);
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/courses" />
-            ) : (
-              <Login onLogin={handleLogin} />
-            )
-          }
-        />
-
-        <Route
-          path="/courses"
-          element={
-            isAuthenticated ? (
-              user.role === "administrador" ? (
-                <AdminCourses courses={courses} user={user} setCourses={setCourses} />
+    <UserContext.Provider value={user}>  
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                <Navigate to="/courses" />
               ) : (
-                <DocenteCourses courses={courses} user={user} setCourses={setCourses} />
+                <Login onLogin={handleLogin} />
               )
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
+            }
+          />
 
-        <Route
-          path="/crear-curso"
-          element={
-            <ProtectedRoute role="administrador">
-              <CreateCourseDetail onAddCourse={handleAddCourse} />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/courses"
+            element={
+              isAuthenticated ? (
+                user.role === "administrador" ? (
+                  <AdminCourses courses={courses} user={user} setCourses={setCourses} />
+                ) : (
+                  <DocenteCourses courses={courses} user={user} setCourses={setCourses} />
+                )
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
 
-        <Route
-          path="/curso/:id"
-          element={
-            <ProtectedRoute role="administrador">
-              <Details courses={courses} setCourses={setCourses} />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/crear-curso"
+            element={
+              <ProtectedRoute role="administrador">
+                <CreateCourseDetail onAddCourse={handleAddCourse} />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/curso-docente/:id"
-          element={
-            <ProtectedRoute role="docente">
-              <Detailsdocente courses={courses} setCourses={setCourses} />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/curso/:id"
+            element={
+              <ProtectedRoute role="administrador">
+                <Details courses={courses} setCourses={setCourses} />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route path="*" element={<Navigate to={isAuthenticated ? "/courses" : "/"} />} />
-      </Routes>
-    </Router>
+          <Route
+            path="/curso-docente/:id"
+            element={
+              <ProtectedRoute role="docente">
+                <Detailsdocente courses={courses} setCourses={setCourses} />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="*" element={<Navigate to={isAuthenticated ? "/courses" : "/"} />} />
+        </Routes>
+      </Router>
+      </UserContext.Provider>
   );
 }
 
