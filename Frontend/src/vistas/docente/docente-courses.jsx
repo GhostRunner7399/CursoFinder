@@ -8,8 +8,6 @@ import Sidebar from "../../components/sidebar/sidebar.jsx";
 import Highlight from "../../components/Highlight/highlight.jsx";
 import heroimg from "./../../images/bienvenida.jpg";
 import Footer from '../../components/Footer/footer.jsx';
-import ChatBot from "./../../components/Bot/bot.jsx";
-
 /**
  * Helper function to group courses by faculty.
  */
