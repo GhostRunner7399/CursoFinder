@@ -18,6 +18,10 @@ function DefaultHeader() {
     navigate('/aprendizaje-docente');
   };
 
+  const handleProfileClick = () => {
+    navigate('/perfil');
+  }
+
   return (
     <div className="header">
       <img src={logoUAM} className="logoUAM" alt="Logo-UAM" />
@@ -29,7 +33,11 @@ function DefaultHeader() {
 
       <div className="icons-container">
         <img src={bell} className="notification-icon" alt="Notification-Icon" />
-        <img src={profileIcon} className="profile-icon" alt="Profile-Icon" />
+        <img src={profileIcon}
+          className="profile-icon"
+          alt="Profile-Icon"
+          onClick={handleProfileClick}
+        />
       </div>
     </div>
   );
