@@ -1,6 +1,7 @@
 package edu.uam.backend.cursos.Usuario.DataTransferObjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
@@ -14,6 +15,8 @@ public class UsuarioDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contraseña;
 
+    @Column(nullable = false)
     private String email;
+
     private Long idRol;
 }

@@ -6,6 +6,8 @@ import edu.uam.backend.cursos.Curso.repository.CursosRepository;
 import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.model.Cursos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,5 +75,14 @@ public class CursoServicio {
     public Optional<Cursos> obtenerCursoPorCodigo(String codigocurso) {
         return cursosRepository.findByCodigocurso(codigocurso);
     }
+
+
+        public CursoServicio(CursosRepository cursosRepository) {
+            this.cursosRepository = cursosRepository;
+        }
+
+        public Page<Cursos> obtenerCursosPaginados(int page, int size) {
+            return cursosRepository.findAll(PageRequest.of(page, size));
+        }
 
 }

@@ -4,6 +4,7 @@ import edu.uam.backend.cursos.Curso.service.CursoServicio;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoUpdateDTO;
 import edu.uam.backend.cursos.Curso.model.Cursos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +18,20 @@ public class CursoController {
     @Autowired
     private CursoServicio cursoServicio;
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<Cursos> crearCurso(@RequestBody Cursos curso) {
         Cursos cursoGuardado = cursoServicio.guardarCurso(curso);
         return ResponseEntity.ok(cursoGuardado);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Cursos>> obtenerTodosLosCursos() {
-        return ResponseEntity.ok(cursoServicio.obtenerTodosLosCursos());
+    public ResponseEntity<Page<Cursos>> obtenerCursosPaginados(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(cursoServicio.obtenerCursosPaginados(page, size));
     }
+
 
     @GetMapping("/{codigocurso}")
     public ResponseEntity<Cursos> obtenerCursoPorCodigo(@PathVariable String codigocurso) {

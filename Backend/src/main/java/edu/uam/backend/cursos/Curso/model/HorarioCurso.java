@@ -18,7 +18,8 @@ public class HorarioCurso {
     private String aula;
 
     @Column
-    private String diaSemana;
+    @Enumerated(EnumType.STRING)
+    private DiaSemana diaSemana;
 
     @Column
     private LocalTime horaInicio;

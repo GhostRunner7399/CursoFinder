@@ -53,18 +53,31 @@ public class MatriculaController {
 
     //Obterner los cursos de el usuario con el cif
     @GetMapping("/{cif}/courses")
-    public ResponseEntity<List<Cursos>> obtenerCursosUsuario(@PathVariable Integer cif) {
+    public ResponseEntity<List<Cursos>> obtenerCursosUsuario(
+            @PathVariable Integer cif,
+            @RequestParam(required = false) Boolean disponibles,
+            @RequestParam(required = false) String nombre
+    ) {
         try {
             Usuario usuario = usuarioRepository.findByCif(cif)
                     .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
+
             List<Cursos> cursos = matriculaRepository.findByUsuario(usuario).stream()
                     .map(Matricula::getCurso)
+                    .filter(curso -> nombre == null || curso.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                    .filter(curso -> {
+                        if (disponibles == null || !disponibles) return true;
+                        int inscritos = matriculaRepository.countByCurso(curso);
+                        return curso.getCursoDetalle().getCapacidadMaxima() > inscritos;
+                    })
                     .toList();
+
             return ResponseEntity.ok(cursos);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
 
     //ELiminar la matricula de un usuario
     @DeleteMapping("/usuario/{cif}/curso/{codigocurso}")
@@ -76,5 +89,14 @@ public class MatriculaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    //Dispinobilidad de curos
+    @GetMapping("/disponibilidad/{codigocurso}")
+    public ResponseEntity<Integer> obtenerCuposDisponibles(@PathVariable String codigocurso) {
+        int cupos = matriculaServicio.obtenerCuposDisponibles(codigocurso);
+        return ResponseEntity.ok(cupos);
+    }
+
+
 }
 

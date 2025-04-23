@@ -18,8 +18,8 @@ public class Cursos {
 
 
     //Relacion entre las tablas de cursos y detalleCursos
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name = "Detallecurso", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn (name = "detalle_curso_id", nullable = false)
     private CursoDetalle cursoDetalle;
 
 
@@ -30,7 +30,7 @@ public class Cursos {
     private String nombre;
 
     @Column(nullable = false)
-    private boolean Active;
+    private boolean active;
 
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -87,4 +87,14 @@ public class MatriculaServicio {
     }
 
 
+    public int obtenerCuposDisponibles(String codigocurso) {
+        Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
+                .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
+
+        int capacidad = curso.getCursoDetalle().getCapacidadMaxima();
+        int inscritos = matriculaRepository.countByCurso(curso);
+
+        return capacidad - inscritos;
+    }
+
 }

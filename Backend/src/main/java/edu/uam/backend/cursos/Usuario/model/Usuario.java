@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsusario;
+    private Long idUsuario;  // ← corregido el typo
 
     @Column(nullable = false)
     private String primernombre;
@@ -31,12 +32,20 @@ public class Usuario {
     private Integer cif;
 
     @Column(nullable = false)
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contraseña;
 
     @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private boolean activo = true;  // ← nuevo campo
+
+    @Column(nullable = false)
+    private LocalDateTime fechaRegistro = LocalDateTime.now();  // ← nuevo campo
+
+    @Column
+    private String telefono;  // ← nuevo campo
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idRol", nullable = false)

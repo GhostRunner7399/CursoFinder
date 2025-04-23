@@ -12,26 +12,28 @@ import java.util.Optional;
 public class RolServicio {
 
     @Autowired
-    private RolRepository RolRepository;
+    private RolRepository rolRepository;
 
     public List<CatalogoRoles> obtenerTodosLosRoles() {
-        return RolRepository.findAll();
+        return rolRepository.findAll();
     }
 
     public Optional<CatalogoRoles> obtenerRolPorId(Long id) {
-        return RolRepository.findById(id);
+        return rolRepository.findById(id);
     }
 
     public CatalogoRoles crearRol(CatalogoRoles rol) {
-        return RolRepository.save(rol);
+        if (rolRepository.existsByNombreRolIgnoreCase(String.valueOf(rol.getNombreRol()))) {
+            throw new IllegalArgumentException("Ya existe un rol con ese nombre.");
+        }
+        return rolRepository.save(rol);
     }
 
+
     public void eliminarRol(long id) {
-        Optional<CatalogoRoles> rolesOptional = RolRepository.findById(id);
-        if (rolesOptional.isPresent()) {
-            RolRepository.delete(rolesOptional.get());
-        } else {
-            throw new RuntimeException("El rol con código " + id + " no fue encontrado.");
-        }
+        CatalogoRoles rol = rolRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado."));
+        rolRepository.delete(rol);
+
     }
 }

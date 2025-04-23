@@ -21,4 +21,6 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
     // Buscar una matrícula específica por usuario y curso
     Optional<Matricula> findByUsuarioAndCurso(Usuario usuario, Cursos curso);
 
+    int countByCurso(Cursos curso);
+
 }

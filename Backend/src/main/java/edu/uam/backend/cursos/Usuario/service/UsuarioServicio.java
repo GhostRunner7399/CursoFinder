@@ -1,11 +1,14 @@
 package edu.uam.backend.cursos.Usuario.service;
 
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioDTO;
+import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioUpdateDTO;
 import edu.uam.backend.cursos.Usuario.model.CatalogoRoles;
 import edu.uam.backend.cursos.Usuario.model.Usuario;
 import edu.uam.backend.cursos.Usuario.repository.RolRepository;
 import edu.uam.backend.cursos.Usuario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,4 +60,32 @@ public class UsuarioServicio {
 
         return usuarioRepository.save(usuario);
     }
+
+    public void cambiarEstado(Integer cif, boolean nuevoEstado) {
+        Usuario usuario = usuarioRepository.findByCif(cif)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con CIF: " + cif));
+
+        usuario.setActivo(nuevoEstado);
+        usuarioRepository.save(usuario);
+    }
+
+    public void actualizarParcialmente(Integer cif, UsuarioUpdateDTO dto) {
+        Usuario usuario = usuarioRepository.findByCif(cif)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
+
+        if (dto.getPrimernombre() != null) usuario.setPrimernombre(dto.getPrimernombre());
+        if (dto.getSegundonombre() != null) usuario.setSegundonombre(dto.getSegundonombre());
+        if (dto.getPrimerapellido() != null) usuario.setPrimerapellido(dto.getPrimerapellido());
+        if (dto.getSegundoapellido() != null) usuario.setSegundoapellido(dto.getSegundoapellido());
+        if (dto.getEmail() != null) usuario.setEmail(dto.getEmail());
+        if (dto.getTelefono() != null) usuario.setTelefono(dto.getTelefono());
+
+        usuarioRepository.save(usuario);
+    }
+
+
+    public Page<Usuario> obtenerUsuariosPaginados(int page, int size) {
+        return usuarioRepository.findAll(PageRequest.of(page, size));
+    }
+
 }

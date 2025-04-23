@@ -21,4 +21,4 @@ El proyecto está organizado por módulos funcionales, lo que permite mantener u
 
 - Java 17
 - Spring Boot
-- PostgreSQL
+- MySQL
