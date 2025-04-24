@@ -1,105 +1,202 @@
+/* ====== GLOBAL RESET ====== */
 html, body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-family);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
 
-:root {
-  --font-family: 'Poppins', sans-serif;
-}
-
-/* Main container for this view */
+/* ====== MAIN STRUCTURE ====== */
 .docente-courses {
-  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7F7;
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 50px;
+  padding-left: 45px; 
+}
+
+/* ====== HERO SECTION ======  hero refers to la imagen grandota de bienvenida de los websites*/
+.Bienvenida-container {
+  width: 100%;
   position: relative;
-  min-height: 100vh; /* So it can expand with content */
 }
 
-/* Container that holds all the faculties */
+.hero-img {
+  width: 100%;
+  height: 350px; /* Adjust height as needed */
+  object-fit: cover;
+  display: block;
+}
+
+.bienvenida-text-container {
+  position: absolute;
+  top: 60%;
+  left: 5%;
+  transform: translateY(-40%);
+  max-width: 600px;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.bienvenida-text-container h1 {
+  font-family: 'Pridi', serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.bienvenida-text-container p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+
 .all-courses-container {
-  width: 100%; 
-  padding: 0 10%; /* Some horizontal padding */
+  flex: 1;
+  width: 100%;
+  padding: 2% 7% 0 5%; /* Removed for testing actual responsive page */
+  box-sizing: border-box;
 }
 
-/* Section Title (Qué aprender ahora) */
-.courses-header-container {
-  margin: 2rem 0; /* Spacing from top */
+.all-courses-container > h1,  /* Targets "Qué aprender ahora" y titulo de facu UNICOS EN USAR */
+.faculty-title {
+  font-family: 'Pridi', serif;
+  font-weight: 400;
 }
 
-/* Faculty section container */
+/* ====== COURSES SLIDER SYSTEM ====== */
 .faculty-section {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
-/* Title showing the name of the faculty */
 .faculty-title {
-  margin-left: 0.5rem;
-  margin-bottom: 0.5rem;
+  font-family: 'Pridi', serif;
+  font-weight: 400;
   font-size: 1.25rem;
   color: #333;
+  margin: 0 0 0.5rem 0.5rem;
 }
 
-/* 
-  Horizontal container for courses in a particular faculty
-  Use flex layout in row, with horizontal scroll if needed
-*/
+/* main slider container for each course row*/
+.faculty-courses-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: calc(296px * 5 + 1rem * 4);
+  margin: 0 auto;
+  height: 300px;
+  padding-bottom: 10px; /* Prevents clipping during hover */
+}
+
+/* Scrolling Track (now child of wrapper) */
 .faculty-courses {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   gap: 1rem;
-  overflow-x: auto; /* Allows horizontal scrolling if too many courses */
-  scrollbar-width: thin; /* Optional, for custom scrollbar styling in Firefox */
+  height: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.faculty-courses::-webkit-scrollbar {
+  display: none;
 }
 
-/* Single course card */
+/*container for each course card*/
 .course-container {
   width: 296px;
-  min-width: 296px; /* Ensures each card has the same size horizontally */
-  height: auto;
-  background-color: #F7F7F7;
-  border-radius: 8px;
+  height: 273px; 
+  min-width: 296px;
+  flex-shrink: 0;
+  background-color: #FFFFFF;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  flex-shrink: 0; /* Prevents the card from shrinking */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative; 
 }
 
-/* The default course image */
-.course-image {
+.course-container:hover .course-content {
+  transform: translateY(-10px);
+}
+
+/* Course Image (flexible within card) */
+
+.course-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 187px;
-  object-fit: cover; /* Keeps aspect ratio if needed */
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  padding: 1rem;
+  z-index: 2;
+  transition: transform 0.3s ease;
 }
 
-/* Title inside each course card */
+.course-image {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  z-index: 1;
+}
+
 .course-title {
-  margin: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  margin: 0 0 0.25rem 0;
 }
 
-/* Instructor or additional info inside each card */
 .course-docente {
-  margin: 0 0.5rem 0.5rem 0.5rem;
+  font-size: 0.875rem;
+  margin: 0;
   color: #666;
-  font-size: 0.9rem;
 }
+/* ====== VISUAL ENHANCEMENTS ====== */
+/* Gradient Overlay 
+.faculty-courses-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.8) 50%, white 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+*/
 
-/* "See more" arrow at the end of the faculty row */
-.courses-see-more {
-  width: 26px;
-  height: 60px;
-  flex-shrink: 0;
+/* Navigation Arrows */
+.slide-arrow-left,
+.slide-arrow-right {
+  position: absolute;
+  top: 50%;
+  width: 30px; 
+  height: 30px; 
   cursor: pointer;
+  z-index: 3;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+  background: white;
+  border-radius: 14px; /* Remove circle */
+  box-shadow: none; /* Remove shadow */
 }
 
-/* Message displayed if no courses are found */
-.no-courses-message {
-  text-align: center;
-  font-size: 1.3rem;
-  color: #000000;
-  margin-top: 4rem;
+.slide-arrow-right {
+  right: -40px;
+}
+
+.slide-arrow-left {
+  left: -40px;
+  transform: rotate(180deg);
+}
+
+.slide-arrow-left:hover,
+.slide-arrow-right:hover {
+  opacity: 1;
 }

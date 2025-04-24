@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import logo from './images/iconLoginUAMFD.svg';
-import errorImage from './images/errorLogin.svg';
-import logIcon from './images/logIcon.svg';
+import logo from './images/login/iconLoginUAMFD.svg';
+import errorImage from './images/login/errorLogin.svg';
+import logIcon from './images/login/logIcon.svg';
 import LogoUAM from './components/Logo-UAM/logoUAM';
 import './login.css';
 

@@ -1,33 +1,120 @@
 .sidebar {
-  height: 100vh;
-  width: 0;
   position: fixed;
-  z-index: 4;
-  top: 0;
   left: 0;
-  background-color: #f1f1f1;
-  border-radius: 8px;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-.open {
-  width: 60px;
-}
-.sidebarContent {
+  top: 50px;
+  height: 100vh;
+  background-color: #1E3F3E;
+  z-index: 5;
+
+  /* Default collapsed width */
+  width: 45px;
+  transition: width 0.3s ease;
+
   display: flex;
   flex-direction: column;
+}
+
+.open {
+  width: 250px;
+}
+
+/* Toggle icon placed in the top-left corner of the sidebar */
+.displayIcon {
+  position: absolute;
+  top: 1rem;
+  right: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate the toggle icon to the left when open */
+.displayIconOpened {
+  transform: rotate(180deg);
+}
+
+/* Main content area of the sidebar, starts below the toggle icon */
+.sidebarContent {
+  margin-top: 3rem; 
+  flex: 1;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  /* Everything left-aligned so icons never move horizontally */
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* Hide identification and nav items by default */
+.identificadorContainer,
+.navItems {
+  opacity: 0;
+  transition: opacity 0.3s ease 0.3s;
+}
+
+/* When sidebar is open, show these elements after a delay */
+.open .identificadorContainer,
+.open .navItems {
+  opacity: 1;
+}
+
+/* Container for user/role text at the top-left when open */
+.identificadorContainer {
+  width: 100%;
+  margin-left: 3.5rem;
+  /* Only show this when the sidebar is open (controlled in JSX or via additional CSS) */
+}
+
+/* Title & role text */
+.sidebarTitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: -1.5rem 0 0 0; /* top, right, bottom, left */
+  font-family: 'Pridi';
+}
+
+.sidebarRole {
+  font-size: 1rem;
+  margin: 0;
+  color: #00bfff;
+  font-weight: 300;
+}
+
+/* Items container */
+.navItems {
+  position: absolute;
+  bottom: 11%;
+  right: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Icons left-aligned */
+  padding-left: 0.75rem;
+}
+
+/* Nav item row: icon + optional label */
+.navItem {
+  display: flex;
   align-items: center;
-}
-.settingsIcon {
-  width: 30px;
-  height: 30px;
-  margin: 20px 0;
+  margin: 1rem 0;
   cursor: pointer;
+  padding-left: 0.75rem; /* Keep icons at the same horizontal position */
 }
-.statisticIcon {
-  width: 30px;
-  height: 30px;
-  margin: 10px 0;
-  cursor: pointer;
+
+/* Icon remains to the left, the text will appear to its right when open */
+.navItem img {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.75rem;
+}
+
+/* The text that only appears if the sidebar is open (handled in JSX) */
+.navItem span {
+  font-size: 0.95rem;
+  font-weight: 400;
 }

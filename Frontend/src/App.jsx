@@ -5,7 +5,11 @@ import AdminCourses from "./vistas/admin/admin-courses.jsx";
 import DocenteCourses from "./vistas/docente/docente-courses.jsx";
 import CreateCourseDetail from "./vistas/admin/create-course-detail.jsx";
 import Details from "./vistas/admin/show-course-detail.jsx"; 
-import Detailsdocente from "./vistas/docente/docente-course-detail.jsx";
+import Detailsdocente from "./vistas/docente/detalleCurso/docente-course-detail.jsx";
+import MyLearning from "./vistas/docente/MyLearning/MyLearning.jsx";
+import MyTeaching from "./vistas/docente/MyTeaching/MyTeaching.jsx";
+import Configuration from "./components/Settings/Settings.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 import { authenticateUser, fetchUserByCif } from "./services/User-Op.jsx";
 import { fetchCourses, createCourse } from "./services/Courses-Op.jsx";
 
@@ -15,6 +19,8 @@ function App() {
   const [courses, setCourses] = useState([]);
 
   // Al montar el componente, obtener cursos desde el backend
+  //HERE WHERE YOU FETCH THE COURSES FROM THE DB
+  /*
   useEffect(() => {
     const loadCourses = async () => {
       try {
@@ -26,6 +32,7 @@ function App() {
     };
     loadCourses();
   }, []);
+  */
 
   const handleLogin = async (credentials) => {
     try {
@@ -39,7 +46,7 @@ function App() {
             name: userInfo.nombre,
             email: userInfo.email,
             cif: userInfo.cif,
-            role: userInfo.adminrole ? "administrador" : "docente",
+            role: userInfo.adminrole ? "administrador" : "docente"
           });
           return true;
         } else {
@@ -148,6 +155,42 @@ function App() {
           element={
             <ProtectedRoute role="docente">
               <Detailsdocente courses={courses} setCourses={setCourses} />
+            </ProtectedRoute>
+          }
+        />
+
+<Route
+          path="/aprendizaje-docente"
+          element={
+            <ProtectedRoute role="docente">
+              <MyLearning user={user} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/practica-docente"
+          element={
+            <ProtectedRoute role="docente">
+              <MyTeaching user={user} />
+            </ProtectedRoute>
+          }
+        />
+
+<Route
+          path="/settings"
+          element={
+            <ProtectedRoute role="docente">
+              <Configuration user={user} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute role="docente">
+              <Profile user={user} />
             </ProtectedRoute>
           }
         />
