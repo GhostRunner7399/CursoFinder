@@ -32,7 +32,7 @@ public class UsuarioController {
         return usuarioServicio.autenticarUsuario(usuario.getCif(), usuario.getContraseña());
     }
 
-    //Usuario info
+    //info por cif
     @GetMapping("/info/{cif}")
     public ResponseEntity<UsuarioResponseDTO> buscarUsuario(@PathVariable Integer cif) {
         return usuarioServicio.buscarPorCif(cif)
@@ -42,7 +42,7 @@ public class UsuarioController {
     }
 
 
-    // Todos los usuarios
+    //todos los usuarios
     @GetMapping("/all")
     public ResponseEntity<Page<UsuarioResponseDTO>> obtenerUsuariosPaginados(
             @RequestParam(defaultValue = "0") int page,
