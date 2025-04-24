@@ -2,7 +2,7 @@ package edu.uam.backend.cursos.Curso.model;
 
 
 import edu.uam.backend.cursos.Facultad.model.Facultad;
-import edu.uam.backend.cursos.Matricula.model.Matricula;
+import edu.uam.backend.cursos.Inscripcion.model.Inscripcion;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -40,7 +40,7 @@ public class Cursos {
     //Esto evita que el codigo sea redundante, por ende si lo quitan
     //El codigo va a recursar entre si infinitamente creando un .json infinito njds
     @JsonIgnore
-    private List<Matricula> matriculas;
+    private List<Inscripcion> inscripcions;
 
 
     @ManyToOne

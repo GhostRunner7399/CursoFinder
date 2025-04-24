@@ -12,9 +12,8 @@ public class CatalogoRoles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRol;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
-    private Nombrerol nombreRol;
+    private String nombreRol;
 
     @Column
     private String descripcion;

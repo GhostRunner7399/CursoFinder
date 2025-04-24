@@ -17,7 +17,7 @@ public interface RolRepository extends JpaRepository<CatalogoRoles, Long> {
 
     List<CatalogoRoles> nombreRol(Nombrerol nombreRol);
 
-    boolean existsByNombreRol(Nombrerol nombreRol);
+    boolean existsByNombreRol(String nombreRol);
 
 
 }

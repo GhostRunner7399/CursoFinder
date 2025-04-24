@@ -1,6 +1,6 @@
 package edu.uam.backend.cursos.Usuario.model;
 
-import edu.uam.backend.cursos.Matricula.model.Matricula;
+import edu.uam.backend.cursos.Inscripcion.model.Inscripcion;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -54,5 +54,5 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Matricula> matriculas;
+    private List<Inscripcion> inscripcions;
 }
