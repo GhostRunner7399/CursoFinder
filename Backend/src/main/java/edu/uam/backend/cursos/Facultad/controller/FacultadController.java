@@ -49,4 +49,10 @@ public class FacultadController {
         return ResponseEntity.ok(facultads);
     }
 
+    /*
+    @PatchMapping("/Update")
+    public ResponseEntity<Facultad> ActualizarFacultad(@RequestBody Facultad facultad) {
+
+    }
+     */
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -56,6 +57,23 @@ public class CursoController {
     ) {
         return ResponseEntity.ok(cursoServicio.obtenerCursosPaginados(page, size));
     }
+
+    @GetMapping
+    public ResponseEntity<List<Cursos>> getCoursesFilteredAndSorted(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String code,
+            @RequestParam(required = false) Boolean active,
+            @RequestParam(required = false) Long facultyId,
+            @RequestParam(defaultValue = "nombre") String orderBy,
+            @RequestParam(defaultValue = "asc") String direction) {
+
+        List<Cursos> courses = cursoServicio.getFilteredAndSortedCourses(
+                name, code, active, facultyId, orderBy, direction
+        );
+        return ResponseEntity.ok(courses);
+    }
+
+
 
 
     @GetMapping("/{codigocurso}")

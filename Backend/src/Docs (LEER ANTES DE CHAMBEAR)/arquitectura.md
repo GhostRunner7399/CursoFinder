@@ -10,7 +10,7 @@ El proyecto sigue una arquitectura monolítica modularizada. Cada módulo repres
 - **Java 17**
 - **Spring Boot**
 - **Spring Data JPA**
-- **MySQL**
+- **Postgre-SQL**
 - **Lombok**
 - **Maven**
 
@@ -28,3 +28,4 @@ El proyecto sigue una arquitectura monolítica modularizada. Cada módulo repres
 2. El controlador delega la lógica al servicio correspondiente.
 3. El servicio interactúa con el repositorio si es necesario acceder a la base de datos.
 4. La respuesta se construye y se devuelve al cliente.
+5. 
