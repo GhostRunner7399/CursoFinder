@@ -13,8 +13,13 @@ import edu.uam.backend.cursos.Usuario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import jakarta.persistence.criteria.Predicate;
+import org.springframework.data.jpa.domain.Specification;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,4 +143,75 @@ public class CursoServicio {
         return cursosRepository.save(curso);
     }
 
+
+    public List<Cursos> obtenerCursosOrdenados(String ordenarPor, String direccion) {
+        List<String> camposPermitidos = List.of("nombre", "codigocurso", "active");
+
+        if (!camposPermitidos.contains(ordenarPor)) {
+            throw new IllegalArgumentException("Campo de ordenamiento no permitido: " + ordenarPor);
+        }
+
+        Sort sort = direccion.equalsIgnoreCase("desc")
+                ? Sort.by(Sort.Order.desc(ordenarPor))
+                : Sort.by(Sort.Order.asc(ordenarPor));
+
+        return cursosRepository.findAll(sort);
+    }
+
+    /**
+     * Retorna una lista ordenada y filtrada de los cursos basado en los parametros
+     *
+     * @param name      aqui filtras por el nombre del curso
+     * @param code      filtra por codigo de curso, opcionalmente quiero meter un case insensitive
+     * @param active    Filtra por estado activo
+     * @param facultyId Filtra por id facultad
+     * @param orderBy   Campo para sortear es decir, definir la query
+     * @param direction DIreccion (asc, desc en SQL)
+     * @return           RETORNA. PUNTO FINAL. CAPSISHI, TODO, ESO HACE EL CODIGO ESTUPIDO CEROTE MIERDA
+     * DIOS MIO ESTOY QUEDANDO LOCO AJAJAJ
+     */
+    public List<Cursos> getFilteredAndSortedCourses(
+            String name,
+            String code,
+            Boolean active,
+            Long facultyId,
+            String orderBy,
+            String direction) {
+
+        List<String> allowedFields = List.of("nombre", "codigocurso", "active");
+
+        if (!allowedFields.contains(orderBy)) {
+            throw new IllegalArgumentException("Invalid sorting field: " + orderBy);
+        }
+
+        Sort sort = direction.equalsIgnoreCase("desc")
+                ? Sort.by(Sort.Order.desc(orderBy))
+                : Sort.by(Sort.Order.asc(orderBy));
+
+        Specification<Cursos> spec = (root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (name != null && !name.isEmpty()) {
+                predicates.add(cb.like(cb.lower(root.get("nombre")), "%" + name.toLowerCase() + "%"));
+            }
+
+            if (code != null && !code.isEmpty()) {
+                predicates.add(cb.like(cb.lower(root.get("codigocurso")), "%" + code.toLowerCase() + "%"));
+            }
+
+            if (active != null) {
+                predicates.add(cb.equal(root.get("active"), active));
+            }
+
+            if (facultyId != null) {
+                predicates.add(cb.equal(root.get("facultad").get("id"), facultyId));
+            }
+
+            return cb.and(predicates.toArray(new Predicate[0]));
+        };
+
+        return cursosRepository.findAll(spec, sort);
+    }
 }
+
+
