@@ -1,5 +1,6 @@
 package edu.uam.backend.cursos.Curso.model;
 
+import edu.uam.backend.cursos.Usuario.model.Usuario;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,8 +27,10 @@ public class CursoDetalle {
     @Column(nullable = false)
     private String requisitos;
 
-    @Column(nullable = false)
-    private String docente;
+    @ManyToOne
+    @JoinColumn(name = "id_docente", nullable = false)
+    private Usuario docente;
+
 
     @Column(nullable = false)
     private String lugar;

@@ -4,6 +4,13 @@ public enum Nombrerol {
         ROOT,
         ADMIN,
         DOCENTE,
-        ESTUDIANTE
+        ESTUDIANTE;
 
+        public boolean equalsIgnoreCase(String docente) {
+                return this.toString().equalsIgnoreCase(docente);
+        }
+
+        public String toUpperCase() {
+                return this.toString().toUpperCase();
+        }
 }

@@ -5,6 +5,7 @@ import edu.uam.backend.cursos.Usuario.model.Nombrerol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -13,6 +14,10 @@ public interface RolRepository extends JpaRepository<CatalogoRoles, Long> {
 
     Optional<CatalogoRoles> findById(Long id);
 
-    boolean existsByNombreRolIgnoreCase(String nombreRol);
+
+    List<CatalogoRoles> nombreRol(Nombrerol nombreRol);
+
+    boolean existsByNombreRol(Nombrerol nombreRol);
+
 
 }

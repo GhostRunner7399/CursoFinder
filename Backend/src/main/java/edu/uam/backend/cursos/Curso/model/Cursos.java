@@ -1,6 +1,7 @@
 package edu.uam.backend.cursos.Curso.model;
 
 
+import edu.uam.backend.cursos.Facultad.model.Facultad;
 import edu.uam.backend.cursos.Matricula.model.Matricula;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -40,6 +41,12 @@ public class Cursos {
     //El codigo va a recursar entre si infinitamente creando un .json infinito njds
     @JsonIgnore
     private List<Matricula> matriculas;
+
+
+    @ManyToOne
+    @JoinColumn(name = "idFacultad", nullable = false)
+    private Facultad facultad;
+
 
 }
 

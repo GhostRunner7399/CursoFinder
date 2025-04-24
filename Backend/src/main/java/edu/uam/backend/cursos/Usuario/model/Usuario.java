@@ -16,7 +16,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;  // ← corregido el typo
+    private Long idUsuario;
 
     @Column(nullable = false)
     private String primernombre;
@@ -45,11 +45,12 @@ public class Usuario {
     private LocalDateTime fechaRegistro = LocalDateTime.now();  // ← nuevo campo
 
     @Column
-    private String telefono;  // ← nuevo campo
+    private String telefono;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "idRol", nullable = false)
     private CatalogoRoles rol;
+
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonIgnore

@@ -7,7 +7,7 @@ public class CursoDetalleUpdateDTO {
 
     private String descripcion;
     private String requisitos;
-    private String docente;
+    private Long idDocente;
     private String lugar;
     private Boolean certificacion;
     private Integer capacidadMaxima;

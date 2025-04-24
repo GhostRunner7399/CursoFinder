@@ -23,7 +23,7 @@ public class RolServicio {
     }
 
     public CatalogoRoles crearRol(CatalogoRoles rol) {
-        if (rolRepository.existsByNombreRolIgnoreCase(String.valueOf(rol.getNombreRol()))) {
+        if (rolRepository.existsByNombreRol(rol.getNombreRol())) {
             throw new IllegalArgumentException("Ya existe un rol con ese nombre.");
         }
         return rolRepository.save(rol);

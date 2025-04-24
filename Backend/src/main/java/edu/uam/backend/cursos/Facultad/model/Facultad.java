@@ -1,9 +1,12 @@
 package edu.uam.backend.cursos.Facultad.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.uam.backend.cursos.Curso.model.Cursos;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,6 +28,10 @@ public class Facultad {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime fechaRegistro = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "facultad")
+    @JsonIgnore
+    private List<Cursos> cursos;
 
 
 }

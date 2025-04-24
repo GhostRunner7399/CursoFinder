@@ -1,14 +1,19 @@
 package edu.uam.backend.cursos.Curso.controller;
 
+import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoRequestDTO;
+import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.service.CursoServicio;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoUpdateDTO;
 import edu.uam.backend.cursos.Curso.model.Cursos;
+import edu.uam.backend.cursos.Facultad.repository.FacultadRepository;
+import edu.uam.backend.cursos.Usuario.model.Usuario;
+import edu.uam.backend.cursos.Usuario.repository.UsuarioRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,12 +22,32 @@ public class CursoController {
 
     @Autowired
     private CursoServicio cursoServicio;
+    @Autowired
+    private FacultadRepository facultadRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    @PostMapping("")
-    public ResponseEntity<Cursos> crearCurso(@RequestBody Cursos curso) {
-        Cursos cursoGuardado = cursoServicio.guardarCurso(curso);
-        return ResponseEntity.ok(cursoGuardado);
+    @PostMapping("create")
+    public ResponseEntity<Cursos> crearCurso(@RequestBody CursoRequestDTO request) {
+        Cursos cursoCreado = cursoServicio.crearCursoDesdeDTO(request);
+        return ResponseEntity.ok(cursoCreado);
     }
+
+    private static @NotNull CursoDetalle getCursoDetalle(CursoRequestDTO request, Usuario docente) {
+        CursoDetalle detalle = new CursoDetalle();
+        detalle.setDescripcion(request.getCursoDetalle().getDescripcion());
+        detalle.setRequisitos(request.getCursoDetalle().getRequisitos());
+        detalle.setLugar(request.getCursoDetalle().getLugar());
+        detalle.setCertificacion(request.getCursoDetalle().isCertificacion());
+        detalle.setCapacidadMaxima(request.getCursoDetalle().getCapacidadMaxima());
+        detalle.setDocente(docente);
+
+        if (request.getCursoDetalle().getHorarios() != null && !request.getCursoDetalle().getHorarios().isEmpty()) {
+            detalle.setHorarios(request.getCursoDetalle().getHorarios());
+        }
+        return detalle;
+    }
+
 
     @GetMapping("/all")
     public ResponseEntity<Page<Cursos>> obtenerCursosPaginados(
