@@ -1,6 +1,5 @@
 package edu.uam.backend.cursos.Curso.DataTransferObjects;
 
-import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.model.HorarioCurso;
 import lombok.Data;
 
@@ -13,8 +12,13 @@ public class CursoRequestDTO {
     private boolean active;
     private Long idFacultad;
     private Long idDocente;
-    private CursoDetalle cursoDetalle;
+
+    // Datos del CursoDetalle directamente incluidos
+    private String descripcion;
+    private String requisitos;
+    private boolean certificacion;
+    private String lugar;
+    private int capacidadMaxima;
 
     private List<HorarioCurso> horarios;
-
 }

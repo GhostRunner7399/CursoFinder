@@ -19,4 +19,6 @@ public class UsuarioDTO {
     private String email;
 
     private Long idRol;
+
+    private String telefono;
 }

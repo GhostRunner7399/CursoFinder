@@ -31,13 +31,19 @@ function MyLearning({ user }) {
   }, [user]);
 
   const handleCourseClick = (courseId) => {
-    navigate(`/detalle-curso/${courseId}`);
+    navigate(`/curso-docente/${course.codigocurso}`);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
   };
 
   return (
     <div className="my-learning">
       <DefaultHeader />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} onLogout={handleLogout} />
+
       <ChatBot message="¿Qué aprenderemos el día de hoy? ¡Estoy aquí para ayudarte!" />
 
       <div className="section-title">

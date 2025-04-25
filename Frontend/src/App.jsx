@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./login.jsx";
-import AdminCourses from "./vistas/admin/admin-courses.jsx";
+import AdminCourses from "./vistas/admin/AdminCourses/AdminCourses.jsx";
 import DocenteCourses from "./vistas/docente/docente-courses.jsx";
 import CreateCourseDetail from "./vistas/admin/create-course-detail.jsx";
 import Details from "./vistas/admin/show-course-detail.jsx"; 
-import Detailsdocente from "./vistas/docente/detalleCurso/docente-course-detail.jsx";
+import Detailsdocente from "./vistas/docente/detalleCurso/DetalleCursos.jsx";
 import MyLearning from "./vistas/docente/MyLearning/MyLearning.jsx";
 import MyTeaching from "./vistas/docente/MyTeaching/MyTeaching.jsx";
 import Configuration from "./components/Settings/Settings.jsx";
@@ -40,19 +40,27 @@ function App() {
       if (success) {
         const cif = credentials.cif;
         const userInfo = await fetchUserByCif(cif);
-        if (userInfo) {
-          setIsAuthenticated(true);
-          setUser({
-            name: userInfo.nombre,
+  
+        console.log("Usuario recibido completo:", JSON.stringify(userInfo, null, 2));
+  
+        if (userInfo && userInfo.idRol) {
+          const role = userInfo.idRol === 1 ? "administrador" : "docente";
+  
+          const userObj = {
+            name: userInfo.nombreCompleto,
             email: userInfo.email,
             cif: userInfo.cif,
-            role: userInfo.adminrole ? "administrador" : "docente"
-          });
+            role: role
+          };
+  
+          setIsAuthenticated(true);
+          setUser(userObj);
           return true;
         } else {
-          setIsAuthenticated(true);
+          console.warn("Usuario sin rol válido:", userInfo);
+          setIsAuthenticated(false);
           setUser(null);
-          return true;
+          return false;
         }
       } else {
         setIsAuthenticated(false);
@@ -65,7 +73,9 @@ function App() {
       setUser(null);
       return false;
     }
-  };
+  };  
+
+  
 
   const handleAddCourse = async (courseData) => {
     try {
@@ -141,28 +151,27 @@ function App() {
           }
         />
 
-        <Route
-          path="/curso/:id"
-          element={
-            <ProtectedRoute role="administrador">
-              <Details courses={courses} setCourses={setCourses} />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/curso-docente/:codigocurso" element={
+          <ProtectedRoute role="docente">
+            <Detailsdocente user={user} />
+          </ProtectedRoute>
+        } />
+
 
         <Route
-          path="/curso-docente/:id"
+          path="/curso-docente/:codigocurso"
           element={
             <ProtectedRoute role="docente">
-              <Detailsdocente courses={courses} setCourses={setCourses} />
+              <Detailsdocente user={user} />
             </ProtectedRoute>
           }
         />
 
-<Route
+
+        <Route
           path="/aprendizaje-docente"
           element={
-            <ProtectedRoute role="docente">
+            <ProtectedRoute>
               <MyLearning user={user} />
             </ProtectedRoute>
           }
@@ -171,16 +180,16 @@ function App() {
         <Route
           path="/practica-docente"
           element={
-            <ProtectedRoute role="docente">
+            <ProtectedRoute>
               <MyTeaching user={user} />
             </ProtectedRoute>
           }
         />
 
-<Route
+        <Route
           path="/settings"
           element={
-            <ProtectedRoute role="docente">
+            <ProtectedRoute>
               <Configuration user={user} />
             </ProtectedRoute>
           }
@@ -189,7 +198,7 @@ function App() {
         <Route
           path="/perfil"
           element={
-            <ProtectedRoute role="docente">
+            <ProtectedRoute>
               <Profile user={user} />
             </ProtectedRoute>
           }

@@ -21,13 +21,12 @@ function getRoleName(idRol) {
   }
 }
 
-function Sidebar({ isOpen, toggleSidebar, user }) {
+function Sidebar({ isOpen, toggleSidebar, user, onLogout }) {
+
   const navigate = useNavigate();
 
-  // Extract the role name from user.id_rol
-  const roleName = user?.id_rol ? getRoleName(user.id_rol) : 'Docente';
+  const roleName = user?.role === "administrador" ? "Administrador" : "Docente";
 
-  // Handlers for navigation
   const handleDashboardClick = () => {
     navigate('/courses');
   };
@@ -41,13 +40,14 @@ function Sidebar({ isOpen, toggleSidebar, user }) {
   };
 
   const handleLogoutClick = () => {
-    // Replace with your logout logic
-    navigate('/login');
+    if (onLogout) {
+      onLogout(); // ejecuta la función enviada como prop desde App.jsx
+    }
   };
+  
 
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
-      {/* Toggle icon (clicking it expands/collapses the sidebar) */}
       <img
         src={displayIcon}
         alt="Toggle Sidebar"
@@ -55,9 +55,7 @@ function Sidebar({ isOpen, toggleSidebar, user }) {
         onClick={toggleSidebar}
       />
 
-      {/* The expanded content (role, icons, labels) */}
       <div className={styles.sidebarContent}>
-        {/* User / Role Identifier */}
         <div className={styles.identificadorContainer}>
           {isOpen && (
             <>
@@ -67,30 +65,30 @@ function Sidebar({ isOpen, toggleSidebar, user }) {
           )}
         </div>
 
-        <div className= {styles.navItems}>{/* Nav items */}
-            <div className={styles.navItem} onClick={handleDashboardClick}>
-              <img src={DashboardIcon} alt="Dashboard" />
-              {isOpen && <span>Dashboard</span>}
-            </div>
+        <div className={styles.navItems}>
+          <div className={styles.navItem} onClick={handleDashboardClick}>
+            <img src={DashboardIcon} alt="Dashboard" />
+            {isOpen && <span>Dashboard</span>}
+          </div>
 
-            {roleName === 'Administrador' && (
-              <div className={styles.navItem} onClick={handleStatisticsClick}>
-                <img src={statisticIcon} alt="Estadísticas" />
-                {isOpen && <span>Estadísticas</span>}
-              </div>
-            )}
-
-            <div className={styles.navItem} onClick={handleSettingsClick}>
-              <img src={settingsIcon} alt="Configuración" />
-              {isOpen && <span>Configuración</span>}
+          {roleName === 'Administrador' && (
+            <div className={styles.navItem} onClick={handleStatisticsClick}>
+              <img src={statisticIcon} alt="Estadísticas" />
+              {isOpen && <span>Estadísticas</span>}
             </div>
+          )}
 
-            <div className={styles.navItem} onClick={handleLogoutClick}>
-              <img src={logOutIcon} alt="Cerrar sesión" />
-              {isOpen && <span>Cerrar sesión</span>}
-            </div>
+          <div className={styles.navItem} onClick={handleSettingsClick}>
+            <img src={settingsIcon} alt="Configuración" />
+            {isOpen && <span>Configuración</span>}
+          </div>
+
+          <div className={styles.navItem} onClick={handleLogoutClick}>
+            <img src={logOutIcon} alt="Cerrar sesión" />
+            {isOpen && <span>Cerrar sesión</span>}
           </div>
         </div>
+      </div>
     </div>
   );
 }

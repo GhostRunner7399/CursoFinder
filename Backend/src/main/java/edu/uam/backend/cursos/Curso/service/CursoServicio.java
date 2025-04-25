@@ -112,36 +112,37 @@ public class CursoServicio {
         }
 
 
-    public Cursos crearCursoDesdeDTO(CursoRequestDTO request) {
-        Facultad facultad = facultadRepository.findById(request.getIdFacultad())
-                .orElseThrow(() -> new IllegalArgumentException("Facultad no encontrada"));
-
-        Usuario docente = usuarioRepository.findById(request.getCursoDetalle().getDocente().getIdUsuario())
-                .orElseThrow(() -> new IllegalArgumentException("Docente no encontrado"));
-
-        String rol = docente.getRol().getNombreRol().toUpperCase();
-        if (!rol.equals("DOCENTE")) {
-            throw new IllegalArgumentException("El usuario con rol '" + rol + "' no puede impartir cursos.");
+        public Cursos crearCursoDesdeDTO(CursoRequestDTO request) {
+            Facultad facultad = facultadRepository.findById(request.getIdFacultad())
+                    .orElseThrow(() -> new IllegalArgumentException("Facultad no encontrada"));
+        
+            Usuario docente = usuarioRepository.findById(request.getIdDocente())
+                    .orElseThrow(() -> new IllegalArgumentException("Docente no encontrado"));
+        
+        
+            CursoDetalle detalle = new CursoDetalle();
+            detalle.setDescripcion(request.getDescripcion());
+            detalle.setRequisitos(request.getRequisitos());
+            detalle.setLugar(request.getLugar());
+            detalle.setCertificacion(request.isCertificacion());
+            detalle.setCapacidadMaxima(request.getCapacidadMaxima());
+            detalle.setDocente(docente);
+        
+            // Mapear lista de horarios (si estás usando HorarioCurso como objeto)
+            if (request.getHorarios() != null && !request.getHorarios().isEmpty()) {
+                detalle.setHorarios(request.getHorarios()); // ← Asegúrate que sean objetos HorarioCurso
+            }
+        
+            Cursos curso = new Cursos();
+            curso.setCodigocurso(request.getCodigocurso());
+            curso.setNombre(request.getNombre());
+            curso.setActive(request.isActive());
+            curso.setCursoDetalle(detalle);
+            curso.setFacultad(facultad);
+        
+            return cursosRepository.save(curso);
         }
-
-        CursoDetalle detalle = new CursoDetalle();
-        detalle.setDescripcion(request.getCursoDetalle().getDescripcion());
-        detalle.setRequisitos(request.getCursoDetalle().getRequisitos());
-        detalle.setLugar(request.getCursoDetalle().getLugar());
-        detalle.setCertificacion(request.getCursoDetalle().isCertificacion());
-        detalle.setCapacidadMaxima(request.getCursoDetalle().getCapacidadMaxima());
-        detalle.setHorarios(request.getCursoDetalle().getHorarios());
-        detalle.setDocente(docente);
-
-        Cursos curso = new Cursos();
-        curso.setCodigocurso(request.getCodigocurso());
-        curso.setNombre(request.getNombre());
-        curso.setActive(request.isActive());
-        curso.setCursoDetalle(detalle);
-        curso.setFacultad(facultad);
-
-        return cursosRepository.save(curso);
-    }
+        
 
 
     public List<Cursos> obtenerCursosOrdenados(String ordenarPor, String direccion) {

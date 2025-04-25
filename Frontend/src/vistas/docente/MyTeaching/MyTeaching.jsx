@@ -16,24 +16,37 @@ function MyTeaching({ user }) {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   useEffect(() => {
-    // Simulación de cursos brindados por el docente logueado
-    const teachingCourses = [
-      { id: 101, name: "Curso 1: Introducción a Redes" },
-      { id: 102, name: "Curso 2: Estructuras de Datos" },
-      { id: 103, name: "Curso 3: Ingeniería de Software" },
-      { id: 104, name: "Curso 4: Gestión de Proyectos" },
-    ];
-    setCourses(teachingCourses);
-  }, []);
+    const fetchTeachingCourses = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/courses?active=true`);
+        const allCourses = await response.json();
+        const myCourses = allCourses.filter(course => 
+          course.cursoDetalle?.docente?.cif === user.cif
+        );
+        setCourses(myCourses);
+      } catch (error) {
+        console.error("Error al cargar cursos impartidos:", error);
+      }
+    };
 
-  const handleCourseClick = (courseId) => {
-    navigate(`/detalle-curso/${courseId}`);
+    if (user?.cif) {
+      fetchTeachingCourses();
+    }
+  }, [user]);
+
+  const handleCourseClick = (course) => {
+    navigate(`/curso-docente/${course.codigocurso}`);
+  };  
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
   };
 
   return (
     <div className="my-teaching">
       <DefaultHeader />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} onLogout={handleLogout} />
       <ChatBot message="¡Cuando uno enseña, dos aprenden!" />
 
       <div className="section-title">
@@ -48,7 +61,7 @@ function MyTeaching({ user }) {
             <div
               key={course.id}
               className="course-container"
-              onClick={() => handleCourseClick(course.id)}
+              onClick={() => handleCourseClick(course)}
             >
               <div className="course-content">
                 <img
@@ -56,8 +69,8 @@ function MyTeaching({ user }) {
                   className="course-image"
                   alt="Imagen de curso"
                 />
-                <h3 className="course-title">{course.name}</h3>
-                <p className="course-docente">Docente: Yo ({user?.name})</p>
+                <h3 className="course-title">{course.nombre}</h3>
+                <p className="course-docente">Docente: Tú mismo ({user?.name})</p>
               </div>
             </div>
           ))

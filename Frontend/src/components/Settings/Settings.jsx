@@ -21,8 +21,8 @@ function Configuration({ user }) {
   return (
     <div className="configuration-page">
       <DefaultHeader />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
-      <ChatBot message="Ayuda" />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} onLogout={handleLogout} />
+      <ChatBot message="Ayuda porfavor" />
 
       <div className="section-title">
         <h1><Highlight>Configuración</Highlight></h1>

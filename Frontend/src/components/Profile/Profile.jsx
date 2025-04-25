@@ -15,6 +15,11 @@ function Profile() {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUser(storedUser);
@@ -96,7 +101,7 @@ function Profile() {
   return (
     <div className="profile-page">
       <DefaultHeader />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} onLogout={handleLogout} />
 
       <div className="section-title">
         <h1><Highlight>Perfil</Highlight></h1>

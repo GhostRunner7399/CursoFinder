@@ -1,27 +1,29 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:8080/api/users/';
+const API_URL = "http://localhost:8080/api/users";
 
-// Register user
-export const registerUser = async (userData) => {
-    const response = await axios.post(`${API_URL}action/register`, userData);
-    return response.data;
+// Autenticación de usuario
+export const authenticateUser = async ({ cif, contraseña }) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth`, {
+      cif,
+      contraseña,
+    });
+    console.log("🔍 Response del backend (auth):", response.data); // <--- línea clave
+    return response.data === true;
+  } catch (error) {
+    console.error("Error en autenticación:", error);
+    return false;
+  }
 };
 
-// Authenticate user
-export const authenticateUser = async (userData) => {
-    const response = await axios.post(`${API_URL}auth`, userData);
-    return response.data; // Assuming this returns true/false
-};
-
-// Fetch user by CIF
+// Obtener datos del usuario autenticado por CIF
 export const fetchUserByCif = async (cif) => {
-    const response = await axios.get(`${API_URL}info/${cif}`);
-    return response.data;
-};
-
-// Fetch all users
-export const fetchAllUsers = async () => {
-    const response = await axios.get(`${API_URL}all`);
-    return response.data;
+  try {
+    const response = await axios.get(`${API_URL}/info/${cif}`);
+    return response.data; // UsuarioResponseDTO esperado
+  } catch (error) {
+    console.error("Error al obtener usuario por CIF:", error);
+    return null;
+  }
 };

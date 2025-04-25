@@ -5,20 +5,31 @@ import Sidebar from "../../../components/sidebar/sidebar.jsx";
 import Highlight from "../../../components/Highlight/highlight.jsx";
 import Footer from '../../../components/Footer/footer.jsx';
 import ChatBot from '../../../components/Bot/bot.jsx';
-import "./docente-course-detail.css";
+import "./DetalleCursos.css";
 
 function DetalleCursos({ user }) {
-  const { id } = useParams();
+  const { codigocurso } = useParams();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [curso, setCurso] = useState(null);
   const [inscrito, setInscrito] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
+  const getNombreCompleto = (docente) => {
+    if (!docente) return "Sin asignar";
+    return `${docente.primernombre} ${docente.segundonombre ?? ""} ${docente.primerapellido} ${docente.segundoapellido}`.trim();
+  };
+  
+
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/api/courses/${id}`);
+        const res = await fetch(`http://localhost:8080/api/courses/${codigocurso}`);
         const data = await res.json();
         setCurso(data);
 
@@ -32,7 +43,8 @@ function DetalleCursos({ user }) {
       }
     };
     fetchCourse();
-  }, [id]);
+  }, [codigocurso]);
+
 
   const handleInscribirse = async () => {
     try {
@@ -65,7 +77,7 @@ function DetalleCursos({ user }) {
   return (
     <div className="detalle-curso">
       <DefaultHeader />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} onLogout={handleLogout} />
       <ChatBot message="¿Te interesa este curso? ¡Estoy aquí para ayudarte!" />
 
       <div className="section-title">
@@ -75,8 +87,10 @@ function DetalleCursos({ user }) {
       <div className="detalle-container">
         <div className="detalle-content">
           <h1>{curso.nombre} - {curso.codigocurso}</h1>
-          <p className="descripcion"><strong>Descripción:</strong> {curso.descripcion}</p>
-          <p className="docente">Brindado por el docente <span className="blue">{curso.docente}</span></p>
+          <p className="descripcion"><strong>Descripción:</strong> {curso.cursoDetalle?.descripcion || "Sin descripción"}</p>
+          <p className="docente">
+            Brindado por el docente <span className="blue">{getNombreCompleto(curso.cursoDetalle?.docente)}</span>
+          </p>
           <p className="estado">
             <span className={curso.active ? "activo" : "inactivo"}>{curso.active ? "Activo" : "Inactivo"}</span>
           </p>
@@ -84,21 +98,21 @@ function DetalleCursos({ user }) {
           <div className="detalle-box">
             <h3>Requisitos</h3>
             <ul>
-              {curso.requisitos.split('.').filter(Boolean).map((r, i) => (
+            {curso.cursoDetalle?.requisitos?.split('.')?.filter(Boolean).map((r, i) => (
                 <li key={i}>{r.trim()}.</li>
-              ))}
+              )) || <li>No hay requisitos.</li>}
             </ul>
           </div>
         </div>
 
         <div className="detalle-sidebar">
           <h3>Características:</h3>
-          <p><strong>Horario:</strong> {curso.horario}</p>
-          <p><strong>Lugar:</strong> {curso.lugar}</p>
-          <p><strong>Intensidad:</strong> {curso.intensidad}</p>
-          <p><strong>Certificación:</strong> {curso.certificacion}</p>
-          <p><strong>Capacidad:</strong> {curso.capacidad}</p>
+          <p><strong>Horario:</strong> {curso.cursoDetalle?.horarios?.map(h => `${h.diaSemana} de ${h.horaInicio} a ${h.horaFin} en ${h.aula}`).join(", ") ?? "No definido"}</p>
+          <p><strong>Lugar:</strong> {curso.cursoDetalle?.lugar}</p>
+          <p><strong>Certificación:</strong> {curso.cursoDetalle?.certificacion ? "Sí" : "No"}</p>
+          <p><strong>Capacidad:</strong> {curso.cursoDetalle?.capacidadMaxima}</p>
           <p><strong>Disponibilidad:</strong> {curso.disponibilidad ?? 0}</p>
+          <p><strong>Facultad:</strong> {curso.facultad?.nombre || "Sin asignar"}</p>
           <div className="detalle-precio">
             {inscrito ? (
               <button className="btn-desinscribirse" onClick={handleDesinscribirse}>DESINSCRIBIRSE</button>
