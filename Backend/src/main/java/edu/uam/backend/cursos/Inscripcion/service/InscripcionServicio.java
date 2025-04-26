@@ -32,23 +32,28 @@ public class InscripcionServicio {
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
         Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
                 .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
-
-        if (inscripcionRepository.existsByUsuarioAndCurso(usuario, curso)) {
-            throw new IllegalArgumentException("El usuario ya está inscrito en este curso.");
-        }
-            Long idrol = usuario.getRol().getIdRol();
-            if (idrol != 3 && idrol != 5) {
-            throw new IllegalArgumentException("El rol no puede ser aceptado. Falta de privilegios");
+    
+        // Validar que no se inscriba a su propio curso
+        if (curso.getCursoDetalle() != null && curso.getCursoDetalle().getDocente() != null) {
+            if (curso.getCursoDetalle().getDocente().getCif().equals(usuario.getCif())) {
+                throw new IllegalArgumentException("No puedes inscribirte en tu propio curso.");
             }
-
-            Inscripcion inscripcion = new Inscripcion();
-            inscripcion.setUsuario(usuario);
-            inscripcion.setCurso(curso);
-            inscripcion.setFechaInscripcion(LocalDateTime.now());
-            inscripcion.setActivo(true);
-            return inscripcionRepository.save(inscripcion);
-
+        }
+    
+        // Verificar si ya está inscrito
+        if (inscripcionRepository.existsByUsuarioAndCurso(usuario, curso)) {
+            throw new IllegalArgumentException("Ya estás inscrito en este curso.");
+        }
+    
+        // Proceder a inscribir
+        Inscripcion inscripcion = new Inscripcion();
+        inscripcion.setUsuario(usuario);
+        inscripcion.setCurso(curso);
+        inscripcion.setFechaInscripcion(LocalDateTime.now());
+        inscripcion.setActivo(true);
+        return inscripcionRepository.save(inscripcion);
     }
+    
     public List<Cursos> obtenerCursosUsuario(Integer cif){
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));

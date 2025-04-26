@@ -16,22 +16,28 @@ function MyLearning({ user }) {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  /*HAY QUE MODIFICAR LA LOGICA DENTRO DE LOS CAMBIOS DE NELSON, INTEGRO LOS SERVICIOS DIRECTAMENTE EN LAS VISTAS*/
   useEffect(() => {
     const fetchMyCourses = async () => {
       if (!user?.cif) return;
       try {
         const response = await axios.get(`http://localhost:8080/api/enrollmentservice/${user.cif}/courses`);
-        setCourses(response.data);
+        const filteredCourses = response.data.filter(c => c.cursoDetalle?.docente?.cif !== user.cif);
+        setCourses(filteredCourses);
       } catch (error) {
         console.error("Error al cargar cursos inscritos:", error);
       }
     };
     fetchMyCourses();
+
+    window.addEventListener('cursoActualizado', fetchMyCourses);
+
+    return () => {
+      window.removeEventListener('cursoActualizado', fetchMyCourses);
+    };
   }, [user]);
 
-  const handleCourseClick = (courseId) => {
-    navigate(`/curso-docente/${course.codigocurso}`);
+  const handleCourseClick = (codigocurso) => {
+    navigate(`/curso-docente/${codigocurso}`);
   };
 
   const handleLogout = () => {
@@ -58,7 +64,7 @@ function MyLearning({ user }) {
             <div
               key={course.id}
               className="course-container"
-              onClick={() => handleCourseClick(course.id)}
+              onClick={() => handleCourseClick(course.codigocurso)}
             >
               <div className="course-content">
                 <img
@@ -67,7 +73,7 @@ function MyLearning({ user }) {
                   alt="Imagen de curso"
                 />
                 <h3 className="course-title">{course.nombre}</h3>
-                <p className="course-docente">Docente: {course.docente}</p>
+                <p className="course-docente">Docente: {`${course.cursoDetalle?.docente?.primernombre || ""} ${course.cursoDetalle?.docente?.primerapellido || ""}`}</p>
               </div>
             </div>
           ))

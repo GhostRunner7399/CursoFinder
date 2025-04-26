@@ -8,23 +8,31 @@ import './default-header.css';
 function DefaultHeader() {
   const navigate = useNavigate();
 
-  // Navigate to /practica-docente
+  const handleDashboardClick = () => {
+    navigate('/courses');
+  };
+
   const handleMyTeachingOnClick = () => {
     navigate('/practica-docente');
   };
 
-  // Navigate to /aprendizaje-docente
   const handleMyLearningOnClick = () => {
     navigate('/aprendizaje-docente');
   };
 
   const handleProfileClick = () => {
     navigate('/perfil');
-  }
+  };
 
   return (
     <div className="header">
-      <img src={logoUAM} className="logoUAM" alt="Logo-UAM" />
+      <img
+        src={logoUAM}
+        className="logoUAM"
+        alt="Logo-UAM"
+        onClick={handleDashboardClick} // <-- AÑADIDO
+        style={{ cursor: 'pointer' }}   // <-- Opcional: para que el mouse cambie a manita
+      />
 
       <div className="nav-links">
         <p onClick={handleMyTeachingOnClick}>Mi práctica docente</p>
@@ -33,7 +41,8 @@ function DefaultHeader() {
 
       <div className="icons-container">
         <img src={bell} className="notification-icon" alt="Notification-Icon" />
-        <img src={profileIcon}
+        <img
+          src={profileIcon}
           className="profile-icon"
           alt="Profile-Icon"
           onClick={handleProfileClick}

@@ -22,12 +22,12 @@
 
 /* === Cursos en columna (scroll vertical) === */
 .courses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: 60vh; 
   padding: 2rem;
   box-sizing: border-box;
 }
@@ -75,8 +75,8 @@
 }
 
 .no-courses-message {
-  font-size: 18px;
+  font-size: 22px;
   text-align: center;
   color: #666;
-  margin-top: 3rem;
 }
+

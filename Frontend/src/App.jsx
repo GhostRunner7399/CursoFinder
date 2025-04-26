@@ -152,7 +152,7 @@ function App() {
         />
 
         <Route path="/curso-docente/:codigocurso" element={
-          <ProtectedRoute role="docente">
+          <ProtectedRoute>
             <Detailsdocente user={user} />
           </ProtectedRoute>
         } />
@@ -161,7 +161,7 @@ function App() {
         <Route
           path="/curso-docente/:codigocurso"
           element={
-            <ProtectedRoute role="docente">
+            <ProtectedRoute>
               <Detailsdocente user={user} />
             </ProtectedRoute>
           }
