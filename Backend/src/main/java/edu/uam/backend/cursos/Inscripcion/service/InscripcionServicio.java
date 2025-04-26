@@ -1,5 +1,6 @@
 package edu.uam.backend.cursos.Inscripcion.service;
 
+import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.model.Cursos;
 import edu.uam.backend.cursos.Curso.repository.CursosRepository;
 import edu.uam.backend.cursos.Inscripcion.model.Inscripcion;
@@ -27,7 +28,7 @@ public class InscripcionServicio {
     private UsuarioServicio usuarioServicio;
 
     public Inscripcion matricularUsuario(Integer cif, String codigocurso) {
-        // Verificar si el usuario y el curso existen
+
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
         Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
@@ -36,19 +37,42 @@ public class InscripcionServicio {
         if (inscripcionRepository.existsByUsuarioAndCurso(usuario, curso)) {
             throw new IllegalArgumentException("El usuario ya está inscrito en este curso.");
         }
-            Long idrol = usuario.getRol().getIdRol();
-            if (idrol != 3 && idrol != 5) {
-            throw new IllegalArgumentException("El rol no puede ser aceptado. Falta de privilegios");
+
+        Long idrol = usuario.getRol().getIdRol();
+        if (idrol != 3 && idrol != 5) {
+            throw new IllegalArgumentException("El rol no puede ser aceptado. Falta de privilegios.");
+        }
+
+        CursoDetalle detalle = curso.getCursoDetalle();
+        if (detalle.getDisponibilidad() <= 0) {
+            throw new IllegalArgumentException("No hay cupos disponibles en este curso.");
+        }
+
+        if (curso.getCursoDetalle() != null && curso.getCursoDetalle().getDocente() != null) {
+
+
+
+            if (curso.getCursoDetalle().getDocente().getCif().equals(usuario.getCif())) {
+
+
+                throw new IllegalArgumentException("No puedes inscribirte en tu propio curso.");
+
+
             }
 
-            Inscripcion inscripcion = new Inscripcion();
-            inscripcion.setUsuario(usuario);
-            inscripcion.setCurso(curso);
-            inscripcion.setFechaInscripcion(LocalDateTime.now());
-            inscripcion.setActivo(true);
-            return inscripcionRepository.save(inscripcion);
 
+        }
+
+        detalle.setDisponibilidad(detalle.getDisponibilidad() - 1);
+        Inscripcion inscripcion = new Inscripcion();
+        inscripcion.setUsuario(usuario);
+        inscripcion.setCurso(curso);
+        inscripcion.setFechaInscripcion(LocalDateTime.now());
+        inscripcion.setActivo(true);
+
+        return inscripcionRepository.save(inscripcion);
     }
+
     public List<Cursos> obtenerCursosUsuario(Integer cif){
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));

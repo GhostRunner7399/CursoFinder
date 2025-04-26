@@ -23,32 +23,13 @@ public class CursoController {
 
     @Autowired
     private CursoServicio cursoServicio;
-    @Autowired
-    private FacultadRepository facultadRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+
 
     @PostMapping("create")
     public ResponseEntity<Cursos> crearCurso(@RequestBody CursoRequestDTO request) {
         Cursos cursoCreado = cursoServicio.crearCursoDesdeDTO(request);
         return ResponseEntity.ok(cursoCreado);
     }
-
-    private static @NotNull CursoDetalle getCursoDetalle(CursoRequestDTO request, Usuario docente) {
-        CursoDetalle detalle = new CursoDetalle();
-        detalle.setDescripcion(request.getCursoDetalle().getDescripcion());
-        detalle.setRequisitos(request.getCursoDetalle().getRequisitos());
-        detalle.setLugar(request.getCursoDetalle().getLugar());
-        detalle.setCertificacion(request.getCursoDetalle().isCertificacion());
-        detalle.setCapacidadMaxima(request.getCursoDetalle().getCapacidadMaxima());
-        detalle.setDocente(docente);
-
-        if (request.getCursoDetalle().getHorarios() != null && !request.getCursoDetalle().getHorarios().isEmpty()) {
-            detalle.setHorarios(request.getCursoDetalle().getHorarios());
-        }
-        return detalle;
-    }
-
 
     @GetMapping("/all")
     public ResponseEntity<Page<Cursos>> obtenerCursosPaginados(

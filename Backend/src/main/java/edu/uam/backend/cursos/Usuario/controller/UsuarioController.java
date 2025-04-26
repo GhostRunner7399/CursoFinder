@@ -1,6 +1,6 @@
 package edu.uam.backend.cursos.Usuario.controller;
 
-import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioDTO;
+import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioRequestDTO;
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioResponseDTO;
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioUpdateDTO;
 import edu.uam.backend.cursos.Usuario.model.Usuario;
@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -22,8 +19,8 @@ public class UsuarioController {
 
     // Registrar usuario
     @PostMapping("/action/register")
-    public Usuario registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        return usuarioServicio.registrarUsuarioDesdeDTO(usuarioDTO);
+    public Usuario registrarUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        return usuarioServicio.registrarUsuarioDesdeDTO(usuarioRequestDTO);
     }
 
     // Autenticar usuario

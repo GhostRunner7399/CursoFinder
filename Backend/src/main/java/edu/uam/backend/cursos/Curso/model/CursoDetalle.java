@@ -21,7 +21,7 @@ public class CursoDetalle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idDetalle;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String descripcion;
 
     @Column(nullable = false)
@@ -40,5 +40,8 @@ public class CursoDetalle {
 
     @Column(nullable = false)
     private int capacidadMaxima;
+
+    @Column
+    private int disponibilidad;
 
 }

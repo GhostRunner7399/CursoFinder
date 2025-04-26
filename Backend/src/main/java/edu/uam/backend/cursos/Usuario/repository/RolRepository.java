@@ -14,10 +14,8 @@ public interface RolRepository extends JpaRepository<CatalogoRoles, Long> {
 
     Optional<CatalogoRoles> findById(Long id);
 
-
     List<CatalogoRoles> nombreRol(Nombrerol nombreRol);
 
     boolean existsByNombreRol(String nombreRol);
-
 
 }

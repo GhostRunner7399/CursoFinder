@@ -132,6 +132,7 @@ public class CursoServicio {
         detalle.setCapacidadMaxima(request.getCursoDetalle().getCapacidadMaxima());
         detalle.setHorarios(request.getCursoDetalle().getHorarios());
         detalle.setDocente(docente);
+        detalle.setDisponibilidad(request.getCursoDetalle().getCapacidadMaxima());
 
         Cursos curso = new Cursos();
         curso.setCodigocurso(request.getCodigocurso());

@@ -1,6 +1,6 @@
 package edu.uam.backend.cursos.Usuario.service;
 
-import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioDTO;
+import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioRequestDTO;
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioUpdateDTO;
 import edu.uam.backend.cursos.Usuario.model.CatalogoRoles;
 import edu.uam.backend.cursos.Usuario.model.Usuario;
@@ -44,7 +44,7 @@ public class UsuarioServicio {
     }
 
     // Registrar usuario desde DTO
-    public Usuario registrarUsuarioDesdeDTO(UsuarioDTO dto) {
+    public Usuario registrarUsuarioDesdeDTO(UsuarioRequestDTO dto) {
         Usuario usuario = new Usuario();
         usuario.setPrimernombre(dto.getPrimernombre());
         usuario.setSegundonombre(dto.getSegundonombre());
@@ -53,6 +53,7 @@ public class UsuarioServicio {
         usuario.setCif(dto.getCif());
         usuario.setContraseña(dto.getContraseña());
         usuario.setEmail(dto.getEmail());
+        usuario.setTelefono(dto.getTelefono());
 
         CatalogoRoles rol = rolRepository.findById(dto.getIdRol())
                 .orElseThrow(() -> new RuntimeException("Rol con ID " + dto.getIdRol() + " no encontrado"));
