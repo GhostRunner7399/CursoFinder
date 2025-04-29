@@ -72,7 +72,8 @@ public class UsuarioController {
                         doc.getPrimernombre(),
                         doc.getSegundonombre(),
                         doc.getPrimerapellido(),
-                        doc.getSegundoapellido()
+                        doc.getSegundoapellido(),
+                        doc.getTelefono()
                 ))
                 .toList();
 

@@ -13,7 +13,7 @@ public class CursoResponseDTO {
     private String requisitos;
     private boolean certificacion;
     private String lugar;
-    private int capacidadMaxima;
+    private Integer capacidadMaxima;
 
     private String docenteNombreCompleto;
     private Long docenteId;

@@ -7,15 +7,17 @@ public class DocenteDTO {
     private String segundonombre;
     private String primerapellido;
     private String segundoapellido;
+    private String telefono;
 
     // Constructor
-    public DocenteDTO(Long id, Integer cif, String primernombre, String segundonombre, String primerapellido, String segundoapellido) {
+    public DocenteDTO(Long id, Integer cif, String primernombre, String segundonombre, String primerapellido, String segundoapellido, String telefono) {
         this.id = id;
         this.cif = cif;
         this.primernombre = primernombre;
         this.segundonombre = segundonombre;
         this.primerapellido = primerapellido;
         this.segundoapellido = segundoapellido;
+        this.telefono = telefono;
     }
 
     // Getters y Setters
@@ -36,4 +38,7 @@ public class DocenteDTO {
 
     public String getSegundoapellido() { return segundoapellido; }
     public void setSegundoapellido(String segundoapellido) { this.segundoapellido = segundoapellido; }
+
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 }

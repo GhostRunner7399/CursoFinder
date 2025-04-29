@@ -39,9 +39,9 @@ public class CursoDetalle {
     private boolean certificacion;
 
     @Column(nullable = false)
-    private int capacidadMaxima;
+    private Integer capacidadMaxima;
 
     @Column
-    private int disponibilidad;
+    private Integer disponibilidad;
 
 }

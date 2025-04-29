@@ -111,8 +111,8 @@ public class InscripcionServicio {
         Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
                 .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
 
-        int capacidad = curso.getCursoDetalle().getCapacidadMaxima();
-        int inscritos = inscripcionRepository.countByCurso(curso);
+        Integer capacidad = curso.getCursoDetalle().getCapacidadMaxima();
+        Integer inscritos = inscripcionRepository.countByCurso(curso);
 
         return capacidad - inscritos;
     }
