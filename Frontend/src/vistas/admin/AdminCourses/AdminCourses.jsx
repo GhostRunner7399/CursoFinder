@@ -4,7 +4,7 @@ import DefaultHeader from "../../../components/def-header/default-header.jsx";
 import Sidebar from "../../../components/sidebar/sidebar.jsx";
 import Highlight from "../../../components/Highlight/highlight.jsx";
 import Footer from "../../../components/Footer/footer.jsx";
-import heroimg from "../../../images/bienvenida.jpg";
+import heroimg from "../../../images/heroImg/bienvenida.jpg";
 import AdminCoursesTabCursos from "./AdminCoursesTabCursos.jsx";
 import AdminCoursesTabGestionarC from "./AdminCoursesTabGestionarC.jsx";
 import "./AdminCourses.css";

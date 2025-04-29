@@ -1,14 +1,17 @@
+// Settings.jsx
 import React, { useState } from "react";
 import DefaultHeader from "../def-header/default-header.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
 import Highlight from "../Highlight/highlight.jsx";
 import ChatBot from "../Bot/bot.jsx";
 import Footer from "../Footer/footer.jsx";
+import { useThemeContext } from "../../context/ThemeContext.jsx";
 import "./Settings.css";
 
-function Configuration({ user }) {
+function Configuration({ user}) {
+  const {isDarkMode, toggleDarkMode } = useThemeContext();
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(true);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -25,7 +28,7 @@ function Configuration({ user }) {
       <ChatBot message="Ayuda porfavor" />
 
       <div className="section-title">
-        <h1><Highlight>Configuración</Highlight></h1>
+          <h1 className="config-text"><Highlight>Configuración</Highlight></h1>
       </div>
 
       <div className="configuration-container">
@@ -34,10 +37,14 @@ function Configuration({ user }) {
 
           <div className="config-item">
             <span>Modo oscuro</span>
-            <label className="switch">
-              <input type="checkbox" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-              <span className="slider round"></span>
-            </label>
+              <label className="switch">
+                <input 
+                  type="checkbox" 
+                  checked={isDarkMode}
+                  onChange={toggleDarkMode}
+                />
+                <span className="slider round"></span>
+              </label>
           </div>
 
           <div className="config-item">

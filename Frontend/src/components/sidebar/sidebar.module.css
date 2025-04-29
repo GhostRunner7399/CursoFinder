@@ -3,7 +3,7 @@
   left: 0;
   top: 50px;
   height: 100vh;
-  background-color: #1E3F3E;
+  background-color: var(--sidebar-bg);
   z-index: 5;
 
   /* Default collapsed width */
@@ -40,7 +40,6 @@
   flex: 1;
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  color: #ffffff;
   display: flex;
   flex-direction: column;
   /* Everything left-aligned so icons never move horizontally */
@@ -48,6 +47,7 @@
   justify-content: flex-start;
   box-sizing: border-box;
   padding: 0;
+  color: white;
 }
 
 /* Hide identification and nav items by default */

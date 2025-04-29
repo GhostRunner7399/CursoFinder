@@ -4,7 +4,7 @@ import "./MyLearning.css";
 import DefaultHeader from "../../../components/def-header/default-header.jsx";
 import Sidebar from "../../../components/sidebar/sidebar.jsx";
 import Highlight from "../../../components/Highlight/highlight.jsx";
-import DefCourseImage from "../../../images/def_course_image.svg";
+import DefCourseImage from "../../../images/Dashboard/def_course_image.svg";
 import ChatBot from '../../../components/Bot/bot.jsx';
 import Footer from '../../../components/Footer/footer.jsx';
 import axios from "axios";

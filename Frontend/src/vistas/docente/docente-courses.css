@@ -10,7 +10,7 @@ html, body {
 .docente-courses {
   display: flex;
   flex-direction: column;
-  background-color: #F7F7F7;
+  background-color: var(--bg-primary);
   min-height: 100vh;
   width: 100%;
   padding-top: 50px;
@@ -37,7 +37,7 @@ html, body {
   transform: translateY(-40%);
   max-width: 600px;
   color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.562);
 }
 
 .bienvenida-text-container h1 {
@@ -79,7 +79,7 @@ html, body {
   font-family: 'Pridi', serif;
   font-weight: 400;
   font-size: 1.25rem;
-  color: #333;
+  color: var(--text-primary);
   margin: 0 0 0.5rem 0.5rem;
 }
 
@@ -113,7 +113,7 @@ html, body {
   height: 273px; 
   min-width: 296px;
   flex-shrink: 0;
-  background-color: #FFFFFF;
+  background-color: var(--bg-secondary);
   cursor: pointer;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   display: flex;
@@ -154,7 +154,7 @@ html, body {
 .course-docente {
   font-size: 0.875rem;
   margin: 0;
-  color: #666;
+  color: var(--text-secondary);
 }
 /* ====== VISUAL ENHANCEMENTS ====== */
 /* Gradient Overlay 
@@ -171,7 +171,7 @@ html, body {
 }
 */
 
-/* Navigation Arrows */
+/* Navigation Arrows REMEMBER TO INVERTIR EL COLOR WHEN DARK MODE IS ON*/
 .slide-arrow-left,
 .slide-arrow-right {
   position: absolute;
@@ -182,9 +182,9 @@ html, body {
   z-index: 3;
   opacity: 0.9;
   transition: opacity 0.2s;
-  background: white;
-  border-radius: 14px; /* Remove circle */
-  box-shadow: none; /* Remove shadow */
+  border-radius: 14px; 
+  box-shadow: none; 
+  filter: var(--icon);
 }
 
 .slide-arrow-right {

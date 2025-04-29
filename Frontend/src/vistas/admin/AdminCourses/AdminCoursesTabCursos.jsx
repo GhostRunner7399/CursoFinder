@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import DefCourseImage from "../../../images/def_course_image.svg";
-import GreaterThan from "../../../images/chevronRight.svg";
+import DefCourseImage from "../../../images/Dashboard/def_course_image.svg";
+import GreaterThan from "../../../images/Dashboard/chevronRight.svg";
 import "./AdminCourses.css";
 
 function groupByFaculty(courseArray) {

@@ -10,16 +10,16 @@ const Footer = () => {
           <p>We are committed to providing quality education and fostering innovation.</p>
         </div>
         <div className="footer-section">
-          <h3>Mission, Vision & Values</h3>
-          <p><strong>Mission:</strong> Empower learners to achieve their goals.</p>
-          <p><strong>Vision:</strong> To be a leader in education and innovation.</p>
-          <p><strong>Values:</strong> Integrity, Excellence, Collaboration.</p>
+          <h3>Misión, Visión y Valores</h3>
+          <p><strong>Misión:</strong> Empower learners to achieve their goals.</p>
+          <p><strong>Visión:</strong> To be a leader in education and innovation.</p>
+          <p><strong>Valores:</strong> Integrity, Excellence, Collaboration.</p>
         </div>
         <div className="footer-section">
-          <h3>Contact Us</h3>
-          <p>Email: info@organization.com</p>
-          <p>Phone: +1 (123) 456-7890</p>
-          <p>Address: 123 Education Lane, Knowledge City</p>
+          <h3>Contáctanos</h3>
+          <p><strong>Email:</strong> uameduFD@gmail.com</p>
+          <p><strong>Teléfono:</strong> 2278 3800</p>
+          <p><strong>Dirección:</strong> 4P5V + 96W, Costado Noroeste. Camino de Oriente</p>
         </div>
       </div>
       <div className="footer-copyright">

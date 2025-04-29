@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,11 +7,76 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+:root, :root[data-theme="light"] {
+  /* Primary Colors */
+  --primary: #BAEEF2;  /* Your existing teal/aqua */
+  --primary-dark: #82CECB; /* Saturated version for hover states */
+  --primary-light: #E0F7FA; /* Lighter tint */
+
+  --header-bg: #BAEEF2;
+  --header-text: #303141; /* Your existing dark blue-gray */
+  --header-hover: #82CECB;
+
+  /* Neutrals */
+  --bg-primary: #F7F7F7; /* Current background */
+  --bg-secondary: #FFFFFF; /* Cards/containers */
+  --text-primary: #333; /* Dark blue-gray (current) */
+  --text-secondary: #666; /* Current gray */
+  --border-color: #E0E0E0; /* Light gray */
+
+  /* Accents */
+  --accent-warning: #FFC107; /* Yellow for alerts */
+  --accent-error: #EF5350; /* Red for errors */
+  --accent-success: #66BB6A; /* Green */
+
+  /*nav links header and sidebar*/
+  --sidebar-bg: #1A3E40;
+
+  /*CONFIGURACION VIEW*/
+  --button-config: #000;
+}
+
+:root[data-theme="dark"] {
+ /* Primary Colors (same brand colors) */
+ --primary: #BAEEF2;
+ --primary-dark: #82CECB;
+ --primary-light: #1A3E40; /* Dark teal for contrast */
+
+   /* Dark theme header - using darker teal variants */
+   --header-bg: #1A3E40; /* Deep teal - maintains brand but darker */
+   --header-text: #E0F7FA; /* Very light teal tint */
+   --header-hover: #2D5D5B; /* Slightly lighter than header-bg */
+   --icon: brightness(0) invert(0.9);
+
+
+ /* Neutrals */
+ --bg-primary: #121212; /* Deep dark */
+ --bg-secondary: #1E1E1E; /* Cards */
+ --text-primary: #E0E0E0; /* Light gray */
+ --text-secondary: #AAAAAA; /* Medium gray */
+ --border-color: #333333;
+
+ /* Accents (more muted) */
+ --accent-warning: #FFB74D;
+ --accent-error: #E57373;
+ --accent-success: #81C784;
+
+ /*CONFIGURACION VIEW*/
+ --button-config: #FFFFFF;
+
+ /*sidebar*/
+  --sidebar-bg: #0F2A2C;
 }

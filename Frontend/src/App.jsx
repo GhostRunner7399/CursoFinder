@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./login.jsx";
 import AdminCourses from "./vistas/admin/AdminCourses/AdminCourses.jsx";
 import DocenteCourses from "./vistas/docente/docente-courses.jsx";
-import CreateCourseDetail from "./vistas/admin/create-course-detail.jsx";
-import Details from "./vistas/admin/show-course-detail.jsx"; 
 import Detailsdocente from "./vistas/docente/detalleCurso/DetalleCursos.jsx";
 import MyLearning from "./vistas/docente/MyLearning/MyLearning.jsx";
 import MyTeaching from "./vistas/docente/MyTeaching/MyTeaching.jsx";
@@ -142,14 +140,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/crear-curso"
-          element={
-            <ProtectedRoute role="administrador">
-              <CreateCourseDetail onAddCourse={handleAddCourse} />
-            </ProtectedRoute>
-          }
-        />
+
 
         <Route path="/curso-docente/:codigocurso" element={
           <ProtectedRoute>

@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./docente-courses.css";
 import DefaultHeader from "../../components/def-header/default-header.jsx";
-import GreaterThan from "./../../images/chevronRight.svg";
-import DefCourseImage from "./../../images/def_course_image.svg";
+import GreaterThan from "./../../images/Dashboard/chevronRight.svg";
+import DefCourseImage from "./../../images/Dashboard/def_course_image.svg";
 import Sidebar from "../../components/sidebar/sidebar.jsx";
 import Highlight from "../../components/Highlight/highlight.jsx";
-import heroimg from "./../../images/bienvenida.jpg";
+import heroimg from "./../../images/HeroImg/bienvenida.jpg";
 import Footer from "../../components/Footer/footer.jsx";
 
-/**
+/*
  * Agrupa los cursos por nombre de facultad.
  */
 function groupByFaculty(courseArray) {

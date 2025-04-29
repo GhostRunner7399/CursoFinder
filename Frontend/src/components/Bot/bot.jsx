@@ -1,5 +1,5 @@
 import React from 'react';
-import BotIcon from '../../images/Bot.svg';
+import BotIcon from '../../images/bot/Bot.svg';
 import './bot.css';
 
 function ChatBot({ message = "¡Hola!" }) {

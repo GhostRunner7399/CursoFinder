@@ -1,15 +1,15 @@
 .detalle-curso {
-  background-color: #f6f6f6;
-  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-primary);
+  font-family: 'Poppins';
   min-height: 100vh;
   padding-top: 50px;
 }
 
 .section-title {
   padding: 100px 0 20px 120px;
-  font-family: 'Pridi', serif;
+  font-family: 'Pridi';
   font-weight: 400;
-  color: #000000;
+  color: var(--text-primary);
 }
 
 .detalle-container {
@@ -24,7 +24,7 @@
 
 .detalle-content {
   flex: 2;
-  background: white;
+  background: var(--bg-secondary);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -32,7 +32,7 @@
 
 .detalle-sidebar {
   flex: 1;
-  background: white;
+  background: var(--bg-secondary);
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -93,7 +93,7 @@
 .detalle-sidebar p {
   font-size: 14px;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .detalle-precio {
@@ -106,7 +106,7 @@
   border: none;
   padding: 12px;
   border-radius: 25px;
-  color: white;
+  color: var(--bg-secondary);
   font-weight: bold;
   font-size: 15px;
   cursor: pointer;
@@ -114,16 +114,16 @@
 }
 
 .btn-inscribirse:hover {
-  background-color: #5a9eea;
+  background-color: var(--primary-dark);
 }
 
 .btn-desinscribirse {
   width: 100%;
-  background-color: #ff6b6b;
+  background-color: var(--accent-error);
   border: none;
   padding: 12px;
   border-radius: 25px;
-  color: white;
+  color: var(--text-primary);
   font-weight: bold;
   font-size: 15px;
   cursor: pointer;
@@ -133,12 +133,3 @@
 .btn-desinscribirse:hover {
   background-color: #e74c3c;
 }
-
-.mensaje-docente-curso {
-  color: #e74c3c; 
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 20px;
-  text-align: center;
-}
-
