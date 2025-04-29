@@ -8,7 +8,8 @@ public class UsuarioResponseDTO {
     private String nombreCompleto;
     private String email;
     private Integer cif;
-    private Long idRol; // ← Nuevo campo
+    private Long idRol; 
+    private String telefono;
 
     public UsuarioResponseDTO(Usuario u) {
         this.nombreCompleto = u.getPrimernombre() + " " +
@@ -18,5 +19,6 @@ public class UsuarioResponseDTO {
         this.email = u.getEmail();
         this.cif = u.getCif();
         this.idRol = u.getRol().getIdRol(); // ← Aquí tomamos el rol del usuario
+        this.telefono = u.getTelefono();
     }
 }

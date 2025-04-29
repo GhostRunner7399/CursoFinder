@@ -17,6 +17,9 @@ function AdminCoursesTabGestionarC({ courses }) {
   const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedCourseIds, setSelectedCourseIds] = useState([]);
+  const [selectedFacultyIds, setSelectedFacultyIds] = useState([]);
+  const [reloadFlag, setReloadFlag] = useState(false);
+
 
 
   const [nuevoCurso, setNuevoCurso] = useState({
@@ -32,7 +35,25 @@ function AdminCoursesTabGestionarC({ courses }) {
     capacidadMaxima: 0,
     horarios: []
   });
-  
+
+  const [cursoEditado, setCursoEditado] = useState({
+    codigocurso: "",
+    nombre: "",
+    active: true,
+    idFacultad: "",
+    idDocente: "",
+    descripcion: "",
+    requisitos: "",
+    certificacion: false,
+    lugar: "",
+    capacidadMaxima: 0,
+    horarios: []
+  });
+
+  const [nuevoFacultad, setNuevoFacultad] = useState({
+    nombre: "",
+    descripcion: ""
+  });
 
   const navigate = useNavigate();
 
@@ -77,7 +98,7 @@ function AdminCoursesTabGestionarC({ courses }) {
       if (res.ok) {
         alert("Curso creado exitosamente");
         closeModal();
-        window.location.reload();
+        setReloadFlag(prev => !prev);
       } else {
         const error = await res.text();
         alert("Error al crear curso: " + error);
@@ -86,15 +107,76 @@ function AdminCoursesTabGestionarC({ courses }) {
       console.error("Error en crear curso:", error);
     }
   };
+
+  const handleSubmitEditCourse = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        nombre: cursoEditado.nombre,
+        active: cursoEditado.active,
+        cursoDetalle: {
+          descripcion: cursoEditado.descripcion,
+          requisitos: cursoEditado.requisitos,
+          idDocente: cursoEditado.idDocente,
+          lugar: cursoEditado.lugar,
+          certificacion: cursoEditado.certificacion,
+          capacidadMaxima: cursoEditado.capacidadMaxima,
+          horarios: cursoEditado.horarios // 🔥 Agregado
+        }
+      };
+  
+      const res = await fetch(`http://localhost:8080/api/courses/update/${cursoEditado.codigocurso}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      if (res.ok) {
+        alert("Curso actualizado exitosamente");
+        closeModal();
+        setReloadFlag(prev => !prev);
+      } else {
+        const error = await res.text();
+        alert("Error al actualizar curso: " + error);
+      }
+    } catch (error) {
+      console.error("Error al actualizar curso:", error);
+    }
+  };
   
 
+  const handleSubmitCreateFaculty = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:8080/api/faculty/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: nuevoFacultad.nombre,
+          descripcion: nuevoFacultad.descripcion,
+          activo: true
+        })
+      });
+      if (res.ok) {
+        alert("Facultad creada exitosamente");
+        closeModal();
+        setReloadFlag(prev => !prev);
+      } else {
+        const error = await res.text();
+        alert("Error al crear facultad: " + error);
+      }
+    } catch (error) {
+      console.error("Error en crear facultad:", error);
+    }
+  };  
+  
   useEffect(() => {
     fetch("http://localhost:8080/api/faculty/all")
       .then((res) => res.json())
       .then((data) => setFaculties(data))
       .catch((err) => console.error("Error al cargar facultades:", err));
-
-      fetch("http://localhost:8080/api/users/docentes")
+  
+    fetch("http://localhost:8080/api/users/docentes")
       .then((res) => res.json())
       .then((data) => {
         const docentesConNombreCompleto = data.map(doc => {
@@ -110,7 +192,8 @@ function AdminCoursesTabGestionarC({ courses }) {
         setDocentes(docentesConNombreCompleto);
       })
       .catch((err) => console.error("Error al cargar docentes:", err));
-  }, []);
+  }, [reloadFlag]);
+  
 
   useEffect(() => {
     if (!Array.isArray(courses)) {
@@ -161,46 +244,87 @@ function AdminCoursesTabGestionarC({ courses }) {
     );
   };  
 
+  const toggleFacultySelection = (idfacultad) => {
+    if (!idfacultad) return;
+    setSelectedFacultyIds(prevSelected =>
+      prevSelected.includes(idfacultad)
+        ? prevSelected.filter(id => id !== idfacultad)
+        : [...prevSelected, idfacultad]
+    );
+  };  
+
   const openCreateModal = () => {
-    setModalType("crear");
-    setCursoSeleccionado(null);
-    setNuevoCurso({
-      codigocurso: "",
-      nombre: "",
-      active: true,
-      idFacultad: null,  
-      idDocente: null,   
-      descripcion: "",
-      requisitos: "",
-      certificacion: false,
-      lugar: "",
-      capacidadMaxima: 0,
-      horarios: []
-    });
+    setModalType(activeStatus === "facultades" ? "crearFacultad" : "crearCurso");
+    if (activeStatus === "facultades") {
+      setNuevoFacultad({ nombre: "", descripcion: "" });
+    } else {
+      setNuevoCurso({
+        codigocurso: "",
+        nombre: "",
+        active: true,
+        idFacultad: "",
+        idDocente: "",
+        descripcion: "",
+        requisitos: "",
+        certificacion: false,
+        lugar: "",
+        capacidadMaxima: 0,
+        horarios: []
+      });
+    }
     setIsModalOpen(true);
   };
   
-
   const openEditModal = () => {
-    const cursoMarcado = filteredCourses.find(course => course.isSelected);
-    if (!cursoMarcado) {
+    if (selectedCourseIds.length === 0) {
       alert("Selecciona un curso para editar.");
       return;
     }
-    setCursoSeleccionado(cursoMarcado);
-    setModalType("editar");
-    setIsModalOpen(true);
-  };
-
-  const openDeleteModal = () => {
-    if (selectedCourseIds.length === 0) {
-      alert("Selecciona al menos un curso para eliminar.");
+  
+    if (selectedCourseIds.length > 1) {
+      alert("Solo puedes editar un curso a la vez. Por favor selecciona solo uno.");
       return;
     }
-    setModalType("eliminar");
+  
+    const cursoSeleccionado = filteredCourses.find(course => selectedCourseIds.includes(course.codigocurso));
+    if (!cursoSeleccionado) {
+      alert("Curso no encontrado.");
+      return;
+    }
+  
+    setCursoEditado({
+      codigocurso: cursoSeleccionado.codigocurso,
+      nombre: cursoSeleccionado.nombre,
+      active: cursoSeleccionado.active,
+      idFacultad: cursoSeleccionado.facultad?.idFacultad || "",
+      idDocente: cursoSeleccionado.cursoDetalle?.docente?.idUsuario || "",
+      descripcion: cursoSeleccionado.cursoDetalle?.descripcion || "",
+      requisitos: cursoSeleccionado.cursoDetalle?.requisitos || "",
+      certificacion: cursoSeleccionado.cursoDetalle?.certificacion || false,
+      lugar: cursoSeleccionado.cursoDetalle?.lugar || "",
+      capacidadMaxima: cursoSeleccionado.cursoDetalle?.capacidadMaxima || 0,
+      horarios: cursoSeleccionado.cursoDetalle?.horarios || []
+    });
+  
+    setModalType("editarCurso");
+    setIsModalOpen(true);
+  };  
+
+  const openDeleteModal = () => {
+    if (activeStatus === "facultades") {
+      if (selectedFacultyIds.length === 0) {
+        alert("Selecciona al menos una facultad para eliminar.");
+        return;
+      }
+    } else {
+      if (selectedCourseIds.length === 0) {
+        alert("Selecciona al menos un curso para eliminar.");
+        return;
+      }
+    }
+    setModalType(activeStatus === "facultades" ? "eliminarFacultad" : "eliminarCurso");
     setIsModalOpen(true);
   };
-  
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -217,7 +341,7 @@ function AdminCoursesTabGestionarC({ courses }) {
       }
       alert("Curso(s) eliminado(s) exitosamente.");
       closeModal();
-      window.location.reload();
+      setReloadFlag(prev => !prev);
     } catch (error) {
       console.error("Error al eliminar curso(s):", error);
       alert("Hubo un error eliminando los cursos.");
@@ -225,6 +349,27 @@ function AdminCoursesTabGestionarC({ courses }) {
       setIsDeleting(false); 
     }
   };   
+
+  const handleConfirmDeleteFaculty = async () => {
+    try {
+      setIsDeleting(true); 
+    
+      for (const idfacultad of selectedFacultyIds) {
+        await fetch(`http://localhost:8080/api/faculty/delete/${idfacultad}`, {
+          method: "DELETE",
+        });
+      }
+      alert("Facultad(es) eliminada(s) exitosamente.");
+      closeModal();
+      setReloadFlag(prev => !prev);
+    } catch (error) {
+      console.error("Error al eliminar facultad(es):", error);
+      alert("Hubo un error eliminando las facultades.");
+    } finally {
+      setIsDeleting(false); 
+    }
+  };
+  
 
   return (
     <div className="gestionar-cursos-tab">
@@ -273,7 +418,11 @@ function AdminCoursesTabGestionarC({ courses }) {
             ) : (
               faculties.map((faculty) => (
                 <div key={faculty.idfacultad || faculty.nombre} className="curso-item">
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={selectedFacultyIds.includes(faculty.idFacultad)}
+                    onChange={() => toggleFacultySelection(faculty.idFacultad)}
+                  />
                   <div className="curso-info">
                     <p><strong>Nombre Facultad:</strong> {faculty.nombre}</p>
                   </div>
@@ -307,7 +456,7 @@ function AdminCoursesTabGestionarC({ courses }) {
       </div>
 
       <Modal key={modalType} isOpen={isModalOpen} onClose={closeModal}>
-        {modalType === "crear" && (
+        {modalType === "crearCurso" && (
           <div className="formulario-curso">
             <h2>Crear Curso</h2>
             <form onSubmit={handleSubmitCreate} className="form-grid">
@@ -346,31 +495,94 @@ function AdminCoursesTabGestionarC({ courses }) {
               <div className="form-group horarios">
                 <label>Horarios</label>
                 <div className="horarios-list">
-                  {nuevoCurso.horarios.map((horario, index) => (
-                    <div key={index} className="horario-item">
-                      {/* Día de la semana ahora es un select */}
-                      <select
-                        value={horario.diaSemana}
-                        onChange={(e) => handleHorarioChange(index, "diaSemana", e.target.value)}
-                        required
-                      >
-                        <option value="">Seleccione un día</option>
-                        <option value="LUNES">LUNES</option>
-                        <option value="MARTES">MARTES</option>
-                        <option value="MIERCOLES">MIERCOLES</option>
-                        <option value="JUEVES">JUEVES</option>
-                        <option value="VIERNES">VIERNES</option>
-                        <option value="SABADO">SABADO</option>
-                        <option value="DOMINGO">DOMINGO</option>
-                      </select>
-                      <input type="time" placeholder="Hora Inicio" value={horario.horaInicio} onChange={(e) => handleHorarioChange(index, "horaInicio", e.target.value)} required />
-                      <input type="time" placeholder="Hora Fin" value={horario.horaFin} onChange={(e) => handleHorarioChange(index, "horaFin", e.target.value)} required />
-                      <input type="text" placeholder="Aula" value={horario.aula} onChange={(e) => handleHorarioChange(index, "aula", e.target.value)} required />
-                      <button type="button" className="btn-agregar-horario" onClick={() => eliminarHorario(index)}>X</button>
-                    </div>
-                  ))}
+                  {cursoEditado.horarios.length > 0 ? (
+                    cursoEditado.horarios.map((horario, index) => (
+                      <div key={index} className="horario-item">
+                        <select
+                          value={horario.diaSemana}
+                          onChange={(e) => {
+                            const nuevosHorarios = [...cursoEditado.horarios];
+                            nuevosHorarios[index].diaSemana = e.target.value;
+                            setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                          }}
+                          required
+                        >
+                          <option value="">Seleccione un día</option>
+                          <option value="LUNES">LUNES</option>
+                          <option value="MARTES">MARTES</option>
+                          <option value="MIERCOLES">MIERCOLES</option>
+                          <option value="JUEVES">JUEVES</option>
+                          <option value="VIERNES">VIERNES</option>
+                          <option value="SABADO">SABADO</option>
+                          <option value="DOMINGO">DOMINGO</option>
+                        </select>
+
+                        <input
+                          type="time"
+                          value={horario.horaInicio}
+                          onChange={(e) => {
+                            const nuevosHorarios = [...cursoEditado.horarios];
+                            nuevosHorarios[index].horaInicio = e.target.value;
+                            setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                          }}
+                          required
+                        />
+
+                        <input
+                          type="time"
+                          value={horario.horaFin}
+                          onChange={(e) => {
+                            const nuevosHorarios = [...cursoEditado.horarios];
+                            nuevosHorarios[index].horaFin = e.target.value;
+                            setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                          }}
+                          required
+                        />
+
+                        <input
+                          type="text"
+                          placeholder="Aula"
+                          value={horario.aula}
+                          onChange={(e) => {
+                            const nuevosHorarios = [...cursoEditado.horarios];
+                            nuevosHorarios[index].aula = e.target.value;
+                            setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                          }}
+                          required
+                        />
+                        
+                        {/* Botón para eliminar un horario en edición */}
+                        <button
+                          type="button"
+                          className="btn-agregar-horario"
+                          onClick={() => {
+                            const nuevosHorarios = [...cursoEditado.horarios];
+                            nuevosHorarios.splice(index, 1);
+                            setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <p style={{ marginTop: "10px" }}>No hay horarios asignados. Agregue uno.</p>
+                  )}
                 </div>
-                <button type="button" className="btn-agregar-horario" onClick={agregarHorario}>+ Agregar Horario</button>
+
+                {/* Botón para agregar nuevo horario */}
+                <button
+                  type="button"
+                  className="btn-agregar-horario"
+                  onClick={() =>
+                    setCursoEditado({
+                      ...cursoEditado,
+                      horarios: [...cursoEditado.horarios, { diaSemana: "", horaInicio: "", horaFin: "", aula: "" }]
+                    })
+                  }
+                >
+                  + Agregar Horario
+                </button>
               </div>
 
               {/* Certificacion */}
@@ -442,7 +654,226 @@ function AdminCoursesTabGestionarC({ courses }) {
           </div>
         )}
 
-        {modalType === "eliminar" && (
+        {modalType === "editarCurso" && (
+          <div className="formulario-curso">
+            <h2>Editar Curso</h2>
+            <form onSubmit={handleSubmitEditCourse} className="form-grid">
+              {/* Campos editables del curso */}
+
+              <div className="form-group">
+                <label>Código del Curso</label>
+                <input
+                  type="text"
+                  value={cursoEditado.codigocurso}
+                  disabled
+                  readOnly
+                  style={{ backgroundColor: "#e0e0e0" }}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Nombre del Curso</label>
+                <input
+                  type="text"
+                  value={cursoEditado.nombre}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, nombre: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Descripción</label>
+                <textarea
+                  value={cursoEditado.descripcion}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, descripcion: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Requisitos</label>
+                <textarea
+                  value={cursoEditado.requisitos}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, requisitos: e.target.value })}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Lugar</label>
+                <input
+                  type="text"
+                  value={cursoEditado.lugar}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, lugar: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Capacidad Máxima</label>
+                <input
+                  type="number"
+                  value={cursoEditado.capacidadMaxima}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, capacidadMaxima: parseInt(e.target.value) })}
+                  required
+                />
+              </div>
+
+              {/* Facultad (Edicion)*/}
+              <div className="form-group">
+                <label>Facultad</label>
+                <select
+                  value={cursoEditado.idFacultad}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, idFacultad: Number(e.target.value) })}
+                  required
+                >
+                  <option value="">Seleccione una Facultad</option>
+                  {faculties.map((fac) => (
+                    <option key={`facultad-${fac.idFacultad}`} value={fac.idFacultad}>
+                      {fac.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Horarios dinámicos (Editar) */}
+              <div className="form-group horarios">
+                <label>Horarios</label>
+                <div className="horarios-list">
+                  {cursoEditado.horarios.map((horario, index) => (
+                    <div key={index} className="horario-item">
+                      <select
+                        value={horario.diaSemana}
+                        onChange={(e) => {
+                          const nuevosHorarios = [...cursoEditado.horarios];
+                          nuevosHorarios[index].diaSemana = e.target.value;
+                          setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                        }}
+                        required
+                      >
+                        <option value="">Seleccione un día</option>
+                        <option value="LUNES">LUNES</option>
+                        <option value="MARTES">MARTES</option>
+                        <option value="MIERCOLES">MIERCOLES</option>
+                        <option value="JUEVES">JUEVES</option>
+                        <option value="VIERNES">VIERNES</option>
+                        <option value="SABADO">SABADO</option>
+                        <option value="DOMINGO">DOMINGO</option>
+                      </select>
+                      <input
+                        type="time"
+                        value={horario.horaInicio}
+                        onChange={(e) => {
+                          const nuevosHorarios = [...cursoEditado.horarios];
+                          nuevosHorarios[index].horaInicio = e.target.value;
+                          setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                        }}
+                        required
+                      />
+                      <input
+                        type="time"
+                        value={horario.horaFin}
+                        onChange={(e) => {
+                          const nuevosHorarios = [...cursoEditado.horarios];
+                          nuevosHorarios[index].horaFin = e.target.value;
+                          setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                        }}
+                        required
+                      />
+                      <input
+                        type="text"
+                        placeholder="Aula"
+                        value={horario.aula}
+                        onChange={(e) => {
+                          const nuevosHorarios = [...cursoEditado.horarios];
+                          nuevosHorarios[index].aula = e.target.value;
+                          setCursoEditado({ ...cursoEditado, horarios: nuevosHorarios });
+                        }}
+                        required
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="form-group">
+                <label>Docente</label>
+                <select
+                  value={cursoEditado.idDocente}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, idDocente: Number(e.target.value) })}
+                  required
+                >
+                  <option value="">Seleccione un Docente</option>
+                  {docentes.map((doc) => (
+                    <option key={`docente-${doc.id}`} value={doc.id}>
+                      {doc.nombreCompleto}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Certificación</label>
+                <select
+                  value={cursoEditado.certificacion ? "si" : "no"}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, certificacion: e.target.value === "si" })}
+                  required
+                >
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Estado</label>
+                <select
+                  value={cursoEditado.active ? "activo" : "inactivo"}
+                  onChange={(e) => setCursoEditado({ ...cursoEditado, active: e.target.value === "activo" })}
+                >
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                </select>
+              </div>
+
+              <div className="form-buttons">
+                <button type="button" className="btn-secondary" onClick={closeModal}>Cancelar</button>
+                <button type="submit" className="btn-primary">Actualizar Curso</button>
+              </div>
+            </form>
+          </div>
+        )}
+
+
+        {modalType === "crearFacultad" && (
+          <div className="formulario-curso">
+            <h2>Crear Facultad</h2>
+            <form onSubmit={handleSubmitCreateFaculty} className="form-grid">
+              <div className="form-group">
+                <label>Nombre de la Facultad</label>
+                <input
+                  type="text"
+                  value={nuevoFacultad.nombre}
+                  onChange={(e) => setNuevoFacultad({ ...nuevoFacultad, nombre: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Descripción</label>
+                <textarea
+                  value={nuevoFacultad.descripcion}
+                  onChange={(e) => setNuevoFacultad({ ...nuevoFacultad, descripcion: e.target.value })}
+                />
+              </div>
+
+              <div className="form-buttons">
+                <button type="button" className="btn-secondary" onClick={closeModal}>Cancelar</button>
+                <button type="submit" className="btn-primary">Guardar Facultad</button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        {modalType === "eliminarCurso" && (
           <div className="formulario-curso">
             {isDeleting ? (
               <p>Eliminando curso(s)...</p>
@@ -460,6 +891,30 @@ function AdminCoursesTabGestionarC({ courses }) {
                 <div className="form-buttons">
                   <button type="button" className="btn-secondary" onClick={closeModal}>Cancelar</button>
                   <button type="button" className="btn-danger" onClick={handleConfirmDelete}>Eliminar</button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {modalType === "eliminarFacultad" && (
+          <div className="formulario-curso">
+            {isDeleting ? (
+              <p>Eliminando facultad(es)...</p>
+            ) : (
+              <>
+                <h2>Confirmar Eliminación</h2>
+                <p>¿Estás seguro que quieres eliminar {selectedFacultyIds.length} facultad(es)?</p>
+                <ul style={{ marginTop: '10px', marginBottom: '20px', listStyleType: 'disc', paddingLeft: '20px' }}>
+                  {faculties
+                    .filter(faculty => selectedFacultyIds.includes(faculty.idFacultad))
+                    .map(faculty => (
+                      <li key={faculty.idFacultad}>{faculty.nombre}</li>
+                    ))}
+                </ul>
+                <div className="form-buttons">
+                  <button type="button" className="btn-secondary" onClick={closeModal}>Cancelar</button>
+                  <button type="button" className="btn-danger" onClick={handleConfirmDeleteFaculty}>Eliminar</button>
                 </div>
               </>
             )}

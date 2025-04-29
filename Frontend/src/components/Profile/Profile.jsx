@@ -11,6 +11,7 @@ function Profile() {
   const [activeTab, setActiveTab] = useState("mi-perfil");
   const [user, setUser] = useState(null);
   const [activeCourses, setActiveCourses] = useState([]);
+  const [impartedCourses, setImpartedCourses] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -28,12 +29,20 @@ function Profile() {
     const formatted = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
     setCurrentDate(formatted);
 
-    // Fetch active courses for MyLearning tab
     if (storedUser?.cif) {
+      // Cursos en los que está inscrito
       fetch(`http://localhost:8080/api/enrollmentservice/${storedUser.cif}/courses`)
         .then((res) => res.json())
         .then((data) => setActiveCourses(data))
-        .catch((err) => console.error("Error al obtener cursos:", err));
+        .catch((err) => console.error("Error al obtener cursos activos:", err));
+    }
+
+    if (storedUser?.cif) {
+      // Cursos que imparte (es docente)
+      fetch(`http://localhost:8080/api/courses/docente/${storedUser.cif}`)
+        .then((res) => res.json())
+        .then((data) => setImpartedCourses(data))
+        .catch((err) => console.error("Error al obtener cursos impartidos:", err));
     }
   }, []);
 
@@ -66,7 +75,7 @@ function Profile() {
             <h2>CURSOS ASIGNADOS</h2>
             <p className="sub">Consulta los cursos asignados como docente o estudiante</p>
             <div className="profile-info">
-              <h4>Cursos Activos:</h4>
+              <h4>Cursos Activos (Estudiante):</h4>
               {activeCourses.length > 0 ? (
                 activeCourses.map((curso) => (
                   <p key={curso.id}>• {curso.nombre}</p>
@@ -74,10 +83,18 @@ function Profile() {
               ) : (
                 <p>No hay cursos activos</p>
               )}
-              <h4>Cursos Impartidos:</h4>
-              <p>Por el momento no disponible "Falta gestion administrativa para cuando asignar un curso"</p>
+
+              <h4>Cursos Impartidos (Docente):</h4>
+              {impartedCourses.length > 0 ? (
+                impartedCourses.map((curso) => (
+                  <p key={curso.id}>• {curso.nombre}</p>
+                ))
+              ) : (
+                <p>No hay cursos impartidos</p>
+              )}
+
               <h4>Cursos Finalizados:</h4>
-              <p>Por el momento no disponible "Falta gestion administrativa para cuando finalizar un curso </p>
+              <p>Por el momento no disponible "Falta gestión administrativa para finalizar un curso"</p>
             </div>
           </div>
         );

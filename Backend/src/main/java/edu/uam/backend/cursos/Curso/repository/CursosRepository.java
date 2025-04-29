@@ -18,4 +18,6 @@ public interface CursosRepository extends JpaRepository<Cursos, Long> {
 
     List<Cursos> findAll(Specification<Cursos> spec, Sort sort);
 
+    List<Cursos> findByCursoDetalleDocenteCif(Integer cif);
+
 }

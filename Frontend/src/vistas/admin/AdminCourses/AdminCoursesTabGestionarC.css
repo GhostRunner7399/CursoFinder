@@ -220,3 +220,10 @@
 .btn-ver-detalles:hover {
   background-color: #0056b3;
 }
+
+.cursos-listado {
+  max-height: 450px;
+  overflow-y: auto;  
+  padding-right: 10px; 
+  scroll-behavior: smooth;
+}

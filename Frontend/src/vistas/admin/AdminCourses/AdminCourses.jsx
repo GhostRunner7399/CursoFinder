@@ -7,12 +7,16 @@ import Footer from "../../../components/Footer/footer.jsx";
 import heroimg from "../../../images/heroImg/bienvenida.jpg";
 import AdminCoursesTabCursos from "./AdminCoursesTabCursos.jsx";
 import AdminCoursesTabGestionarC from "./AdminCoursesTabGestionarC.jsx";
+import AdminCoursesTabGestionarU from "./AdminCoursesTabGestionarU.jsx";
+
 import "./AdminCourses.css";
 
 function AdminCourses({ user }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("cursos");
   const [courses, setCourses] = useState([]);
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -23,14 +27,22 @@ function AdminCourses({ user }) {
   };
 
   useEffect(() => {
-  fetch("http://localhost:8080/api/courses/all")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Cursos que llegaron a AdminCourses:", data);
-      setCourses(data.content); 
-    })
-    .catch((err) => console.error("Error al obtener cursos:", err));
-  }, []);
+    fetch("http://localhost:8080/api/courses/all")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Cursos que llegaron a AdminCourses:", data);
+        setCourses(data.content); 
+      })
+      .catch((err) => console.error("Error al obtener cursos:", err));
+  
+    fetch("http://localhost:8080/api/users/all")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Usuarios que llegaron a AdminCourses:", data);
+        setUsers(data.content);
+      })
+      .catch((err) => console.error("Error al obtener usuarios:", err));
+  }, []);  
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -41,7 +53,7 @@ function AdminCourses({ user }) {
       case "gestionar-cursos":
         return <AdminCoursesTabGestionarC courses={courses} />; 
       case "gestionar-usuarios":
-        return <div className="admin-tab-content">Contenido para Gestionar Usuarios</div>;
+        return <AdminCoursesTabGestionarU users={users} />;
       default:
         return null;
     }

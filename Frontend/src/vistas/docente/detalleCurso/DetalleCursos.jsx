@@ -21,11 +21,6 @@ function DetalleCursos({ user }) {
     window.location.href = "/";
   };
 
-  const getNombreCompleto = (docente) => {
-    if (!docente) return "Sin asignar";
-    return `${docente.primernombre} ${docente.segundonombre ?? ""} ${docente.primerapellido} ${docente.segundoapellido}`.trim();
-  };
-
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -48,38 +43,26 @@ function DetalleCursos({ user }) {
   const handleInscribirse = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-  
-      if (!user?.cif || !curso?.codigocurso) {
-        console.error("Faltan datos para inscribirse:", { cif: user?.cif, codigocurso: curso?.codigocurso });
-        return;
-      }
-  
-      const body = {
-        cif: user.cif,
-        codigocurso: curso.codigocurso
-      };
-  
-      console.log("Datos enviados para inscripción:", body);
-  
+      if (!user?.cif || !curso?.codigocurso) return;
+
+      const body = { cif: user.cif, codigocurso: curso.codigocurso };
       const res = await fetch("http://localhost:8080/api/enrollmentservice/enroll", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
-  
+
       if (res.ok) {
         setInscrito(true);
         window.dispatchEvent(new Event('cursoActualizado'));
-        console.log("Inscripción exitosa");
       } else {
         const errorText = await res.text();
-        console.error("Error al inscribirse:", errorText);
         alert(`Error: ${errorText}`);
       }
     } catch (err) {
       console.error("Error al intentar inscribirse:", err);
     }
-  };  
+  };
 
   const handleDesinscribirse = async () => {
     try {
@@ -101,7 +84,7 @@ function DetalleCursos({ user }) {
 
   if (!curso) return <div>Cargando curso...</div>;
 
-  const isDocenteDelCurso = user?.cif === curso.cursoDetalle?.docente?.cif;
+  const isDocenteDelCurso = user?.cif === curso.docenteId;
 
   return (
     <div className="detalle-curso">
@@ -116,9 +99,9 @@ function DetalleCursos({ user }) {
       <div className="detalle-container">
         <div className="detalle-content">
           <h1>{curso.nombre} - {curso.codigocurso}</h1>
-          <p className="descripcion"><strong>Descripción:</strong> {curso.cursoDetalle?.descripcion || "Sin descripción"}</p>
+          <p className="descripcion"><strong>Descripción:</strong> {curso.descripcion || "Sin descripción"}</p>
           <p className="docente">
-            Brindado por el docente <span className="blue">{getNombreCompleto(curso.cursoDetalle?.docente)}</span>
+            Brindado por el docente <span className="blue">{curso.docenteNombreCompleto || "Sin asignar"}</span>
           </p>
           <p className="estado">
             <span className={curso.active ? "activo" : "inactivo"}>{curso.active ? "Activo" : "Inactivo"}</span>
@@ -127,7 +110,7 @@ function DetalleCursos({ user }) {
           <div className="detalle-box">
             <h3>Requisitos</h3>
             <ul>
-              {curso.cursoDetalle?.requisitos?.split('.')?.filter(Boolean).map((r, i) => (
+              {curso.requisitos?.split('.')?.filter(Boolean).map((r, i) => (
                 <li key={i}>{r.trim()}.</li>
               )) || <li>No hay requisitos.</li>}
             </ul>
@@ -136,12 +119,14 @@ function DetalleCursos({ user }) {
 
         <div className="detalle-sidebar">
           <h3>Características:</h3>
-          <p><strong>Horario:</strong> {curso.cursoDetalle?.horarios?.map(h => `${h.diaSemana} de ${h.horaInicio} a ${h.horaFin} en ${h.aula}`).join(", ") ?? "No definido"}</p>
-          <p><strong>Lugar:</strong> {curso.cursoDetalle?.lugar}</p>
-          <p><strong>Certificación:</strong> {curso.cursoDetalle?.certificacion ? "Sí" : "No"}</p>
-          <p><strong>Capacidad:</strong> {curso.cursoDetalle?.capacidadMaxima}</p>
-          <p><strong>Disponibilidad:</strong> {curso.cursoDetalle?.disponibilidad ?? 0}</p>
-          <p><strong>Facultad:</strong> {curso.facultad?.nombre || "Sin asignar"}</p>
+          <p><strong>Horario:</strong> {curso.horarios?.length > 0
+            ? curso.horarios.map(h => `${h.diaSemana} de ${h.horaInicio} a ${h.horaFin} en ${h.aula}`).join(", ")
+            : "No definido"}</p>
+          <p><strong>Lugar:</strong> {curso.lugar}</p>
+          <p><strong>Certificación:</strong> {curso.certificacion ? "Sí" : "No"}</p>
+          <p><strong>Capacidad:</strong> {curso.capacidadMaxima}</p>
+          <p><strong>Disponibilidad:</strong> {curso.disponibilidad}</p> {/* <== Aquí corregido! */}
+          <p><strong>Facultad:</strong> {curso.facultadNombre || "Sin asignar"}</p>
 
           {isDocenteDelCurso ? (
             <p className="mensaje-docente-curso">Eres el docente de este curso. No puedes inscribirte.</p>

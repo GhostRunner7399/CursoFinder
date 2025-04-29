@@ -2,6 +2,7 @@ package edu.uam.backend.cursos.Curso.service;
 
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoDetalleUpdateDTO;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoRequestDTO;
+import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoResponseDTO;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoUpdateDTO;
 import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.model.Cursos;
@@ -150,6 +151,43 @@ public class CursoServicio {
         return cursosRepository.findAll(sort);
     }
 
+    public CursoResponseDTO convertirACursoResponseDTO(Cursos curso) {
+        CursoResponseDTO dto = new CursoResponseDTO();
+    
+        dto.setId(curso.getId());
+        dto.setNombre(curso.getNombre());
+        dto.setCodigocurso(curso.getCodigocurso());
+        dto.setActive(curso.isActive());
+    
+        if (curso.getCursoDetalle() != null) {
+            dto.setDescripcion(curso.getCursoDetalle().getDescripcion());
+            dto.setRequisitos(curso.getCursoDetalle().getRequisitos());
+            dto.setLugar(curso.getCursoDetalle().getLugar());
+            dto.setCertificacion(curso.getCursoDetalle().isCertificacion());
+            dto.setCapacidadMaxima(curso.getCursoDetalle().getCapacidadMaxima());
+            dto.setHorarios(curso.getCursoDetalle().getHorarios());
+            dto.setDisponibilidad(curso.getCursoDetalle().getDisponibilidad());
+    
+            if (curso.getCursoDetalle().getDocente() != null) {
+                Usuario docente = curso.getCursoDetalle().getDocente();
+                dto.setDocenteId(docente.getCif() != null ? docente.getCif().longValue() : null); // 🔥 Convertido Integer → Long
+                dto.setDocenteNombreCompleto(String.format("%s %s %s %s",
+                    docente.getPrimernombre(),
+                    docente.getSegundonombre() != null ? docente.getSegundonombre() : "",
+                    docente.getPrimerapellido(),
+                    docente.getSegundoapellido() != null ? docente.getSegundoapellido() : ""
+                ).replaceAll("\\s+", " ").trim());
+            }
+        }
+    
+        if (curso.getFacultad() != null) {
+            dto.setFacultadId(curso.getFacultad().getIdFacultad());
+            dto.setFacultadNombre(curso.getFacultad().getNombre());
+        }
+    
+        return dto;
+    }
+    
     public List<Cursos> getFilteredAndSortedCourses(
             String name,
             String code,
@@ -192,4 +230,10 @@ public class CursoServicio {
 
         return cursosRepository.findAll(spec, sort);
     }
+
+    public List<Cursos> obtenerCursosPorDocente(Integer cif) {
+        return cursosRepository.findByCursoDetalleDocenteCif(cif);
+    }
+
+    
 }
