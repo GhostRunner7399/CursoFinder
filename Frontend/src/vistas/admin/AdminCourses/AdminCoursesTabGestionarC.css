@@ -203,3 +203,20 @@
   font-size: 18px;
   color: #999;
 }
+
+.btn-ver-detalles {
+  padding: 6px 10px;
+  width: 130px; /* 👈 ancho fijo */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.btn-ver-detalles:hover {
+  background-color: #0056b3;
+}

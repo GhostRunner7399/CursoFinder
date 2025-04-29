@@ -44,10 +44,14 @@ public class FacultadController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<Facultad>> AllFacultad() {
-        List<Facultad> facultads = facultadServicio.findAll();
-        return ResponseEntity.ok(facultads);
+    public ResponseEntity<List<Facultad>> listarTodasFacultades() {
+        List<Facultad> facultades = facultadServicio.findAll()
+                .stream()
+                .filter(facultad -> facultad.getIdFacultad() != null)// Solo facultades válidas
+                .toList();
+        return ResponseEntity.ok(facultades);
     }
+
 
     /*
     @PatchMapping("/Update")

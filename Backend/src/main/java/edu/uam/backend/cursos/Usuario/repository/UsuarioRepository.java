@@ -3,8 +3,10 @@ package edu.uam.backend.cursos.Usuario.repository;
 import edu.uam.backend.cursos.Usuario.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import edu.uam.backend.cursos.Usuario.repository.UsuarioRepository;
 
 import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
@@ -13,5 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     //Autenticar usuario
     Optional<Usuario> findByCifAndContraseña(Integer cif, String contraseña);
+
+    // Buscar todos los usuarios que tengan rol 'DOCENTE'
+    List<Usuario> findByRol_IdRol(Long idRol);
 
 }

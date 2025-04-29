@@ -1,9 +1,11 @@
 package edu.uam.backend.cursos.Usuario.controller;
 
+import edu.uam.backend.cursos.Usuario.DataTransferObjects.DocenteDTO;
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioDTO;
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioResponseDTO;
 import edu.uam.backend.cursos.Usuario.DataTransferObjects.UsuarioUpdateDTO;
 import edu.uam.backend.cursos.Usuario.model.Usuario;
+import edu.uam.backend.cursos.Usuario.repository.UsuarioRepository;
 import edu.uam.backend.cursos.Usuario.service.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,6 +22,10 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
 
     // Registrar usuario
     @PostMapping("/action/register")
@@ -51,6 +58,25 @@ public class UsuarioController {
         Page<Usuario> usuariosPage = usuarioServicio.obtenerUsuariosPaginados(page, size);
         Page<UsuarioResponseDTO> dtoPage = usuariosPage.map(UsuarioResponseDTO::new);
         return ResponseEntity.ok(dtoPage);
+    }
+
+    @GetMapping("/docentes")
+    public ResponseEntity<List<DocenteDTO>> listarDocentes() {
+        List<Usuario> docentes = usuarioRepository.findByRol_IdRol(2L);
+
+        List<DocenteDTO> docentesDTO = docentes.stream()
+                .filter(doc -> doc.getIdUsuario() != null) // Solo devolver docentes con ID no nulo
+                .map(doc -> new DocenteDTO(
+                        doc.getIdUsuario(),
+                        doc.getCif(),
+                        doc.getPrimernombre(),
+                        doc.getSegundonombre(),
+                        doc.getPrimerapellido(),
+                        doc.getSegundoapellido()
+                ))
+                .toList();
+
+        return ResponseEntity.ok(docentesDTO);
     }
 
 

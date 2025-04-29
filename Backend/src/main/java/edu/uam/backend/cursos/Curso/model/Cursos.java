@@ -33,7 +33,6 @@ public class Cursos {
     @Column(nullable = false)
     private boolean active;
 
-
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
 
     //LOCO NO BORREN ESTO O JODEMOS TODO AJAJJAJAJ

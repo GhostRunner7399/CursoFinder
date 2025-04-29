@@ -1,5 +1,6 @@
 package edu.uam.backend.cursos.Inscripcion.service;
 
+import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.model.Cursos;
 import edu.uam.backend.cursos.Curso.repository.CursosRepository;
 import edu.uam.backend.cursos.Inscripcion.model.Inscripcion;
@@ -44,8 +45,14 @@ public class InscripcionServicio {
         if (inscripcionRepository.existsByUsuarioAndCurso(usuario, curso)) {
             throw new IllegalArgumentException("Ya estás inscrito en este curso.");
         }
+
+        CursoDetalle detalle = curso.getCursoDetalle();
+        if (detalle.getDisponibilidad() <= 0) {
+            throw new IllegalArgumentException("No hay cupos disponibles en este curso.");
+        }
     
         // Proceder a inscribir
+        detalle.setDisponibilidad(detalle.getDisponibilidad() - 1);
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setUsuario(usuario);
         inscripcion.setCurso(curso);
@@ -86,6 +93,14 @@ public class InscripcionServicio {
         // Buscar la matrícula correspondiente
         Inscripcion inscripcion = inscripcionRepository.findByUsuarioAndCurso(usuario, curso)
                 .orElseThrow(() -> new IllegalArgumentException("La matrícula no existe."));
+
+        // Recuperar el detalle y aumentar disponibilidad en +1
+        CursoDetalle detalle = curso.getCursoDetalle();
+        if (detalle != null) {
+                detalle.setDisponibilidad(detalle.getDisponibilidad() + 1);
+        }
+
+        cursosRepository.save(curso); // Guardar actualización de disponibilidad
 
         // Eliminar la matrícula
         inscripcionRepository.delete(inscripcion);

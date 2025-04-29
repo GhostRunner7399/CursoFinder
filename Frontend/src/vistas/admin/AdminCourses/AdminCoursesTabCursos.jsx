@@ -26,7 +26,7 @@ function AdminCoursesTabCursos({ courses }) {
   const navigate = useNavigate();
   const scrollContainerRefs = useRef({});
 
-  const activeCourses = Array.isArray(courses) ? courses.filter(course => course.active) : []; // 🔥 Filtramos activos
+  const activeCourses = Array.isArray(courses) ? courses.filter(course => course.active) : []; 
   const facultyGroups = groupByFaculty(activeCourses);
 
   const handleCourseClick = (course) => {
@@ -51,8 +51,8 @@ function AdminCoursesTabCursos({ courses }) {
             <h2 className="faculty-title">Facultad de {facultyGroup.faculty}</h2>
             <div className="faculty-courses-wrapper">
               <div className="faculty-courses" ref={(el) => (scrollContainerRefs.current[facultyGroup.faculty] = el)}>
-                {facultyGroup.courses.map((course) => (
-                  <div key={course.idcurso} className="course-container" onClick={() => handleCourseClick(course)}>
+                {facultyGroup.courses.map((course, index) => (
+                  <div key={course.idcurso || course.codigocurso || index} className="course-container" onClick={() => handleCourseClick(course)}>
                     <div className="course-content">
                       <img src={DefCourseImage} className="course-image" alt="Imagen de curso" />
                       <h3 className="course-title">{course.nombre}</h3>

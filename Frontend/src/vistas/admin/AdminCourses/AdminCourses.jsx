@@ -27,7 +27,7 @@ function AdminCourses({ user }) {
     .then((res) => res.json())
     .then((data) => {
       console.log("Cursos que llegaron a AdminCourses:", data);
-      setCourses(data.content); // 🔥 EXTRAER SOLO "content"
+      setCourses(data.content); 
     })
     .catch((err) => console.error("Error al obtener cursos:", err));
   }, []);
@@ -35,11 +35,11 @@ function AdminCourses({ user }) {
   const renderTabContent = () => {
     switch (activeTab) {
       case "cursos":
-        return <AdminCoursesTabCursos courses={courses} />; // solo activos filtrados ahí
+        return <AdminCoursesTabCursos courses={courses} />; 
       case "estadisticas":
         return <div className="admin-tab-content">Contenido de Estadísticas</div>;
       case "gestionar-cursos":
-        return <AdminCoursesTabGestionarC courses={courses} />; // 🔥 todos para gestionar
+        return <AdminCoursesTabGestionarC courses={courses} />; 
       case "gestionar-usuarios":
         return <div className="admin-tab-content">Contenido para Gestionar Usuarios</div>;
       default:

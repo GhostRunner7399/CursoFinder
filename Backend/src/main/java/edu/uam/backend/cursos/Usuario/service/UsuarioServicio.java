@@ -53,6 +53,7 @@ public class UsuarioServicio {
         usuario.setCif(dto.getCif());
         usuario.setContraseña(dto.getContraseña());
         usuario.setEmail(dto.getEmail());
+        usuario.setTelefono(dto.getTelefono());
 
         CatalogoRoles rol = rolRepository.findById(dto.getIdRol())
                 .orElseThrow(() -> new RuntimeException("Rol con ID " + dto.getIdRol() + " no encontrado"));
@@ -87,5 +88,10 @@ public class UsuarioServicio {
     public Page<Usuario> obtenerUsuariosPaginados(int page, int size) {
         return usuarioRepository.findAll(PageRequest.of(page, size));
     }
+
+    public List<Usuario> obtenerDocentes() {
+        return usuarioRepository.findByRol_IdRol(2L);
+    }
+    
 
 }

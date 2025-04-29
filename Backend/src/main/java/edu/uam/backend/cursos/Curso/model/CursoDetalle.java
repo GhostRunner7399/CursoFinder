@@ -41,4 +41,7 @@ public class CursoDetalle {
     @Column(nullable = false)
     private int capacidadMaxima;
 
+    @Column
+    private int disponibilidad;
+
 }

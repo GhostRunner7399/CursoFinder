@@ -140,7 +140,7 @@ function DetalleCursos({ user }) {
           <p><strong>Lugar:</strong> {curso.cursoDetalle?.lugar}</p>
           <p><strong>Certificación:</strong> {curso.cursoDetalle?.certificacion ? "Sí" : "No"}</p>
           <p><strong>Capacidad:</strong> {curso.cursoDetalle?.capacidadMaxima}</p>
-          <p><strong>Disponibilidad:</strong> {curso.disponibilidad ?? 0}</p>
+          <p><strong>Disponibilidad:</strong> {curso.cursoDetalle?.disponibilidad ?? 0}</p>
           <p><strong>Facultad:</strong> {curso.facultad?.nombre || "Sin asignar"}</p>
 
           {isDocenteDelCurso ? (

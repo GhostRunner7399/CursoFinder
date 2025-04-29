@@ -3,21 +3,20 @@ package edu.uam.backend.cursos.Curso.service;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoDetalleUpdateDTO;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoRequestDTO;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoUpdateDTO;
-import edu.uam.backend.cursos.Curso.repository.CursosRepository;
 import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.model.Cursos;
+import edu.uam.backend.cursos.Curso.repository.CursosRepository;
 import edu.uam.backend.cursos.Facultad.model.Facultad;
 import edu.uam.backend.cursos.Facultad.repository.FacultadRepository;
 import edu.uam.backend.cursos.Usuario.model.Usuario;
 import edu.uam.backend.cursos.Usuario.repository.UsuarioRepository;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +27,16 @@ public class CursoServicio {
 
     @Autowired
     private CursosRepository cursosRepository;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
+
     @Autowired
     private FacultadRepository facultadRepository;
 
+    public CursoServicio(CursosRepository cursosRepository) {
+        this.cursosRepository = cursosRepository;
+    }
 
     public Cursos guardarCurso(Cursos curso) {
         return cursosRepository.save(curso);
@@ -46,6 +50,10 @@ public class CursoServicio {
         return cursosRepository.findById(id);
     }
 
+    public Optional<Cursos> obtenerCursoPorCodigo(String codigocurso) {
+        return cursosRepository.findByCodigocurso(codigocurso);
+    }
+
     public void eliminarCurso(String codigocurso) {
         Optional<Cursos> cursoOptional = cursosRepository.findByCodigocurso(codigocurso);
         if (cursoOptional.isPresent()) {
@@ -55,16 +63,49 @@ public class CursoServicio {
         }
     }
 
+    public Page<Cursos> obtenerCursosPaginados(int page, int size) {
+        return cursosRepository.findAll(PageRequest.of(page, size));
+    }
+
+    public Cursos crearCursoDesdeDTO(CursoRequestDTO request) {
+        Facultad facultad = facultadRepository.findById(request.getIdFacultad())
+                .orElseThrow(() -> new IllegalArgumentException("Facultad no encontrada"));
+
+        Usuario docente = usuarioRepository.findById(request.getIdDocente())
+                .orElseThrow(() -> new IllegalArgumentException("Docente no encontrado"));
+
+        if (!docente.getRol().getNombreRol().equalsIgnoreCase("DOCENTE")) {
+            throw new IllegalArgumentException("El usuario seleccionado no tiene rol de DOCENTE.");
+        }
+
+        CursoDetalle detalle = new CursoDetalle();
+        detalle.setDescripcion(request.getDescripcion());
+        detalle.setRequisitos(request.getRequisitos());
+        detalle.setLugar(request.getLugar());
+        detalle.setCertificacion(request.isCertificacion());
+        detalle.setCapacidadMaxima(request.getCapacidadMaxima());
+        detalle.setDisponibilidad(request.getCapacidadMaxima());
+        detalle.setDocente(docente);
+
+        if (request.getHorarios() != null && !request.getHorarios().isEmpty()) {
+            detalle.setHorarios(request.getHorarios());
+        }
+
+        Cursos curso = new Cursos();
+        curso.setCodigocurso(request.getCodigocurso());
+        curso.setNombre(request.getNombre());
+        curso.setActive(request.isActive());
+        curso.setCursoDetalle(detalle);
+        curso.setFacultad(facultad);
+
+        return cursosRepository.save(curso);
+    }
+
     public Cursos actualizarCursoParcialPorCodigo(String codigocurso, CursoUpdateDTO cursoDTO) {
         System.out.println(">>> PATCH invocado para código: " + codigocurso);
 
-        Optional<Cursos> cursoOptional = cursosRepository.findByCodigocurso(codigocurso);
-        if (!cursoOptional.isPresent()) {
-            System.out.println(">>> Curso no encontrado");
-            throw new RuntimeException("Curso no encontrado con código: " + codigocurso);
-        }
-
-        Cursos curso = cursoOptional.get();
+        Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
+                .orElseThrow(() -> new RuntimeException("Curso no encontrado con código: " + codigocurso));
 
         if (cursoDTO.getNombre() != null) curso.setNombre(cursoDTO.getNombre());
         if (cursoDTO.getActive() != null) curso.setActive(cursoDTO.getActive());
@@ -86,64 +127,14 @@ public class CursoServicio {
                 if (!docente.getRol().getNombreRol().equalsIgnoreCase("DOCENTE")) {
                     throw new IllegalArgumentException("El usuario no tiene rol de DOCENTE.");
                 }
-
                 detalle.setDocente(docente);
             }
         }
 
         Cursos actualizado = cursosRepository.save(curso);
         System.out.println(">>> Curso actualizado: " + actualizado.getNombre());
-
         return actualizado;
     }
-
-
-    public Optional<Cursos> obtenerCursoPorCodigo(String codigocurso) {
-        return cursosRepository.findByCodigocurso(codigocurso);
-    }
-
-
-        public CursoServicio(CursosRepository cursosRepository) {
-            this.cursosRepository = cursosRepository;
-        }
-
-        public Page<Cursos> obtenerCursosPaginados(int page, int size) {
-            return cursosRepository.findAll(PageRequest.of(page, size));
-        }
-
-
-        public Cursos crearCursoDesdeDTO(CursoRequestDTO request) {
-            Facultad facultad = facultadRepository.findById(request.getIdFacultad())
-                    .orElseThrow(() -> new IllegalArgumentException("Facultad no encontrada"));
-        
-            Usuario docente = usuarioRepository.findById(request.getIdDocente())
-                    .orElseThrow(() -> new IllegalArgumentException("Docente no encontrado"));
-        
-        
-            CursoDetalle detalle = new CursoDetalle();
-            detalle.setDescripcion(request.getDescripcion());
-            detalle.setRequisitos(request.getRequisitos());
-            detalle.setLugar(request.getLugar());
-            detalle.setCertificacion(request.isCertificacion());
-            detalle.setCapacidadMaxima(request.getCapacidadMaxima());
-            detalle.setDocente(docente);
-        
-            // Mapear lista de horarios (si estás usando HorarioCurso como objeto)
-            if (request.getHorarios() != null && !request.getHorarios().isEmpty()) {
-                detalle.setHorarios(request.getHorarios()); // ← Asegúrate que sean objetos HorarioCurso
-            }
-        
-            Cursos curso = new Cursos();
-            curso.setCodigocurso(request.getCodigocurso());
-            curso.setNombre(request.getNombre());
-            curso.setActive(request.isActive());
-            curso.setCursoDetalle(detalle);
-            curso.setFacultad(facultad);
-        
-            return cursosRepository.save(curso);
-        }
-        
-
 
     public List<Cursos> obtenerCursosOrdenados(String ordenarPor, String direccion) {
         List<String> camposPermitidos = List.of("nombre", "codigocurso", "active");
@@ -159,18 +150,6 @@ public class CursoServicio {
         return cursosRepository.findAll(sort);
     }
 
-    /**
-     * Retorna una lista ordenada y filtrada de los cursos basado en los parametros
-     *
-     * @param name      aqui filtras por el nombre del curso
-     * @param code      filtra por codigo de curso, opcionalmente quiero meter un case insensitive
-     * @param active    Filtra por estado activo
-     * @param facultyId Filtra por id facultad
-     * @param orderBy   Campo para sortear es decir, definir la query
-     * @param direction DIreccion (asc, desc en SQL)
-     * @return           RETORNA. PUNTO FINAL. CAPSISHI, TODO, ESO HACE EL CODIGO ESTUPIDO CEROTE MIERDA
-     * DIOS MIO ESTOY QUEDANDO LOCO AJAJAJ
-     */
     public List<Cursos> getFilteredAndSortedCourses(
             String name,
             String code,
@@ -182,7 +161,7 @@ public class CursoServicio {
         List<String> allowedFields = List.of("nombre", "codigocurso", "active");
 
         if (!allowedFields.contains(orderBy)) {
-            throw new IllegalArgumentException("Invalid sorting field: " + orderBy);
+            throw new IllegalArgumentException("Campo de ordenamiento no permitido: " + orderBy);
         }
 
         Sort sort = direction.equalsIgnoreCase("desc")
@@ -205,7 +184,7 @@ public class CursoServicio {
             }
 
             if (facultyId != null) {
-                predicates.add(cb.equal(root.get("facultad").get("id"), facultyId));
+                predicates.add(cb.equal(root.get("facultad").get("idfacultad"), facultyId));
             }
 
             return cb.and(predicates.toArray(new Predicate[0]));
@@ -214,5 +193,3 @@ public class CursoServicio {
         return cursosRepository.findAll(spec, sort);
     }
 }
-
-

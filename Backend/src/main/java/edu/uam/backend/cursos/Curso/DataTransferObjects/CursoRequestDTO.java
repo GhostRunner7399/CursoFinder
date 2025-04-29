@@ -19,6 +19,7 @@ public class CursoRequestDTO {
     private boolean certificacion;
     private String lugar;
     private int capacidadMaxima;
+    private int disponibilidad;
 
     private List<HorarioCurso> horarios;
 }

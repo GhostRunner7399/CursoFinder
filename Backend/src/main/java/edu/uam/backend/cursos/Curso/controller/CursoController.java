@@ -28,7 +28,7 @@ public class CursoController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<Cursos> crearCurso(@RequestBody CursoRequestDTO request) {
         Cursos cursoCreado = cursoServicio.crearCursoDesdeDTO(request);
         return ResponseEntity.ok(cursoCreado);
@@ -57,9 +57,6 @@ public class CursoController {
         );
         return ResponseEntity.ok(courses);
     }
-
-
-
 
     @GetMapping("/{codigocurso}")
     public ResponseEntity<Cursos> obtenerCursoPorCodigo(@PathVariable String codigocurso) {

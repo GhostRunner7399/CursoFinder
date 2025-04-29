@@ -11,5 +11,5 @@ public class CursoDetalleUpdateDTO {
     private String lugar;
     private Boolean certificacion;
     private Integer capacidadMaxima;
-
+    
 }
