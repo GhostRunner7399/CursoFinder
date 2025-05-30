@@ -4,11 +4,13 @@
   display: flex;
   gap: 20px;
   padding: 20px;
+  font-family: 'Poppins';
+  
 }
 
 .gestionar-cursos-sidebar {
   flex: 0 0 260px;
-  background-color: #ffffff;
+  background-color: var(--bg-secondary);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -30,17 +32,18 @@
   transition: background 0.3s;
   font-weight: 500;
   text-align: center;
-  color: #333;
-  background-color: #f7f7f7;
+  color: var(--text-secondary);
+  background-color: var(--bg-container);
+  border: 1px solid var(--border-color);
 }
 
 .estado-item:hover {
-  background-color: #e0e0e0;
+  background-color: var(--primary-light);
 }
 
 .estado-item.active {
-  background-color: #81B9F9;
-  color: white;
+  background-color: var(--primary-dark);
+  color: #000;
 }
 
 /* Botón de Filtrar Facultad */
@@ -49,11 +52,13 @@
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  font-family: 'Poppins';
 }
 
 .faculty-dropdown {
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-family: 'Poppins';
   padding: 8px 12px;
   border-radius: 8px;
   width: 100%;
@@ -62,17 +67,17 @@
   text-align: center;
   cursor: pointer;
   transition: background 0.3s;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .faculty-dropdown:hover {
-  background-color: #f0f0f0;
+  background-color: var(--primary-light);
 }
 
 /* Opciones desplegables de facultades */
 .faculty-options {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   margin-top: 8px;
   border-radius: 8px;
   max-height: 150px;
@@ -88,10 +93,11 @@
   cursor: pointer;
   transition: background 0.3s;
   text-align: center;
+  color: var(--text-secondary)
 }
 
 .faculty-options p:hover {
-  background-color: #e6e6e6;
+  background-color: var(--primary-light);
   border-radius: 6px;
 }
 
@@ -109,13 +115,14 @@
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
+  font-family: 'Poppins';
   font-weight: bold;
   transition: background 0.3s;
+  color: #ffffff;
 }
 
 .btn-editar {
-  background-color: #f1c40f;
-  color: white;
+  background-color: var(--accent-warning);
 }
 
 .btn-editar:hover {
@@ -123,8 +130,7 @@
 }
 
 .btn-eliminar {
-  background-color: #e74c3c;
-  color: white;
+  background-color: var(--accent-error);
 }
 
 .btn-eliminar:hover {
@@ -132,8 +138,7 @@
 }
 
 .btn-crear {
-  background-color: #2ecc71;
-  color: white;
+  background-color: var(--accent-success);
 }
 
 .btn-crear:hover {
@@ -143,7 +148,7 @@
 /* Main de los cursos o facultades */
 .gestionar-cursos-main {
   flex: 1;
-  background-color: #ffffff;
+  background-color: var(--bg-secondary);
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -158,10 +163,12 @@
 
 .header-gestionar input {
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   width: 250px;
   font-size: 14px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 /* Listado */
@@ -176,14 +183,14 @@
   align-items: center;
   gap: 15px;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: var(--bg-secondary);
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: background 0.3s;
 }
 
 .curso-item:hover {
-  background-color: #f0f0f0;
+  background-color: var(--primary-light);
 }
 
 .curso-info {
@@ -194,22 +201,23 @@
 .curso-info p {
   margin: 0;
   font-size: 14px;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .no-courses-message {
   text-align: center;
   margin: 40px 0;
   font-size: 18px;
-  color: #999;
+  color: var(--text-secondary);
 }
 
 .btn-ver-detalles {
   padding: 6px 10px;
-  width: 130px; /* 👈 ancho fijo */
-  background-color: #007bff;
-  color: white;
+  width: 130px; /* ancho fijo */
+  background-color: var(--primary-light);
+  color: var(--text-primary);
   border: none;
+  font-family: 'Poppins';
   border-radius: 6px;
   font-size: 0.85rem;
   cursor: pointer;
@@ -218,5 +226,5 @@
 }
 
 .btn-ver-detalles:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-light);
 }

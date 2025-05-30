@@ -36,6 +36,7 @@ function CursosDocente({ user }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const scrollContainerRefs = useRef({});
+  const coursesTitleRef = useRef(null); /*REFERENCIA PARA EL SCROLL DEL BUTTON DEL HERO IMG*/
 
   useEffect(() => {
     fetch("http://localhost:8080/api/courses?active=true")
@@ -73,11 +74,19 @@ function CursosDocente({ user }) {
         <div className="bienvenida-text-container">
           <h1>Bienvenido al espacio de Formación Docente</h1>
           <p>Descubre cursos diseñados para potenciar tu aprendizaje y crecimiento profesional</p>
+          <button 
+            className="bienvenida-button"
+            onClick={() => coursesTitleRef.current.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start' // Aligns to top of viewport
+            })}
+          >Ver cursos disponibles
+          </button>
         </div>
       </div>
 
       <div className="all-courses-container">
-        <h1><Highlight>Qué aprender ahora</Highlight></h1>
+        <h1 ref={coursesTitleRef}><Highlight>Qué aprender ahora</Highlight></h1>
 
         {facultyGroups.length === 0 ? (
           <h2 className="no-courses-message">No hay cursos disponibles</h2>
@@ -97,8 +106,8 @@ function CursosDocente({ user }) {
                       className="course-container"
                       onClick={() => handleCourseClick(course)}
                     >
+                      <img src={DefCourseImage} className="course-image" alt="Imagen de curso" />
                       <div className="course-content">
-                        <img src={DefCourseImage} className="course-image" alt="Imagen de curso" />
                         <h3 className="course-title">{course.nombre}</h3>
                         <p className="course-docente">
                           Docente: {course.cursoDetalle?.docente

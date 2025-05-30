@@ -30,6 +30,10 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+.detalle-content h1 {
+  color: var(--text-primary) !important;
+}
+
 .detalle-sidebar {
   flex: 1;
   background: var(--bg-secondary);

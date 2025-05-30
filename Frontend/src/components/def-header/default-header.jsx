@@ -33,7 +33,6 @@ function DefaultHeader() {
         onClick={handleDashboardClick} // <-- AÑADIDO
         style={{ cursor: 'pointer' }}   // <-- Opcional: para que el mouse cambie a manita
       />
-
       <div className="nav-links">
         <p onClick={handleMyTeachingOnClick}>Mi práctica docente</p>
         <p onClick={handleMyLearningOnClick}>Mi aprendizaje</p>

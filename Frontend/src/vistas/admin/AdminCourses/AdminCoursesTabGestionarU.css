@@ -1,0 +1,160 @@
+@import "./AdminCoursesTabGestionarC.css";
+
+.gestionar-usuarios-tab {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.gestionar-usuarios-sidebar {
+  flex: 0 0 260px;
+  background-color: var(--bg-secondary);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+}
+
+.sort-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sort-button {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: background 0.3s;
+}
+
+.sort-button:hover {
+  background-color: var(--primary-light);
+}
+
+.gestionar-usuarios-main {
+  flex: 1;
+  background-color: var(--bg-secondary);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header-gestionar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header-gestionar input {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  width: 250px;
+  font-size: 14px;
+}
+
+.usuarios-listado {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.usuario-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: var(--bg-container);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s;
+}
+
+.usuario-item:hover {
+  background-color: var(--primary-light);
+}
+
+.usuario-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.usuario-info p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.no-usuarios-message {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.role-filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .role-dropdown {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: var(--text-primary);
+  }
+  
+  .role-dropdown:hover {
+    background-color: var(--primary-light);
+  }
+  
+  .role-options {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    margin-top: 8px;
+    border-radius: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .role-options p {
+    padding: 10px 12px;
+    margin: 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+  }
+  
+  .role-options p:hover {
+    background-color: var(--primary-light);
+    border-radius: 6px;
+  }
+
+  .usuarios-listado {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 10px;
+    scroll-behavior: smooth;
+  }
+  
+  

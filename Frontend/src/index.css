@@ -25,6 +25,7 @@ code {
   --primary: #BAEEF2;  /* Your existing teal/aqua */
   --primary-dark: #82CECB; /* Saturated version for hover states */
   --primary-light: #E0F7FA; /* Lighter tint */
+  --basic-hover: #e6e6e6;
 
   --header-bg: #BAEEF2;
   --header-text: #303141; /* Your existing dark blue-gray */
@@ -33,6 +34,7 @@ code {
   /* Neutrals */
   --bg-primary: #F7F7F7; /* Current background */
   --bg-secondary: #FFFFFF; /* Cards/containers */
+  --bg-container: #ffffff8e;
   --text-primary: #333; /* Dark blue-gray (current) */
   --text-secondary: #666; /* Current gray */
   --border-color: #E0E0E0; /* Light gray */
@@ -54,6 +56,7 @@ code {
  --primary: #BAEEF2;
  --primary-dark: #82CECB;
  --primary-light: #1A3E40; /* Dark teal for contrast */
+ --basic-hover: #e6e6e6; /* Light gray for hover states */
 
    /* Dark theme header - using darker teal variants */
    --header-bg: #1A3E40; /* Deep teal - maintains brand but darker */
@@ -65,6 +68,7 @@ code {
  /* Neutrals */
  --bg-primary: #121212; /* Deep dark */
  --bg-secondary: #1E1E1E; /* Cards */
+ --bg-container: #1e1e1ea8; 
  --text-primary: #E0E0E0; /* Light gray */
  --text-secondary: #AAAAAA; /* Medium gray */
  --border-color: #333333;
