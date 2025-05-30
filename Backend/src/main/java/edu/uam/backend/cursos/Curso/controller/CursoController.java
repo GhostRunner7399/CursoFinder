@@ -1,6 +1,7 @@
 package edu.uam.backend.cursos.Curso.controller;
 
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoRequestDTO;
+import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoResponseDTO;
 import edu.uam.backend.cursos.Curso.model.CursoDetalle;
 import edu.uam.backend.cursos.Curso.service.CursoServicio;
 import edu.uam.backend.cursos.Curso.DataTransferObjects.CursoUpdateDTO;
@@ -59,12 +60,15 @@ public class CursoController {
     }
 
     @GetMapping("/{codigocurso}")
-    public ResponseEntity<Cursos> obtenerCursoPorCodigo(@PathVariable String codigocurso) {
+    public ResponseEntity<CursoResponseDTO> obtenerCursoPorCodigo(@PathVariable String codigocurso) {
         Optional<Cursos> curso = cursoServicio.obtenerCursoPorCodigo(codigocurso);
-        return curso.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        if (curso.isPresent()) {
+            CursoResponseDTO responseDTO = cursoServicio.convertirACursoResponseDTO(curso.get()); // 🚀 usando el nuevo método
+            return ResponseEntity.ok(responseDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-    
 
     @DeleteMapping("/{codigocurso}")
     public ResponseEntity<String> eliminarCurso(@PathVariable String codigocurso) {
@@ -84,6 +88,15 @@ public class CursoController {
             System.out.println(">>> Error en PATCH: " + e.getMessage());
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/docente/{cif}")
+    public ResponseEntity<List<CursoResponseDTO>> obtenerCursosPorDocente(@PathVariable Integer cif) {
+        List<Cursos> cursos = cursoServicio.obtenerCursosPorDocente(cif);
+        List<CursoResponseDTO> dtos = cursos.stream()
+            .map(curso -> cursoServicio.convertirACursoResponseDTO(curso))
+            .toList();
+        return ResponseEntity.ok(dtos);
     }
 
 }

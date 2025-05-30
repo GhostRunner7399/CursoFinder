@@ -21,16 +21,13 @@ public class Inscripcion {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    // Relación con Curso
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = false)
     private Cursos curso;
 
-    // Fecha de inscripción
     @Column(nullable = false)
     private LocalDateTime fechaInscripcion;
 
-    // Estado de la inscripción
     @Column(nullable = false)
     private boolean activo;
 

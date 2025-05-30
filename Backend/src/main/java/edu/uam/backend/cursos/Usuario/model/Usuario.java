@@ -39,10 +39,10 @@ public class Usuario {
     private String email;
 
     @Column(nullable = false)
-    private boolean activo = true;  // ← nuevo campo
+    private boolean activo = true;  
 
     @Column(nullable = false)
-    private LocalDateTime fechaRegistro = LocalDateTime.now();  // ← nuevo campo
+    private LocalDateTime fechaRegistro = LocalDateTime.now();  
 
     @Column
     private String telefono;

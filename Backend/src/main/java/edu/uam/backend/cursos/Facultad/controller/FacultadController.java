@@ -53,10 +53,4 @@ public class FacultadController {
     }
 
 
-    /*
-    @PatchMapping("/Update")
-    public ResponseEntity<Facultad> ActualizarFacultad(@RequestBody Facultad facultad) {
-
-    }
-     */
 }

@@ -1,7 +1,7 @@
 package edu.uam.backend.cursos.Usuario.DataTransferObjects;
 
 public class DocenteDTO {
-    private Long id;    // <--- antes no tenías id, agrégalo aquí
+    private Long id;    
     private Integer cif;
     private String primernombre;
     private String segundonombre;
@@ -9,7 +9,7 @@ public class DocenteDTO {
     private String segundoapellido;
     private String telefono;
 
-    // Constructor
+    // constructor
     public DocenteDTO(Long id, Integer cif, String primernombre, String segundonombre, String primerapellido, String segundoapellido, String telefono) {
         this.id = id;
         this.cif = cif;

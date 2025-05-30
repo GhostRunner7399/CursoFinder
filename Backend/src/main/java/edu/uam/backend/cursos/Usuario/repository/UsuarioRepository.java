@@ -10,13 +10,13 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    //Buscar usuario por CIF
+    //buscar por CIF
     Optional<Usuario> findByCif(Integer cif);
 
-    //Autenticar usuario
+    //autenticar 
     Optional<Usuario> findByCifAndContraseña(Integer cif, String contraseña);
 
-    // Buscar todos los usuarios que tengan rol 'DOCENTE'
+    // buscar usuarios que tengan rol 'DOCENTE'
     List<Usuario> findByRol_IdRol(Long idRol);
 
 }

@@ -22,20 +22,20 @@ public class RolController {
         return ResponseEntity.ok(rolServicio.obtenerTodosLosRoles());
     }
 
-    // Obtener rol por ID
+    // get rol por id
     @GetMapping("/{id}")
     public ResponseEntity<CatalogoRoles> obtenerRolPorId(@PathVariable Long id) {
         Optional<CatalogoRoles> rol = rolServicio.obtenerRolPorId(id);
         return rol.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear nuevo rol
+    //crear nuevo rol
     @PostMapping("/create")
     public ResponseEntity<CatalogoRoles> crearRol(@RequestBody CatalogoRoles rol) {
         return ResponseEntity.ok(rolServicio.crearRol(rol));
     }
     
-    // Eliminar rol
+    //eliminar rol
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> eliminarRol(@PathVariable Long id) {
         rolServicio.eliminarRol(id);

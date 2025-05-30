@@ -27,13 +27,13 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
 
-    // Registrar usuario
+    // Registrar 
     @PostMapping("/action/register")
     public Usuario registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return usuarioServicio.registrarUsuarioDesdeDTO(usuarioDTO);
     }
 
-    // Autenticar usuario
+    // Autenticar
     @PostMapping("/auth")
     public boolean autenticarUsuario(@RequestBody Usuario usuario) {
         return usuarioServicio.autenticarUsuario(usuario.getCif(), usuario.getContraseña());

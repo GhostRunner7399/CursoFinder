@@ -23,27 +23,26 @@ public class UsuarioServicio {
     @Autowired
     private RolRepository rolRepository;
 
-    // Registrar usuario desde entidad directa
     public Usuario registrarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    // Buscar usuario por CIF
+    // Buscar por CIF
     public Optional<Usuario> buscarPorCif(Integer cif) {
         return usuarioRepository.findByCif(cif);
     }
 
-    // Autenticación simple
+    // Autenticacion
     public boolean autenticarUsuario(Integer cif, String contraseña) {
         return usuarioRepository.findByCifAndContraseña(cif, contraseña).isPresent();
     }
 
-    // Obtener todos los usuarios
+    // get todos los usuarios
     public List<Usuario> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    // Registrar usuario desde DTO
+    // registrar usuario DTO
     public Usuario registrarUsuarioDesdeDTO(UsuarioDTO dto) {
         Usuario usuario = new Usuario();
         usuario.setPrimernombre(dto.getPrimernombre());

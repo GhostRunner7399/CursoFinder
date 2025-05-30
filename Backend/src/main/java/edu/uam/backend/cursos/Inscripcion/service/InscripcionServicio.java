@@ -28,13 +28,13 @@ public class InscripcionServicio {
     private UsuarioServicio usuarioServicio;
 
     public Inscripcion matricularUsuario(Integer cif, String codigocurso) {
-        // Verificar si el usuario y el curso existen
+        // verificar existencia usuario y curso 
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
         Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
                 .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
     
-        // Validar que no se inscriba a su propio curso
+        // validar que no se inscriba a su propio curso
         if (curso.getCursoDetalle() != null && curso.getCursoDetalle().getDocente() != null) {
             if (curso.getCursoDetalle().getDocente().getCif().equals(usuario.getCif())) {
                 throw new IllegalArgumentException("No puedes inscribirte en tu propio curso.");
@@ -51,7 +51,6 @@ public class InscripcionServicio {
             throw new IllegalArgumentException("No hay cupos disponibles en este curso.");
         }
     
-        // Proceder a inscribir
         detalle.setDisponibilidad(detalle.getDisponibilidad() - 1);
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setUsuario(usuario);
@@ -72,37 +71,35 @@ public class InscripcionServicio {
     }
 
     public List<Usuario> obtenerParticipantes(String codigocurso) {
-        // Verificar si el curso existe por su código
         Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
                 .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
 
-        // Obtener las matrículas asociadas al curso y devolver los usuarios
         return inscripcionRepository.findByCurso(curso)
                 .stream()
-                .map(Inscripcion::getUsuario) // Obtener el usuario de cada matrícula
+                .map(Inscripcion::getUsuario) 
                 .toList();
 
     }
     public void borrarmatricula(Integer cif, String codigocurso) {
-        // Verificar si el usuario y el curso existen
+        // verificacion de existencias
         Usuario usuario = usuarioRepository.findByCif(cif)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado."));
         Cursos curso = cursosRepository.findByCodigocurso(codigocurso)
                 .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado."));
 
-        // Buscar la matrícula correspondiente
+        //buscar la matrícula 
         Inscripcion inscripcion = inscripcionRepository.findByUsuarioAndCurso(usuario, curso)
                 .orElseThrow(() -> new IllegalArgumentException("La matrícula no existe."));
 
-        // Recuperar el detalle y aumentar disponibilidad en +1
+        //recuperar detalle y aumentar disponibilidad en +1
         CursoDetalle detalle = curso.getCursoDetalle();
         if (detalle != null) {
                 detalle.setDisponibilidad(detalle.getDisponibilidad() + 1);
         }
 
-        cursosRepository.save(curso); // Guardar actualización de disponibilidad
+        cursosRepository.save(curso); 
 
-        // Eliminar la matrícula
+        //eliminar 
         inscripcionRepository.delete(inscripcion);
     }
 
